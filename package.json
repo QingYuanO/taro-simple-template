@@ -2,8 +2,8 @@
   "name": "taro-simple-cli",
   "version": "1.0.0",
   "private": false,
-  "description": "简单的taro模板",
-  "author": "",
+  "description": "{{description}}",
+  "author": "{{author}}",
   "templateInfo": {
     "name": "default",
     "typescript": true,
