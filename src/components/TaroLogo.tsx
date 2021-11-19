@@ -4,9 +4,9 @@ import taro_logo from "@/assets/images/logo-taro.png";
 const Tarologo = () => {
   return (
     <Image
-      className="p-30rpx"
+      className="p-30px h-60px w-60px"
       src={taro_logo}
-      style={{ height: 30, width: 30,backgroundColor:'blue' }}
+      style={{backgroundColor:'blue' }}
     ></Image>
   );
 };

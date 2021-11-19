@@ -8,11 +8,11 @@ const Index = () => {
   const dispatch = useAppDispatch()
   const num = useAppSelector((state) => state.index.num);
   return (
-    <View className="index flex flex-col mt-100rpx justify-center items-center">
+    <View className="index flex flex-col mt-100px justify-center items-center">
       <Tarologo />
-      <View className="flex mt-30rpx">
+      <View className="flex items-center mt-30px">
         <Text className="btn" onClick={() => dispatch(subtract())}>-</Text>
-        <Text className="mx-30rpx ">{num}</Text>
+        <Text className="mx-30px ">{num}</Text>
         <Text className="btn" onClick={() => dispatch(addOne())}>+</Text>
       </View>
     </View>
