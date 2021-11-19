@@ -12,7 +12,7 @@ const Index = () => {
       <Tarologo />
       <View className="flex mt-30rpx">
         <Text className="btn" onClick={() => dispatch(subtract())}>-</Text>
-        <Text className="mx-30rpx">{num}</Text>
+        <Text className="mx-30rpx ">{num}</Text>
         <Text className="btn" onClick={() => dispatch(addOne())}>+</Text>
       </View>
     </View>
