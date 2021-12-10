@@ -44,19 +44,19 @@ const ApiService = {
     return Taro.request(option);
 
   },
-  get(url, data: ExtraData) {
+  get(url, data?: ExtraData) {
     let option = { url, data };
     return this.baseOptions(option, "GET");
   },
-  post(url, data: ExtraData) {
+  post(url, data?: ExtraData) {
     let params = { url, data };
     return this.baseOptions(params, "POST");
   },
-  put(url, data: ExtraData) {
+  put(url, data?: ExtraData) {
     let option = { url, data };
     return this.baseOptions(option, "PUT");
   },
-  delete(url, data: ExtraData) {
+  delete(url, data?: ExtraData) {
     let option = { url, data };
     return this.baseOptions(option, "DELETE");
   },
