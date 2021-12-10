@@ -26,9 +26,10 @@ const config = {
     "@/utils": resolve(__dirname, "..", "src/utils"),
     "@/hooks": resolve(__dirname, "..", "src/hooks"),
     "@/store": resolve(__dirname, "..", "src/store"),
-    "@/store-hooks": resolve(__dirname, "..", "src/store/hooks.ts"),
     "@/constants": resolve(__dirname, "..", "src/constants"),
     "@/assets": resolve(__dirname, "..", "src/assets"),
+    "@/service": resolve(__dirname, "..", "src/service"),
+    "@/pages": resolve(__dirname, "..", "src/pages"),
   },
   copy: {
     patterns: [],

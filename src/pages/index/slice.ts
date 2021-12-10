@@ -1,5 +1,5 @@
+import { getSingleImg } from "@/service/apis/img";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getSingleImg } from './../../service/apis/img';
 
 interface IndexSlice {
   num: number;

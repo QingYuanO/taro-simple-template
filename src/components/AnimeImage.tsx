@@ -1,24 +1,29 @@
-import { useAppDispatch, useAppSelector } from "@/store-hooks";
-import { Button, View,Image,Text } from "@tarojs/components";
-import { useState,memo } from "react";
-import { getSingleImgThunk } from "../pages/index/slice";
 
+import useUpdateEffect from "@/hooks/useUpdateEffect";
+import { getSingleImgThunk } from "@/pages/index/slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {  View, Image, Text } from "@tarojs/components";
+import { useState, memo } from "react";
 
 const AnimeImage = () => {
   const dispatch = useAppDispatch();
   const img = useAppSelector((state) => state.index.imageUrl);
+  const isFetchImg = useAppSelector((state) => state.index.isFetchImg);
   const [isImageLoad, setIsImageLoad] = useState(false);
-  const onGetImage = async () => {
-    try {
-      await dispatch(getSingleImgThunk()).unwrap();
+  useUpdateEffect(() => {
+    if (isFetchImg) {
       setIsImageLoad(false);
-    } catch (error) {
-      console.log(error);
     }
+  }, [isFetchImg]);
+  const onGetImage = async () => {
+    dispatch(getSingleImgThunk());
   };
   return (
     <View className="mt-100px flex flex-col">
-      <View className="w-500px min-h-600px shadow-lg flex flex-col items-center justify-center" onClick={onGetImage}>
+      <View
+        className="w-500px min-h-600px shadow-lg flex flex-col items-center justify-center cur"
+        onClick={onGetImage}
+      >
         {img ? (
           <>
             <Image
@@ -38,4 +43,4 @@ const AnimeImage = () => {
   );
 };
 
-export default memo(AnimeImage) ;
+export default memo(AnimeImage);

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/store-hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { View, Text } from "@tarojs/components";
 import { memo } from "react";
 import { addOne, subtract } from "../pages/index/slice";
