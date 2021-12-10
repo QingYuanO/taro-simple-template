@@ -11,7 +11,7 @@ export const isUrlLink = (url) => {
     /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
   return rep.test(url);
 };
-export const isPhoneNUmber = (phone) => {
+export const isPhoneNumber = (phone) => {
   const phoneReg = /^1[3|4|5|7|8|9][0-9]\d{8}$/;
   return phoneReg.test(phone);
 };
