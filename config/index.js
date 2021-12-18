@@ -11,7 +11,7 @@ const config = {
     828: 1.81 / 2,
   },
   sourceRoot: "src",
-  outputRoot:  `dist/${process.env.TARO_ENV}`,
+  outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [
     [
       "taro-plugin-tailwind",
@@ -19,6 +19,8 @@ const config = {
         // 具体参数见：https://github.com/windicss/vite-plugin-windicss/blob/main/packages/plugin-utils/src/options.ts#L10
       },
     ],
+    //修改为你的绝对路径如 D:\project\taro\taro-simple-template\config\index.js -> /project/taro/taro-simple-template/src/plugin/index
+    "/project/taro/taro-simple-template/src/plugin/index",
   ],
   defineConstants: {},
   alias: {

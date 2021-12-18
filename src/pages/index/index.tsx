@@ -2,6 +2,7 @@ import AnimeImage from "@/components/AnimeImage";
 import Conut from "@/components/Conut";
 import Tarologo from "@/components/TaroLogo";
 import { View } from "@tarojs/components";
+import { IPluginContext } from '@tarojs/service'
 import "./index.less";
 
 const Index = () => {
