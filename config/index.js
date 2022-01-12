@@ -19,8 +19,10 @@ const config = {
         // 具体参数见：https://github.com/windicss/vite-plugin-windicss/blob/main/packages/plugin-utils/src/options.ts#L10
       },
     ],
-    //修改为你的绝对路径如 D:\project\taro\taro-simple-template\config\index.js -> /project/taro/taro-simple-template/src/plugin/index
-    "/project/taro/taro-simple-template/src/plugin/index",
+    //本地插件
+    resolve(__dirname, "..", "src/plugin/index")
+      .split(":")[1]
+      .replace(/\\/g, "/"),
   ],
   defineConstants: {},
   alias: {
