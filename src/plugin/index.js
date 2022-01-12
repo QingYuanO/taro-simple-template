@@ -6,7 +6,7 @@ const { generateToRouterMethods } = require("./utils");
 module.exports = (ctx, options) => {
   ctx.registerCommand({
     // 命令名
-    name: "generate-router-methods",
+    name: "grm",//generate-router-methods
     async fn() {
       console.log("开始生成");
       const appConfigPath = ctx.helper.resolveMainFilePath(
