@@ -1,15 +1,17 @@
-
 import useUpdateEffect from "@/hooks/useUpdateEffect";
 import { getSingleImgThunk } from "@/pages/index/slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {  View, Image, Text } from "@tarojs/components";
-import { useState, memo } from "react";
+import { View, Image, Text } from "@tarojs/components";
+import { useState, memo, useEffect } from "react";
 
 const AnimeImage = () => {
   const dispatch = useAppDispatch();
   const img = useAppSelector((state) => state.index.imageUrl);
   const isFetchImg = useAppSelector((state) => state.index.isFetchImg);
   const [isImageLoad, setIsImageLoad] = useState(false);
+  useEffect(() => {
+    dispatch(getSingleImgThunk());
+  }, [dispatch]);
   useUpdateEffect(() => {
     if (isFetchImg) {
       setIsImageLoad(false);
@@ -24,7 +26,7 @@ const AnimeImage = () => {
         className="w-500px min-h-600px shadow-lg flex flex-col items-center justify-center cur"
         onClick={onGetImage}
       >
-        {img ? (
+        {img && (
           <>
             <Image
               src={img}
@@ -35,8 +37,6 @@ const AnimeImage = () => {
             />
             {!isImageLoad && <Text>加载中...</Text>}
           </>
-        ) : (
-          <Text>点击获取图片</Text>
         )}
       </View>
     </View>

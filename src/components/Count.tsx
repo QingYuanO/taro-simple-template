@@ -3,7 +3,7 @@ import { View, Text } from "@tarojs/components";
 import { memo } from "react";
 import { addOne, subtract } from "../pages/index/slice";
 
-const Conut = () => {
+const Count = () => {
   const dispatch = useAppDispatch();
   const num = useAppSelector((state) => state.index.num);
   return (
@@ -19,4 +19,4 @@ const Conut = () => {
   );
 };
 
-export default memo(Conut);
+export default memo(Count);
