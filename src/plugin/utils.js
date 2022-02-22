@@ -1,9 +1,8 @@
+/* eslint-disable import/no-commonjs */
+const path = require("path");
 
-
-function generateToRouterMethods(pagePath) {
+function generateToRouterMethods(pagePath, ctx) {
   const staticStr = `
-import Taro, { EventChannel } from "@tarojs/taro";
-
 export enum NavigateType {
   /** 保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。使用 Router.back 可以返回到原页面。小程序中页面栈最多十层。 */
   navigateTo = "navigateTo",
@@ -38,7 +37,7 @@ const navigateType = <P>(url: string, option?: ToRouterType<P>) => {
     complete: () => {},
     events: undefined,
   };
-  url = url + ganerateParams(params ?? {});
+  url = url + generateParams(params ?? {});
   switch (type) {
     case NavigateType.navigateTo:
       Taro.navigateTo({ url, success, fail, complete, events });
@@ -57,7 +56,7 @@ const navigateType = <P>(url: string, option?: ToRouterType<P>) => {
   }
 };
 
-const ganerateParams = (params: { [key: string]: any }) => {
+const generateParams = (params: { [key: string]: any }) => {
   return (
     "?" +
     Object.entries(params).reduce((total, cur, idx) => {
@@ -72,36 +71,56 @@ const ganerateParams = (params: { [key: string]: any }) => {
 };
   `;
 
-  const toRouterMethodsStr = pagePath
-    .map((item) => {
-      const routerSplit = item
-        .split("/")
-        .map(
-          (routerSplitItem) =>
-            routerSplitItem.charAt(0).toUpperCase() + routerSplitItem.slice(1)
-        );
-      let methodName = "";
-      if (routerSplit.length > 4) {
-        methodName = routerSplit[1] + routerSplit[3];
-      } else {
-        methodName = routerSplit[2];
-      }
-      return `
-export const to${
-        methodName.charAt(0).toUpperCase() + methodName.slice(1)
-      }Page = <P>(option?: ToRouterType<P>) => {
+  const topImports = `import Taro, { EventChannel } from "@tarojs/taro";\n`
+
+  let toRouterMethodsStr = "";
+  let importRouteStr = "";
+
+  pagePath.forEach((item) => {
+    const routerSplit = item
+      .split("/")
+      .map(
+        (routerSplitItem) =>
+          routerSplitItem.charAt(0).toUpperCase() + routerSplitItem.slice(1)
+      );
+    let methodName = "";
+    if (routerSplit.length > 4) {
+      methodName = routerSplit[1] + routerSplit[3];
+    } else {
+      methodName = routerSplit[2];
+    }
+    const headToUpperCaseMethodName =
+      methodName.charAt(0).toUpperCase() + methodName.slice(1);
+
+    const pathUrl = path.resolve(
+      ctx.paths.sourcePath,
+      `.${item.slice(0, item.lastIndexOf("/")) + "\\route.config.ts"}`
+    );
+    if (ctx.helper.fs.existsSync(pathUrl)) {
+      const contentStr = ctx.helper.fs.readFileSync(pathUrl).toString("utf8");
+      if (contentStr.includes("Params")) {
+        importRouteStr +=  `import ${headToUpperCaseMethodName}Params from '..${
+          item.slice(0, item.lastIndexOf("/")) + "/route.config"
+        }'\n`;
+        toRouterMethodsStr += `
+export const to${headToUpperCaseMethodName}Page = (option?: ToRouterType<${headToUpperCaseMethodName}Params>) => {
   navigateType("${item}", option);
-};
-`;
-    })
-    .join("\n");
+};\n
+          `;
+          return
+      }
+    }
+    toRouterMethodsStr += `
+export const to${headToUpperCaseMethodName}Page = (option?: ToRouterType<any>) => {
+  navigateType("${item}", option);
+};\n
+    `;
+  });
 
-  return staticStr + toRouterMethodsStr;
+  return topImports + importRouteStr + staticStr + toRouterMethodsStr;
 }
-
 
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
-  generateToRouterMethods
-}
-
+  generateToRouterMethods,
+};

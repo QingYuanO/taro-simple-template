@@ -25,7 +25,7 @@ module.exports = (ctx, options) => {
       console.log(pagePath);
       ctx.helper.fs.writeFile(
         ctx.paths.sourcePath + "/utils/toRouterPage.ts",
-        generateToRouterMethods(pagePath),
+        generateToRouterMethods(pagePath,ctx),
         function (err) {
           console.log(`生成--路由函数（${pagePath.length}个）`);
           if (err) {

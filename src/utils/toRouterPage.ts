@@ -1,5 +1,6 @@
-
 import Taro, { EventChannel } from "@tarojs/taro";
+import IndexParams from '../pages/index/route.config'
+import PackageAHomeParams from '../packageA/pages/home/route.config'
 
 export enum NavigateType {
   /** 保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。使用 Router.back 可以返回到原页面。小程序中页面栈最多十层。 */
@@ -35,7 +36,7 @@ const navigateType = <P>(url: string, option?: ToRouterType<P>) => {
     complete: () => {},
     events: undefined,
   };
-  url = url + ganerateParams(params ?? {});
+  url = url + generateParams(params ?? {});
   switch (type) {
     case NavigateType.navigateTo:
       Taro.navigateTo({ url, success, fail, complete, events });
@@ -54,7 +55,7 @@ const navigateType = <P>(url: string, option?: ToRouterType<P>) => {
   }
 };
 
-const ganerateParams = (params: { [key: string]: any }) => {
+const generateParams = (params: { [key: string]: any }) => {
   return (
     "?" +
     Object.entries(params).reduce((total, cur, idx) => {
@@ -68,11 +69,13 @@ const ganerateParams = (params: { [key: string]: any }) => {
   );
 };
   
-export const toIndexPage = <P>(option?: ToRouterType<P>) => {
+export const toIndexPage = (option?: ToRouterType<IndexParams>) => {
   navigateType("/pages/index/index", option);
 };
 
-
-export const toPackageAHomePage = <P>(option?: ToRouterType<P>) => {
+          
+export const toPackageAHomePage = (option?: ToRouterType<PackageAHomeParams>) => {
   navigateType("/packageA/pages/home/index", option);
 };
+
+          
