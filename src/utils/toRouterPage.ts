@@ -73,9 +73,6 @@ export const toIndexPage = (option?: ToRouterType<IndexParams>) => {
   navigateType("/pages/index/index", option);
 };
 
-          
 export const toPackageAHomePage = (option?: ToRouterType<PackageAHomeParams>) => {
   navigateType("/packageA/pages/home/index", option);
 };
-
-          

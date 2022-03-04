@@ -71,10 +71,10 @@ const generateParams = (params: { [key: string]: any }) => {
 };
   `;
 
-  const topImports = `import Taro, { EventChannel } from "@tarojs/taro";\n`
+  const topImports = `import Taro, { EventChannel } from "@tarojs/taro";\n`;
 
   let toRouterMethodsStr = "";
-  let importRouteStr = "";
+  let importRouteParamsStr = "";
 
   pagePath.forEach((item) => {
     const routerSplit = item
@@ -83,41 +83,42 @@ const generateParams = (params: { [key: string]: any }) => {
         (routerSplitItem) =>
           routerSplitItem.charAt(0).toUpperCase() + routerSplitItem.slice(1)
       );
-    let methodName = "";
-    if (routerSplit.length > 4) {
-      methodName = routerSplit[1] + routerSplit[3];
-    } else {
-      methodName = routerSplit[2];
-    }
-    const headToUpperCaseMethodName =
-      methodName.charAt(0).toUpperCase() + methodName.slice(1);
 
+    //根据是否是分包生成方法名称
+    const methodName =
+      routerSplit.length > 4 ? routerSplit[1] + routerSplit[3] : routerSplit[2];
+
+    const getToRouterMethodsStr = (toRouterType) => {
+      return `
+export const to${methodName}Page = (option?: ToRouterType<${toRouterType}Params>) => {
+  navigateType("${item}", option);
+};\n`;
+    }
+
+    // const headToUpperCaseMethodName =
+    //   methodName.charAt(0).toUpperCase() + methodName.slice(1);
+
+    //生成页面对应的router.config文件路径
     const pathUrl = path.resolve(
       ctx.paths.sourcePath,
       `.${item.slice(0, item.lastIndexOf("/")) + "\\route.config.ts"}`
     );
+    //判断文件是否存在
     if (ctx.helper.fs.existsSync(pathUrl)) {
       const contentStr = ctx.helper.fs.readFileSync(pathUrl).toString("utf8");
+      //判断文件是否包含Params
       if (contentStr.includes("Params")) {
-        importRouteStr +=  `import ${headToUpperCaseMethodName}Params from '..${
+        importRouteParamsStr += `import ${methodName}Params from '..${
           item.slice(0, item.lastIndexOf("/")) + "/route.config"
         }'\n`;
-        toRouterMethodsStr += `
-export const to${headToUpperCaseMethodName}Page = (option?: ToRouterType<${headToUpperCaseMethodName}Params>) => {
-  navigateType("${item}", option);
-};\n
-          `;
-          return
+        toRouterMethodsStr += getToRouterMethodsStr(methodName)
+        return;
       }
     }
-    toRouterMethodsStr += `
-export const to${headToUpperCaseMethodName}Page = (option?: ToRouterType<any>) => {
-  navigateType("${item}", option);
-};\n
-    `;
+    toRouterMethodsStr += getToRouterMethodsStr('any')
   });
 
-  return topImports + importRouteStr + staticStr + toRouterMethodsStr;
+  return topImports + importRouteParamsStr + staticStr + toRouterMethodsStr;
 }
 
 // eslint-disable-next-line import/no-commonjs
