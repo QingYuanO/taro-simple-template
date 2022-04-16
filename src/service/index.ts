@@ -1,5 +1,5 @@
-import Taro, { request } from "@tarojs/taro";
-import interceptors from "./interceptors";
+import Taro from "@tarojs/taro";
+import interceptors, { HTTP_STATUS } from "./interceptors";
 
 const BASE_URL = "";
 
@@ -10,12 +10,29 @@ export interface ExtraData {
   hasToken?: boolean;
   showErrorToast?: boolean;
 }
-interface OptionParams {
-  url: string;
-  data?: ExtraData & { [key: string]: any };
+
+export type CustomData = ExtraData & { [key: string]: any };
+
+type OmitMethodCustomOption = Omit<
+  Taro.request.Option<CustomResult, CustomData>,
+  "method"
+> & {
+  baseUrl?: string;
+};
+
+type CustomOption = Omit<OmitMethodCustomOption, "url">;
+
+export interface CustomResult {
+  result: any;
+  resultCode: HTTP_STATUS;
+  [key: string]: any;
 }
+
 const ApiService = {
-  baseOptions({ url, data }: OptionParams, method: keyof Taro.request.method) {
+  baseOptions(
+    { url, data, header, baseUrl, ...otherConfig }: OmitMethodCustomOption,
+    method: keyof Taro.request.Method
+  ) {
     data = {
       showLoad: true,
       hasToken: true,
@@ -27,13 +44,16 @@ const ApiService = {
       : "application/x-www-form-urlencoded";
 
     const option: Taro.request.Option = {
-      url: BASE_URL + url,
+      url: (baseUrl ?? BASE_URL) + url,
       data,
       method,
       header: {
         "content-type": contentType,
+        //TODO添加自己的token
         Authorization: data.hasToken ? "" : "",
+        ...header,
       },
+      ...otherConfig,
     };
     if (data.showLoad) {
       Taro.showLoading({
@@ -41,24 +61,20 @@ const ApiService = {
         mask: true,
       });
     }
-    return Taro.request(option);
+    return Taro.request<CustomResult, CustomData>(option);
+  },
 
+  get(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
+    return this.baseOptions({ url, ...option }, "GET");
   },
-  get(url, data?: ExtraData) {
-    let option = { url, data };
-    return this.baseOptions(option, "GET");
+  post(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
+    return this.baseOptions({ url, ...option }, "POST");
   },
-  post(url, data?: ExtraData) {
-    let params = { url, data };
-    return this.baseOptions(params, "POST");
+  put(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
+    return this.baseOptions({ url, ...option }, "PUT");
   },
-  put(url, data?: ExtraData) {
-    let option = { url, data };
-    return this.baseOptions(option, "PUT");
-  },
-  delete(url, data?: ExtraData) {
-    let option = { url, data };
-    return this.baseOptions(option, "DELETE");
+  delete(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
+    return this.baseOptions({ url, ...option }, "DELETE");
   },
 };
 

@@ -41,7 +41,9 @@ export const indexSlice = createSlice({
     });
 
     build.addCase(getSingleImgThunk.fulfilled, (state, action) => {
-      state.imageUrl = action.payload.url
+
+
+      state.imageUrl = action.payload.data.url;
       state.isFetchImg = false;
     });
   },

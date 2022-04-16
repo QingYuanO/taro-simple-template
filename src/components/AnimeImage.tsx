@@ -1,41 +1,30 @@
-import useUpdateEffect from "@/hooks/useUpdateEffect";
-import { getSingleImgThunk } from "@/pages/index/slice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useGetSfwWaifuQuery } from "@/service/apis/imgApi";
+
 import { View, Image, Text } from "@tarojs/components";
-import { useState, memo, useEffect } from "react";
+import { memo } from "react";
 
 const AnimeImage = () => {
-  const dispatch = useAppDispatch();
-  const img = useAppSelector((state) => state.index.imageUrl);
-  const isFetchImg = useAppSelector((state) => state.index.isFetchImg);
-  const [isImageLoad, setIsImageLoad] = useState(false);
-  useEffect(() => {
-    dispatch(getSingleImgThunk());
-  }, [dispatch]);
-  useUpdateEffect(() => {
-    if (isFetchImg) {
-      setIsImageLoad(false);
-    }
-  }, [isFetchImg]);
+  const { data, error, isLoading, isSuccess, refetch } = useGetSfwWaifuQuery();
+  console.log(data);
+
   const onGetImage = async () => {
-    dispatch(getSingleImgThunk());
+    refetch();
   };
   return (
     <View className="mt-100px flex flex-col">
       <View
-        className="w-500px min-h-600px shadow-lg flex flex-col items-center justify-center cur"
+        className="w-500px min-h-600px shadow-lg flex flex-col items-center justify-center"
         onClick={onGetImage}
       >
-        {img && (
+        {data?.url && (
           <>
             <Image
-              src={img}
+              src={data.url}
               className="w-full h-full"
-              style={{ display: isImageLoad ? "inherit" : "none" }}
+              style={{ display: isSuccess ? "inherit" : "none" }}
               mode="widthFix"
-              onLoad={() => setIsImageLoad(true)}
             />
-            {!isImageLoad && <Text>加载中...</Text>}
+            {isLoading && <Text>加载中...</Text>}
           </>
         )}
       </View>
