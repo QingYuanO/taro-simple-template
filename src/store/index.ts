@@ -1,18 +1,17 @@
 import { imgApi } from "@/service/apis/imgApi";
-import { pokemonApi } from "@/service/apis/pokemonApi";
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
 import index from "../pages/index/slice";
+import { coreApi } from "./coreApi";
 
 const store = configureStore({
   reducer: {
     index,
+    [coreApi.reducerPath]: coreApi.reducer,
     [imgApi.reducerPath]: imgApi.reducer,
-    [pokemonApi.reducerPath]: pokemonApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(imgApi.middleware),
-  // .concat(pokemonApi.middleware),
+    getDefaultMiddleware().concat(coreApi.middleware).concat(imgApi.middleware),
 });
 setupListeners(store.dispatch);
 // Infer the `RootState` and `AppDispatch` types from the store itself

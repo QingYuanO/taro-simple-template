@@ -10,7 +10,7 @@ const wxBaseQuery =
     unknown,
     unknown
   > =>
-  async ({ method, ...data }) => {
+  async ({ method, ...data },api,extraData) => {
     try {
       const result = await ApiService.baseOptions(
         { ...data, baseUrl },

@@ -1,13 +1,21 @@
-import { useGetSfwWaifuQuery } from "@/service/apis/imgApi";
+import { useFirstMountState } from "@/hooks/useFirstMountState";
+import {
+  useGetSfwWaifuQuery,
+  useLazyGetSfwWaifuQuery,
+} from "@/service/apis/imgApi";
 
 import { View, Image, Text } from "@tarojs/components";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 const AnimeImage = () => {
-  const { data, error, isLoading, isSuccess, refetch } = useGetSfwWaifuQuery();
+  const [trigger, { data, isLoading, isSuccess }] = useLazyGetSfwWaifuQuery();
+  useEffect(() => {
+    trigger(null, true);
+  }, [trigger]);
   console.log(data);
 
   const onGetImage = async () => {
+    const { refetch } = trigger({ showLoad: true });
     refetch();
   };
   return (
