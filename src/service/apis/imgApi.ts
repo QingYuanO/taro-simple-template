@@ -3,9 +3,9 @@ import wxBaseQuery from "@/store/wxBaseQuery";
 import { CustomData } from "..";
 
 export const imgApi = createApi({
-  baseQuery: wxBaseQuery({ baseUrl: "https://api.waifu.pics" }),
+  reducerPath: "imgApi",
   tagTypes: ["Img"],
-
+  baseQuery: wxBaseQuery({ baseUrl: "https://api.waifu.pics" }),
   endpoints: (builder) => ({
     getSfwWaifu: builder.query<{ url: string }, CustomData | null>({
       query: (args) => ({
@@ -17,4 +17,5 @@ export const imgApi = createApi({
     }),
   }),
 });
-export const { useGetSfwWaifuQuery,useLazyGetSfwWaifuQuery, usePrefetch } = imgApi;
+export const { useGetSfwWaifuQuery, useLazyGetSfwWaifuQuery, usePrefetch } =
+  imgApi;

@@ -7,11 +7,11 @@ import "./index.less";
 
 definePageConfig({
   navigationBarTitleText: "首页",
-  backgroundColor: "#000000", //貌似不起效
 });
 
 const Index = () => {
   const prefetchImg = usePrefetch("getSfwWaifu");
+
   return (
     <View className="index flex flex-col justify-center items-center py-50px">
       <TaroLogo />
