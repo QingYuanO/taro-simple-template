@@ -19,15 +19,21 @@ function showError(message, show, res?: any) {
       title: message || "请求异常",
       icon: "none",
     });
-  return Promise.reject(res);
+  return Promise.reject(res.data ?? res);
 }
 
 const customInterceptor = function (chain) {
   let requestParams = chain.requestParams;
   //剔除掉额外配置参数
   const {
-    data: { showErrorToast, showLoad, hasToken, ...realRequestParams },
+    data: {
+      showErrorToast,
+      showLoad,
+      showStatusBarLoad,
+      ...realRequestParams
+    },
   } = requestParams;
+
   requestParams.data = realRequestParams;
   return chain
     .proceed(requestParams)
@@ -38,10 +44,12 @@ const customInterceptor = function (chain) {
     })
     .then((res) => {
       // 只要请求成功，不管返回什么状态码，都走这个回调
-      if (showLoad) {
+      if (showStatusBarLoad) {
+        Taro.hideNavigationBarLoading();
+      } else if (showLoad) {
         Taro.hideLoading();
       }
-      const codeStatus = [res.statusCode];
+      const codeStatus = [res.statusCode, res.data.code];
       if (codeStatus.includes(HTTP_STATUS.NOT_FOUND)) {
         return showError(
           res.data.message || "请求资源不存在",
@@ -70,6 +78,8 @@ const customInterceptor = function (chain) {
         return showError(res.data.message || "需要鉴权", showErrorToast, res);
       } else if (res.statusCode >= 400) {
         return showError(res.data?.message, showErrorToast, res);
+      } else if (res?.data?.code >= 1000) {
+        return showError(res.data?.message, showErrorToast, res);
       } else {
         /**
          * res原始数据格式
@@ -85,11 +95,7 @@ const customInterceptor = function (chain) {
           cookies
           cookies?: string[]
          */
-        return {
-          ...res,
-          //根据自己的后台确定返回数据格式，
-          data: res?.data?.data ?? res.data,
-        };
+        return res;
       }
     });
 };

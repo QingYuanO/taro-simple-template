@@ -1,8 +1,14 @@
 //@ts-ignore
 import { resolve } from "path";
 
+const {
+  TaroWeappTailwindcssWebpackPluginV4,
+} = require("weapp-tailwindcss-webpack-plugin");
+
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+
 const config = {
-  projectName: "taro-simple-cli",
+  projectName: "wine-cellar-wechat",
   date: "2021-11-19",
   designWidth: 750,
   deviceRatio: {
@@ -13,12 +19,6 @@ const config = {
   sourceRoot: "src",
   outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [
-    [
-      "taro-plugin-tailwind",
-      {
-        // 具体参数见：https://github.com/windicss/vite-plugin-windicss/blob/main/packages/plugin-utils/src/options.ts#L10
-      },
-    ],
     //本地插件
     resolve(__dirname, "..", "src/plugin/index")
       .split(":")[1]
@@ -34,6 +34,7 @@ const config = {
     "@/assets": resolve(__dirname, "..", "src/assets"),
     "@/service": resolve(__dirname, "..", "src/service"),
     "@/pages": resolve(__dirname, "..", "src/pages"),
+    "@/types": resolve(__dirname, "..", "src/types"),
   },
   copy: {
     patterns: [],
@@ -41,6 +42,25 @@ const config = {
   },
   framework: "react",
   mini: {
+    webpackChain(chain) {
+      chain.merge({
+        plugins: [new LodashModuleReplacementPlugin()],
+      });
+
+      chain.merge({
+        plugin: {
+          install: {
+            plugin: TaroWeappTailwindcssWebpackPluginV4,
+            args: [
+              {
+                // 注意这一行(不传默认 react)
+                framework: "react", // 'vue2' / 'vue3'
+              },
+            ],
+          },
+        },
+      });
+    },
     postcss: {
       pxtransform: {
         enable: true,

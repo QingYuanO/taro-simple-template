@@ -1,8 +1,9 @@
 import Count from "@/components/Count";
 import TaroLogo from "@/components/TaroLogo";
-import { usePrefetch } from "@/service/apis/imgApi";
+import { getSingleImg } from "@/service/apis/img";
 import { toPackageAHomePage } from "@/utils/toRouterPage";
 import { Button, View } from "@tarojs/components";
+import { useQueryClient } from "react-query";
 import "./index.less";
 
 definePageConfig({
@@ -10,18 +11,18 @@ definePageConfig({
 });
 
 const Index = () => {
-  const prefetchImg = usePrefetch("getSfwWaifu");
+  const queryClient = useQueryClient();
 
   return (
-    <View className="index flex flex-col justify-center items-center py-50px">
+    <View className="index py-[50px] flex flex-col items-center justify-center">
       <TaroLogo />
       <Count />
 
       <Button
         type="primary"
-        className="mt-50px"
+        className="mt-[50px]"
         onClick={() => {
-          prefetchImg(null);
+          // queryClient.prefetchQuery(["getSingleImg"],getSingleImg);
           toPackageAHomePage();
         }}
       >

@@ -1,12 +1,13 @@
 import Taro from "@tarojs/taro";
 import interceptors, { HTTP_STATUS } from "./interceptors";
 
-const BASE_URL = "";
+export const BASE_URL = "";
 
 interceptors.forEach((i) => Taro.addInterceptor(i));
 
 export interface ExtraData {
   showLoad?: boolean;
+  showStatusBarLoad?: boolean;
   hasToken?: boolean;
   showErrorToast?: boolean;
 }
@@ -18,25 +19,39 @@ type OmitMethodCustomOption = Omit<
   "method"
 > & {
   baseUrl?: string;
+  extraData?: ExtraData;
 };
 
-type CustomOption = Omit<OmitMethodCustomOption, "url">;
+export type CustomOption = Omit<OmitMethodCustomOption, "url">;
 
-export interface CustomResult {
-  result: any;
-  resultCode: HTTP_STATUS;
-  [key: string]: any;
+export interface CustomResult<D = unknown> {
+  data: D;
+  code: number;
+  message: string;
 }
 
-const ApiService = {
-  baseOptions(
-    { url, data, header, baseUrl, ...otherConfig }: OmitMethodCustomOption,
+class ApiService {
+  static baseOptions<D>(
+    {
+      url,
+      data,
+      header,
+      baseUrl,
+      extraData,
+      ...otherConfig
+    }: OmitMethodCustomOption,
     method: keyof Taro.request.Method
   ) {
-    data = {
+    extraData = {
       showLoad: true,
       hasToken: true,
-      showErrorToast: false,
+      showErrorToast: true,
+      showStatusBarLoad: false,
+      ...(extraData ?? {}),
+    };
+    //将额外配置传递到拦截器中
+    data = {
+      ...extraData,
       ...(data ?? {}),
     };
     const contentType = ["POST", "PUT"].includes(method)
@@ -50,32 +65,33 @@ const ApiService = {
       header: {
         "content-type": contentType,
         //TODO添加自己的token
-        Authorization: data.hasToken ? "" : "",
+        Authorization: extraData.hasToken ? "" : "",
         ...header,
       },
       ...otherConfig,
     };
-    if (data.showLoad) {
+    if (extraData.showStatusBarLoad) {
+      Taro.showNavigationBarLoading();
+    } else if (extraData.showLoad) {
       Taro.showLoading({
         title: "请稍候...",
         mask: true,
       });
     }
-    return Taro.request<CustomResult, CustomData>(option);
-  },
-
-  get(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
-    return this.baseOptions({ url, ...option }, "GET");
-  },
-  post(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
-    return this.baseOptions({ url, ...option }, "POST");
-  },
-  put(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
-    return this.baseOptions({ url, ...option }, "PUT");
-  },
-  delete(url, option?: CustomOption): Taro.RequestTask<CustomResult> {
-    return this.baseOptions({ url, ...option }, "DELETE");
-  },
-};
+    return Taro.request<CustomResult<D>, CustomData>(option).then((res) => {
+      return res.data;
+    });
+  }
+  private static getMethod = (method: keyof Taro.request.Method) => {
+    function apiMethod<D>(url, option?: CustomOption): Promise<D> {
+      return this.baseOptions({ url, ...option }, method);
+    }
+    return apiMethod;
+  };
+  static get = this.getMethod("GET");
+  static post = this.getMethod("POST");
+  static put = this.getMethod("PUT");
+  static delete = this.getMethod("DELETE");
+}
 
 export default ApiService;

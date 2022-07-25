@@ -1,8 +1,8 @@
 import { Component } from 'react'
-import { Provider } from 'react-redux'
-import 'windi.css';
+import { QueryClient, QueryClientProvider } from 'react-query'
 import './app.less'
-import store from './store'
+
+const queryClient = new QueryClient()
 
 class App extends Component {
 
@@ -16,7 +16,7 @@ class App extends Component {
 
   // this.props.children 是将要会渲染的页面
   render () {
-    return <Provider store={store}>{this.props.children}</Provider>;
+    return  <QueryClientProvider client={queryClient}>{this.props.children}</QueryClientProvider>;
   }
 }
 

@@ -1,18 +1,18 @@
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { View, Text } from "@tarojs/components";
+import { atom, useAtom } from "jotai";
 import { memo } from "react";
-import { addOne, subtract } from "../pages/index/slice";
+
+const countAtom = atom(0);
 
 const Count = () => {
-  const dispatch = useAppDispatch();
-  const num = useAppSelector((state) => state.index.num);
+  const [count, setCount] = useAtom(countAtom);
   return (
-    <View className="flex items-center mt-30px">
-      <Text className="btn" onClick={() => dispatch(subtract())}>
+    <View className="mt-[30px] flex items-center">
+      <Text className="btn" onClick={() => setCount(count - 1)}>
         -
       </Text>
-      <Text className="mx-30px ">{num}</Text>
-      <Text className="btn" onClick={() => dispatch(addOne())}>
+      <Text className="mx-[30px] ">{count}</Text>
+      <Text className="btn" onClick={() => setCount(count + 1)}>
         +
       </Text>
     </View>

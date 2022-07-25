@@ -1,4 +1,68 @@
+@import "tailwindcss/base";
+@import "tailwindcss/utilities";
+
+page {
+  --bg-theme: #efeff4;
+  --theme-color: #d73535;
+  //修改taroify css变量
+  --primary-color: var(--theme-color);
+  --empty-image-width: 180px;
+  --empty-image-height: 180px;
+
+  background-color: var(--bg-theme);
+}
 .safe_bottom {
   padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
   padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
+}
+
+.require-before {
+  position: relative;
+  &::before {
+    content: "*";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -24rpx;
+    color: red;
+  }
+}
+.require-after {
+  position: relative;
+  &::before {
+    content: "*";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -24rpx;
+    color: red;
+  }
+}
+
+.truncate-custom {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.text-under-line {
+  --text-under-line-color: rgba(212, 44, 44);
+  display: inline-block;
+  position: relative;
+  z-index: 10;
+  &::after {
+    content: "";
+    height: 30%;
+    background-color: var(--text-under-line-color);
+    opacity: 0.2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+    z-index: 1;
+  }
 }

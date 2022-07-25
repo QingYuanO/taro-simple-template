@@ -1,34 +1,32 @@
 import { useFirstMountState } from "@/hooks/useFirstMountState";
-import {
-  useGetSfwWaifuQuery,
-  useLazyGetSfwWaifuQuery,
-} from "@/service/apis/imgApi";
+import { getSingleImg } from "@/service/apis/img";
 
 import { View, Image, Text } from "@tarojs/components";
 import { memo, useEffect } from "react";
+import { useQuery } from "react-query";
 
 const AnimeImage = () => {
-  const [trigger, { data, isLoading, isSuccess }] = useLazyGetSfwWaifuQuery();
-  useEffect(() => {
-    trigger(null, true);
-  }, [trigger]);
+  const { data, isLoading, isSuccess, refetch } = useQuery(
+    ["getSingleImg"],
+    getSingleImg
+  );
   console.log(data);
 
+
   const onGetImage = async () => {
-    const { refetch } = trigger({ showLoad: true });
     refetch();
   };
   return (
-    <View className="mt-100px flex flex-col">
+    <View className="mt-[100px] flex flex-col">
       <View
-        className="w-500px min-h-600px shadow-lg flex flex-col items-center justify-center"
+        className="w-[500px] min-h-[600px] flex flex-col items-center justify-center shadow-lg"
         onClick={onGetImage}
       >
         {data?.url && (
           <>
             <Image
               src={data.url}
-              className="w-full h-full"
+              className="h-full w-full"
               style={{ display: isSuccess ? "inherit" : "none" }}
               mode="widthFix"
             />
