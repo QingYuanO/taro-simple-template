@@ -12,7 +12,12 @@ export interface ExtraData {
   showErrorToast?: boolean;
 }
 
-export type CustomData = ExtraData & { [key: string]: any };
+export type CustomData = { [key: string]: any };
+export interface CustomResult<D = unknown> {
+  data: D;
+  code: number;
+  message: string;
+}
 
 type OmitMethodCustomOption = Omit<
   Taro.request.Option<CustomResult, CustomData>,
@@ -23,12 +28,6 @@ type OmitMethodCustomOption = Omit<
 };
 
 export type CustomOption = Omit<OmitMethodCustomOption, "url">;
-
-export interface CustomResult<D = unknown> {
-  data: D;
-  code: number;
-  message: string;
-}
 
 class ApiService {
   static baseOptions<D>(
