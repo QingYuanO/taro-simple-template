@@ -24,7 +24,8 @@
       "@/store/*": ["./src/store/*"],
       "@/service/*": ["./src/service/*"],
       "@/pages/*": ["./src/pages/*"],
-      "@/types/*": ["./src/types/*"]
+      "@/types/*": ["./src/types/*"],
+      "@/types": ["./src/types/index"],
     },
     "rootDir": ".",
     "jsx": "react-jsx",
