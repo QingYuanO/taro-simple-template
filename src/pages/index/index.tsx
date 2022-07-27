@@ -3,7 +3,7 @@ import TaroLogo from "@/components/TaroLogo";
 import { getSingleImg } from "@/service/apis/img";
 import { toPackageAHomePage } from "@/utils/toRouterPage";
 import { Button, View } from "@tarojs/components";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import "./index.less";
 
 definePageConfig({
@@ -14,10 +14,9 @@ const Index = () => {
   const queryClient = useQueryClient();
 
   return (
-    <View className="index py-[50px] flex flex-col items-center justify-center">
+    <View className="index flex flex-col items-center justify-center py-[50px]">
       <TaroLogo />
       <Count />
-
       <Button
         type="primary"
         className="mt-[50px]"

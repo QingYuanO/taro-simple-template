@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './app.less'
 
 const queryClient = new QueryClient()

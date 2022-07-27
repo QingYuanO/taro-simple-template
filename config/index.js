@@ -8,6 +8,7 @@ const {
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 
 const config = {
+  compiler: 'webpack5',
   projectName: "wine-cellar-wechat",
   date: "2021-11-19",
   designWidth: 750,
