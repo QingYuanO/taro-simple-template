@@ -1,8 +1,8 @@
-import AnimeImage from "@/components/AnimeImage";
-import { View } from "@tarojs/components";
+import AnimeImage from '@/components/AnimeImage';
+import { View } from '@tarojs/components';
 
 definePageConfig({
-  navigationBarTitleText: "packageA - home - page",
+  navigationBarTitleText: 'packageA - home - page',
   animation: {
     duration: 300,
     delay: 50,
@@ -11,7 +11,7 @@ definePageConfig({
 
 const Home = () => {
   return (
-    <View className="index flex flex-col justify-center items-center py-50px">
+    <View className='index py-50px flex flex-col items-center justify-center'>
       <AnimeImage />
     </View>
   );
