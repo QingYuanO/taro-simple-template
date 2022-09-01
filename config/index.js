@@ -2,7 +2,7 @@
 import { resolve } from "path";
 
 const {
-  TaroWeappTailwindcssWebpackPluginV4,
+  TaroWeappTailwindcssWebpackPluginV5,
 } = require("weapp-tailwindcss-webpack-plugin");
 
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
@@ -51,7 +51,7 @@ const config = {
       chain.merge({
         plugin: {
           install: {
-            plugin: TaroWeappTailwindcssWebpackPluginV4,
+            plugin: TaroWeappTailwindcssWebpackPluginV5,
             args: [
               {
                 // 注意这一行(不传默认 react)
