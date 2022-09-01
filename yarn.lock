@@ -9165,7 +9165,7 @@ postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.23, postcss@^7.0.3
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@^8.2.15, postcss@^8.3.5, postcss@^8.4.14:
+postcss@^8.2.15, postcss@^8.3.5, postcss@^8.4.14, postcss@^8.4.16:
   version "8.4.16"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
   integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
@@ -9484,7 +9484,7 @@ react-transition-group@^4.4.1:
 
 react@^18.2.0:
   version "18.2.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
+  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
@@ -11581,15 +11581,17 @@ wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-weapp-tailwindcss-webpack-plugin@1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/weapp-tailwindcss-webpack-plugin/-/weapp-tailwindcss-webpack-plugin-1.7.1.tgz#4dccf91941f8fa8f3aeec50470ea2becb01ea2ab"
-  integrity sha512-rn01tzA4Aa9TrV9ofLc5Q1DT2iyPo79uNqOiqlJjNOMU12w9bOB3O8qIht8cJAGQsvOKW7AIssUAjvYaIcY60A==
+weapp-tailwindcss-webpack-plugin@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.npmjs.org/weapp-tailwindcss-webpack-plugin/-/weapp-tailwindcss-webpack-plugin-1.8.2.tgz#f97d4a16315fab5987e6ea603724a45d15b49733"
+  integrity sha512-L+RsGqRKa00a8tOxajdNVZGVxtQ5dGiopzxOLU/K8bvYRYE1M5dfvUWIpX9Gntq27o3uG9OJ8j2Ab6lJOnCZNg==
   dependencies:
     "@babel/generator" "7.18.12"
     "@babel/parser" "7.18.11"
     "@babel/traverse" "7.18.11"
     loader-utils "^2.0.2"
+    postcss "^8.4.16"
+    postcss-selector-parser "^6.0.10"
     webpack-sources "^3.2.3"
 
 webidl-conversions@^4.0.2:
