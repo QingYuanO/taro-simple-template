@@ -27,7 +27,7 @@ interface ToRouterType<P> {
   ) => void;
 }
 
-const navigateType = <P>(url: string, option?: ToRouterType<P>) => {
+const navigateType = <P,>(url: string, option?: ToRouterType<P>) => {
   const { type, params, success, fail, complete, events } = option ?? {
     type: NavigateType.navigateTo,
     params: {},
