@@ -6,7 +6,7 @@ const {
 } = require('weapp-tailwindcss-webpack-plugin');
 
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-
+console.log(resolve(__dirname, '..', 'src/plugin/index'));
 const config = {
   compiler: 'webpack5',
   projectName: 'taro-simple-template',
@@ -21,9 +21,7 @@ const config = {
   outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [
     //本地插件
-    resolve(__dirname, '..', 'src/plugin/index')
-      .split(':')[1]
-      .replace(/\\/g, '/'),
+    resolve(__dirname, '..', 'src/plugin/index'),
   ],
   defineConstants: {},
   alias: {
