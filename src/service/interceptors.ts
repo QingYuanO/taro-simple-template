@@ -78,7 +78,7 @@ const customInterceptor = function (chain) {
         return showError(res.data.message || "需要鉴权", showErrorToast, res);
       } else if (res.statusCode >= 400) {
         return showError(res.data?.message, showErrorToast, res);
-      } else if (res?.data?.code >= 1000) {
+      } else if (res?.data?.code !== 200) {
         return showError(res.data?.message, showErrorToast, res);
       } else {
         /**

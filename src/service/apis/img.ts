@@ -1,7 +1,7 @@
-import ApiService from "..";
+import ApiService from '..';
 
-export const getSingleImg =  () => {
-  return ApiService.get<{url:string}>("https://api.waifu.pics/sfw/waifu", {
-    extraData: { showLoad: false },
+export const getSingleImg = () => {
+  return ApiService.get<{ url: string }>('https://api.waifu.pics/sfw/waifu', {
+    extraConfig: { showLoad: false },
   });
 };

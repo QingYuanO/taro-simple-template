@@ -5,7 +5,7 @@ export const BASE_URL = "";
 
 interceptors.forEach((i) => Taro.addInterceptor(i));
 
-export interface ExtraData {
+export interface ExtraConfig {
   showLoad?: boolean;
   showStatusBarLoad?: boolean;
   hasToken?: boolean;
@@ -24,7 +24,7 @@ type OmitMethodCustomOption = Omit<
   "method"
 > & {
   baseUrl?: string;
-  extraData?: ExtraData;
+  extraConfig?: ExtraConfig;
 };
 
 export type CustomOption = Omit<OmitMethodCustomOption, "url">;
@@ -36,21 +36,21 @@ class ApiService {
       data,
       header,
       baseUrl,
-      extraData,
+      extraConfig,
       ...otherConfig
     }: OmitMethodCustomOption,
     method: keyof Taro.request.Method
   ) {
-    extraData = {
+    extraConfig = {
       showLoad: true,
       hasToken: true,
       showErrorToast: true,
       showStatusBarLoad: false,
-      ...(extraData ?? {}),
+      ...(extraConfig ?? {}),
     };
     //将额外配置传递到拦截器中
     data = {
-      ...extraData,
+      ...extraConfig,
       ...(data ?? {}),
     };
     const contentType = ["POST", "PUT"].includes(method)
@@ -64,14 +64,14 @@ class ApiService {
       header: {
         "content-type": contentType,
         //TODO添加自己的token
-        Authorization: extraData.hasToken ? "" : "",
+        Authorization: extraConfig.hasToken ? "" : "",
         ...header,
       },
       ...otherConfig,
     };
-    if (extraData.showStatusBarLoad) {
+    if (extraConfig.showStatusBarLoad) {
       Taro.showNavigationBarLoading();
-    } else if (extraData.showLoad) {
+    } else if (extraConfig.showLoad) {
       Taro.showLoading({
         title: "请稍候...",
         mask: true,
