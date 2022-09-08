@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import './index.less';
 import {
   findContainerChildren,
-  getFooterRect,
   getNavBarHeight,
 } from './helper';
 import { Content, Footer, Navbar } from './components';
 import { ContainerProps } from './types';
+import { useNodeRect } from '@/hooks/useNodeRect';
 
 function Container({
   children,
@@ -16,15 +16,10 @@ function Container({
   ...otherViewProps
 }: ContainerProps) {
   const { navbar, content, footer, other } = findContainerChildren(children);
-  const [footerHeight, setFooterHeight] = useState(0);
   const navBarHeight = getNavBarHeight();
   const hasContentMt = hasNavBarTop && navbar;
   const hasContentPb = hasFooterBottom && footer;
-  useEffect(() => {
-    if (hasContentPb) {
-      getFooterRect((rect) => setFooterHeight(rect?.height));
-    }
-  }, [hasContentPb]);
+  const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
 
   return (
     <View {...otherViewProps}>
@@ -35,7 +30,7 @@ function Container({
           className={hasFooterBottom ? 'taro-container__safe-bottom' : ''}
           style={{
             ...(hasContentMt ? { marginTop: navBarHeight } : {}),
-            ...(hasContentPb ? { paddingBottom: footerHeight } : {}),
+            ...(hasContentPb ? { paddingBottom: rect?.height ?? 0 } : {}),
             position: 'relative',
             boxSizing: 'border-box',
           }}

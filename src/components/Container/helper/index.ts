@@ -1,18 +1,13 @@
-import {
-  Children,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-} from "react";
+import { Children, isValidElement, ReactElement, ReactNode } from 'react';
 import {
   createSelectorQuery,
   getMenuButtonBoundingClientRect,
   getSystemInfoSync,
   nextTick,
-  NodesRef
-} from "@tarojs/taro";
-import Container from "..";
-import { ContainerChildren } from "../types";
+  NodesRef,
+} from '@tarojs/taro';
+import Container from '..';
+import { ContainerChildren } from '../types';
 
 const globalSystemInfo = getSystemInfoSync();
 export const getSystemInfo = () => {
@@ -20,7 +15,7 @@ export const getSystemInfo = () => {
 };
 
 export const getNavBarHeight = () => {
-  if (process.env.TARO_ENV === "weapp") {
+  if (process.env.TARO_ENV === 'weapp') {
     const menuButtonBounding = getMenuButtonBoundingClientRect();
     return menuButtonBounding.top + menuButtonBounding.height + 5;
   }
@@ -35,27 +30,12 @@ export const getSafeArea = () => {
   return {
     safeBottom,
     safeTop,
-    safeHeight
+    safeHeight,
   };
 };
 export const isIPhoneX = () => {
   const { safeArea, model } = getSystemInfo();
-  return model.includes("iPhone") && (safeArea?.top ?? 0) > 20;
-};
-
-export const getFooterRect = (
-  callback?: (rect: NodesRef.BoundingClientRectCallbackResult) => void
-) => {
-  nextTick(() => {
-    createSelectorQuery()
-      .select("#taroContainerFooter")
-      .boundingClientRect(res => {
-        if (res?.height) {
-          callback?.(res);
-        }
-      })
-      .exec();
-  });
+  return model.includes('iPhone') && (safeArea?.top ?? 0) > 20;
 };
 
 export function findContainerChildren(node?: ReactNode): ContainerChildren {
@@ -63,7 +43,7 @@ export function findContainerChildren(node?: ReactNode): ContainerChildren {
     navbar: undefined,
     footer: undefined,
     content: undefined,
-    other: []
+    other: [],
   };
 
   Children.forEach(node, (child: ReactNode) => {
@@ -94,10 +74,10 @@ export const formattedRoutePath = (path: string) => {
   if (!path) {
     return path;
   }
-  let formattedPath = path.split("?")[0];
+  let formattedPath = path.split('?')[0];
   const firstChar = path.charAt(0);
 
-  if (firstChar !== "/") {
+  if (firstChar !== '/') {
     formattedPath = `/${path}`;
   }
 

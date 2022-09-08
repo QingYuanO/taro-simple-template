@@ -26,7 +26,7 @@ export interface ContentProps extends ViewProps {
 export interface FooterProps {
   children?: ReactNode;
   hasSeat?: boolean;
-  onFooterRenderAfter?: (
+  onFooterRectChange?: (
     dom: NodesRef.BoundingClientRectCallbackResult
   ) => void;
 }

@@ -1,4 +1,5 @@
-import { ViewProps, View } from "@tarojs/components";
+import { useNodeRect } from '@/hooks/useNodeRect';
+import { ViewProps, View } from '@tarojs/components';
 import React, {
   Children,
   forwardRef,
@@ -7,40 +8,26 @@ import React, {
   useImperativeHandle,
   useMemo,
   useState,
-} from "react";
-import { getFooterRect, isIPhoneX } from "../../helper";
-import { FooterProps, FooterRef } from "../../types";
-import "./index.less";
+} from 'react';
+import { isIPhoneX } from '../../helper';
+import { FooterProps, FooterRef } from '../../types';
+import './index.less';
 
 export default forwardRef<
   FooterRef | undefined,
-  FooterProps & Omit<ViewProps, "style">
+  FooterProps & Omit<ViewProps, 'style'>
 >(function Footer(
-  { children, hasSeat, onFooterRenderAfter, ...viewProps },
-  ref
+  { children, hasSeat, onFooterRectChange, ...viewProps },
+  ref,
 ) {
   const isIPhone = isIPhoneX();
   const { className, id, ...otherViewProps } = viewProps;
-  const [nodeHeight, setNodeHeight] = useState(0);
-
-  useEffect(() => {
-    getFooterRect((rect) => setNodeHeight(rect.height));
-  }, []);
-
-  useEffect(() => {
-    getFooterRect(onFooterRenderAfter);
-  }, [onFooterRenderAfter]);
-
-  useImperativeHandle(ref, () => ({
-    getFooterRect,
-  }));
-
   const formattedChildren = useMemo(() => {
     const single = Children.only(children);
     if (single && React.isValidElement(single)) {
       const addedSafeBottomChildren = React.cloneElement(single, {
-        className: `${isIPhone ? "taro-container__safe-bottom" : ""} ${
-          single?.props?.className ?? ""
+        className: `${isIPhone ? 'taro-container__safe-bottom' : ''} ${
+          single?.props?.className ?? ''
         }`,
       });
       return addedSafeBottomChildren;
@@ -48,16 +35,30 @@ export default forwardRef<
     return children;
   }, [children, isIPhone]);
 
+  const rect = useNodeRect('taroContainerFooter', [children]);
+
+  useEffect(() => {
+    if (onFooterRectChange && rect) {
+      onFooterRectChange(rect);
+    }
+  }, [onFooterRectChange, rect]);
+
+  useImperativeHandle(ref, () => ({
+    getFooterRect: () => {
+      return rect;
+    },
+  }));
+
   return (
     <Fragment>
       <View
-        id="taroContainerFooter"
+        id='taroContainerFooter'
         className={`taro-container__footer-wrap ${className ?? ''}`}
         {...otherViewProps}
       >
         {formattedChildren}
       </View>
-      {hasSeat && <View style={{ height: nodeHeight }}></View>}
+      {hasSeat && <View style={{ height: rect?.height ?? 0 }}></View>}
     </Fragment>
   );
 });
