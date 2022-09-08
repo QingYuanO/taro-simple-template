@@ -1,4 +1,4 @@
-import Taro, { useReady, useUnload } from '@tarojs/taro';
+import Taro, { nextTick, useReady, useUnload } from '@tarojs/taro';
 import { useMemo, useCallback, useEffect, useState, useRef } from 'react';
 import { getNavBarHeight } from '../components/Container/helper';
 
@@ -18,17 +18,19 @@ export default function useNodeInViewport(nodeId: string) {
   const navBarHeight = getNavBarHeight();
   const generateObserver = useCallback(() => {
     if (nodeId) {
-      observer
-        .relativeToViewport({
-          top: -navBarHeight,
-        })
-        .observe(`#${nodeId}`, (res) => {
-          const { boundingClientRect, intersectionRatio } = res;
-          setRect(boundingClientRect);
-          const isHide =
-            boundingClientRect.top < navBarHeight && intersectionRatio === 0;
-          setShow(!isHide);
-        });
+      nextTick(() => {
+        observer
+          .relativeToViewport({
+            top: -navBarHeight,
+          })
+          .observe(`#${nodeId}`, (res) => {
+            const { boundingClientRect, intersectionRatio } = res;
+            setRect(boundingClientRect);
+            const isHide =
+              boundingClientRect.top < navBarHeight && intersectionRatio === 0;
+            setShow(!isHide);
+          });
+      });
     }
   }, [observer, navBarHeight, nodeId]);
 
