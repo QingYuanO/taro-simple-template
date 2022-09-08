@@ -1,23 +1,39 @@
-import { Component } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import './app.less'
+import { PropsWithChildren, useEffect } from 'react';
+import {
+  QueryClient,
+  QueryClientProvider,
+  focusManager,
+  onlineManager,
+} from '@tanstack/react-query';
+import './app.less';
+import { useDidHide, useDidShow } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
-class App extends Component {
+function App({ children }: PropsWithChildren<{}>) {
+  useEffect(() => {
+    //从无网络状态变为有网络时react-query自动重新发起请求
+    function onlineChange(res) {
+      if (onlineManager.isOnline() === res.isConnected) return;
+      onlineManager.setOnline(res.isConnected);
+    }
+    Taro.onNetworkStatusChange(onlineChange);
+    return () => {
+      Taro.offNetworkStatusChange(onlineChange);
+    };
+  }, []);
 
-  componentDidMount () {}
+  useDidShow(() => {
+    focusManager.setFocused(true);
+  });
+  useDidHide(() => {
+    focusManager.setFocused(false);
+  });
 
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
-
-  // this.props.children 是将要会渲染的页面
-  render () {
-    return  <QueryClientProvider client={queryClient}>{this.props.children}</QueryClientProvider>;
-  }
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
 }
 
-export default App
+export default App;

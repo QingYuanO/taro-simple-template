@@ -1,4 +1,4 @@
-import Taro from "@tarojs/taro";
+import Taro from '@tarojs/taro';
 
 export enum HTTP_STATUS {
   SUCCESS = 200,
@@ -16,8 +16,8 @@ export enum HTTP_STATUS {
 function showError(message, show, res?: any) {
   show &&
     Taro.showToast({
-      title: message || "请求异常",
-      icon: "none",
+      title: message || '请求异常',
+      icon: 'none',
     });
   return Promise.reject(res.data ?? res);
 }
@@ -26,12 +26,7 @@ const customInterceptor = function (chain) {
   let requestParams = chain.requestParams;
   //剔除掉额外配置参数
   const {
-    data: {
-      showErrorToast,
-      showLoad,
-      showStatusBarLoad,
-      ...realRequestParams
-    },
+    data: { showErrorToast, showLoad, showStatusBarLoad, ...realRequestParams },
   } = requestParams;
 
   requestParams.data = realRequestParams;
@@ -52,33 +47,31 @@ const customInterceptor = function (chain) {
       const codeStatus = [res.statusCode, res.data.code];
       if (codeStatus.includes(HTTP_STATUS.NOT_FOUND)) {
         return showError(
-          res.data.message || "请求资源不存在",
+          res.data.message || '请求资源不存在',
           showErrorToast,
-          res
+          res,
         );
       } else if (codeStatus.includes(HTTP_STATUS.BAD_GATEWAY)) {
         return showError(
-          res.data.message || "服务端出现了问题",
+          res.data.message || '服务端出现了问题',
           showErrorToast,
-          res
+          res,
         );
       } else if (codeStatus.includes(HTTP_STATUS.SERVER_ERROR)) {
         return showError(
-          res.data.message || "后端出现了问题",
+          res.data.message || '后端出现了问题',
           showErrorToast,
-          res
+          res,
         );
       } else if (codeStatus.includes(HTTP_STATUS.FORBIDDEN)) {
         return showError(
-          res.data.message || "没有权限访问",
+          res.data.message || '没有权限访问',
           showErrorToast,
-          res
+          res,
         );
       } else if (codeStatus.includes(HTTP_STATUS.AUTHENTICATE)) {
-        return showError(res.data.message || "需要鉴权", showErrorToast, res);
+        return showError(res.data.message || '需要鉴权', showErrorToast, res);
       } else if (res.statusCode >= 400) {
-        return showError(res.data?.message, showErrorToast, res);
-      } else if (res?.data?.code !== 200) {
         return showError(res.data?.message, showErrorToast, res);
       } else {
         /**
