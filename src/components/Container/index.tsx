@@ -1,10 +1,7 @@
 import { View } from '@tarojs/components';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './index.less';
-import {
-  findContainerChildren,
-  getNavBarHeight,
-} from './helper';
+import { findContainerChildren, getNavBarHeight } from './helper';
 import { Content, Footer, Navbar } from './components';
 import { ContainerProps } from './types';
 import { useNodeRect } from '@/hooks/useNodeRect';
@@ -15,7 +12,9 @@ function Container({
   hasFooterBottom = true,
   ...otherViewProps
 }: ContainerProps) {
-  const { navbar, content, footer, other } = findContainerChildren(children);
+  const { navbar, content, footer, other } = useMemo(() => {
+    return findContainerChildren(children);
+  }, [children]);
   const navBarHeight = getNavBarHeight();
   const hasContentMt = hasNavBarTop && navbar;
   const hasContentPb = hasFooterBottom && footer;

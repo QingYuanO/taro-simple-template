@@ -8,7 +8,5 @@ export function getSafeTop(){
     //@ts-ignore
     app?.config?.window?.navigationStyle === 'custom' ||
     page?.config?.navigationStyle === 'custom';
-  console.log(navBarHeight);
-
   return isCustomNavigation ? navBarHeight : 0;
 }

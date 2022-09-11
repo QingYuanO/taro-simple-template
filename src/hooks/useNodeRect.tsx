@@ -23,12 +23,8 @@ export function useNodeRect(nodeId: string, deps?: any[]) {
   }, [selector, nodeId]);
 
   useEffect(() => {
-
-      getRect();
-
-
+    getRect();
   }, [getRect, ...(deps ?? [])]);
-
 
   return rect;
 }

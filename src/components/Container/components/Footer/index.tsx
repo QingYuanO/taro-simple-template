@@ -33,7 +33,7 @@ export default forwardRef<
       return addedSafeBottomChildren;
     }
     return children;
-  }, [children, isIPhone]);
+  }, []);
 
   const rect = useNodeRect('taroContainerFooter', [children]);
 

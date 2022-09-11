@@ -47,11 +47,11 @@ export function findContainerChildren(node?: ReactNode): ContainerChildren {
     if (isValidElement(child)) {
       const element = child as ReactElement;
       if (element.type === Container.Navbar) {
-        children.navbar = element as ReturnType<typeof Container.Navbar>;
+        children.navbar = element;
       } else if (element.type === Container.Content) {
         children.content = element;
       } else if (element.type === Container.Footer) {
-        children.footer = element as ReturnType<typeof Container.Footer>;
+        children.footer = element;
       } else {
         children.other!.push(child);
       }
