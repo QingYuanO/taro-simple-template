@@ -1,5 +1,5 @@
 import Taro, { nextTick, useUnload } from '@tarojs/taro';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { getSafeTop } from './getSafeTop';
 
 /**
@@ -11,7 +11,9 @@ export default function useNodeInViewport(nodeId: string) {
   const [show, setShow] = useState(true);
   const [rect, setRect] =
     useState<Taro.IntersectionObserver.BoundingClientRectResult>();
-  const safeTop = getSafeTop();
+  const safeTop = useMemo(() => {
+    return getSafeTop();
+  }, []);
   const observer = useRef(
     new IntersectionObserver(
       function (entries) {

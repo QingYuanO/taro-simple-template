@@ -11,7 +11,9 @@ export default function useNodeInViewport(nodeId: string) {
   const [show, setShow] = useState(true);
   const [rect, setRect] =
     useState<Taro.IntersectionObserver.BoundingClientRectResult>();
-  const safeTop = getSafeTop();
+  const safeTop = useMemo(() => {
+    return getSafeTop();
+  }, []);
   const observer = useMemo(() => {
     return Taro.createIntersectionObserver(this);
   }, []);
