@@ -1,5 +1,5 @@
-import Taro, { nextTick, useReady, useUnload } from '@tarojs/taro';
-import { useMemo, useCallback, useEffect, useState, useRef } from 'react';
+import Taro, { nextTick, useUnload } from '@tarojs/taro';
+import { useMemo, useCallback, useEffect, useState } from 'react';
 import { getNavBarHeight } from '../components/Container/helper';
 
 /**
@@ -11,7 +11,6 @@ export default function useNodeInViewport(nodeId: string) {
   const [show, setShow] = useState(true);
   const [rect, setRect] =
     useState<Taro.IntersectionObserver.BoundingClientRectResult>();
-  const firstRender = useRef(true);
   const observer = useMemo(() => {
     return Taro.createIntersectionObserver(this);
   }, []);
@@ -35,15 +34,9 @@ export default function useNodeInViewport(nodeId: string) {
   }, [observer, navBarHeight, nodeId]);
 
   useEffect(() => {
-    if (!firstRender.current) {
-      generateObserver();
-    }
-    firstRender.current = false;
+    generateObserver();
   }, [generateObserver]);
 
-  useReady(() => {
-    generateObserver();
-  });
   useUnload(() => {
     observer.disconnect();
   });

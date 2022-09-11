@@ -6,7 +6,6 @@ const {
 } = require('weapp-tailwindcss-webpack-plugin');
 
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-console.log(resolve(__dirname, '..', 'src/plugin/index'));
 const config = {
   compiler: 'webpack5',
   projectName: 'taro-simple-template',
@@ -84,21 +83,6 @@ const config = {
     webpackChain(chain) {
       chain.merge({
         plugins: [new LodashModuleReplacementPlugin()],
-      });
-
-      chain.merge({
-        plugin: {
-          install: {
-            plugin: TaroWeappTailwindcssWebpackPluginV5,
-            args: [
-              {
-                // 注意这一行(不传默认 react)
-                framework: 'react', // 'vue2' / 'vue3'
-                disabled: true,
-              },
-            ],
-          },
-        },
       });
     },
     publicPath: '/',
