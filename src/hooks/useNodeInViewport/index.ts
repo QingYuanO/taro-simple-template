@@ -1,6 +1,6 @@
-import { getNavBarHeight } from '@/components/Container/helper';
-import Taro, { getCurrentInstance, nextTick, useUnload } from '@tarojs/taro';
+import Taro, { nextTick, useUnload } from '@tarojs/taro';
 import { useMemo, useCallback, useEffect, useState } from 'react';
+import { getSafeTop } from './getSafeTop';
 
 /**
  * 观察一个元素是否从顶部移出可视界面
@@ -8,19 +8,10 @@ import { useMemo, useCallback, useEffect, useState } from 'react';
  * @returns boolean
  */
 export default function useNodeInViewport(nodeId: string) {
-  const realSafeTop = useMemo(() => {
-    const { app, page } = getCurrentInstance();
-    const isCustomNavigation =
-      //@ts-ignore
-      app?.config?.window?.navigationStyle === 'custom' ||
-      page?.config?.navigationStyle === 'custom';
-
-    return isCustomNavigation ? navBarHeight : 0;
-  }, []);
-
   const [show, setShow] = useState(true);
   const [rect, setRect] =
     useState<Taro.IntersectionObserver.BoundingClientRectResult>();
+  const safeTop = getSafeTop();
   const observer = useMemo(() => {
     return Taro.createIntersectionObserver(this);
   }, []);
@@ -29,18 +20,18 @@ export default function useNodeInViewport(nodeId: string) {
       nextTick(() => {
         observer
           .relativeToViewport({
-            top: -realSafeTop,
+            top: -safeTop,
           })
           .observe(`#${nodeId}`, (res) => {
             const { boundingClientRect, intersectionRatio } = res;
             setRect(boundingClientRect);
             const isHide =
-              boundingClientRect.top <= realSafeTop && intersectionRatio === 0;
+              boundingClientRect.top <= safeTop && intersectionRatio === 0;
             setShow(!isHide);
           });
       });
     }
-  }, [observer, nodeId, realSafeTop]);
+  }, [observer, nodeId, safeTop]);
 
   useEffect(() => {
     generateObserver();
@@ -52,5 +43,3 @@ export default function useNodeInViewport(nodeId: string) {
 
   return { show, rect };
 }
-
-const navBarHeight = getNavBarHeight();
