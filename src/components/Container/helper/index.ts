@@ -1,10 +1,7 @@
 import { Children, isValidElement, ReactElement, ReactNode } from 'react';
 import {
-  createSelectorQuery,
   getMenuButtonBoundingClientRect,
   getSystemInfoSync,
-  nextTick,
-  NodesRef,
 } from '@tarojs/taro';
 import Container from '..';
 import { ContainerChildren } from '../types';
