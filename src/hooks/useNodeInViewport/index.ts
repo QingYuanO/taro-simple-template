@@ -1,4 +1,4 @@
-import Taro, { nextTick, useUnload } from '@tarojs/taro';
+import Taro, { nextTick, useReady, useUnload } from '@tarojs/taro';
 import { useMemo, useCallback, useEffect, useState } from 'react';
 import { getSafeTop } from './getSafeTop';
 
@@ -38,6 +38,10 @@ export default function useNodeInViewport(nodeId: string) {
   useEffect(() => {
     generateObserver();
   }, [generateObserver]);
+
+  // useReady(() => {
+  //   generateObserver();
+  // })
 
   useUnload(() => {
     observer.disconnect();

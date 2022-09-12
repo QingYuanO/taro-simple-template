@@ -1,5 +1,6 @@
-import Taro, { nextTick, useUnload } from '@tarojs/taro';
-import { useEffect, useState, useRef, useMemo } from 'react';
+import Taro, { nextTick, useReady, useUnload } from '@tarojs/taro';
+import { useUpdateEffect } from 'ahooks';
+import { useState, useRef, useMemo, useCallback } from 'react';
 import { getSafeTop } from './getSafeTop';
 
 /**
@@ -18,23 +19,34 @@ export default function useNodeInViewport(nodeId: string) {
     new IntersectionObserver(
       function (entries) {
         const observeNode = entries[entries.length - 1];
-        setShow(observeNode.isIntersecting);
+        console.log(observeNode);
+
+        setShow(
+          observeNode.intersectionRect.height > 0 ||
+            observeNode.boundingClientRect.top >= safeTop,
+        );
         setRect(observeNode.boundingClientRect);
       },
       {
         rootMargin: `-${safeTop}px 0px 0px `,
+        // threshold: [0,0.5, 1],
       },
     ),
   );
-
-  useEffect(() => {
+  const generateObserver = useCallback(() => {
     const node = document.querySelector(`#${nodeId}`);
     if (node) {
       nextTick(() => {
         observer.current.observe(node);
       });
     }
-  }, [nodeId, safeTop]);
+  }, [nodeId]);
+  useReady(() => {
+    generateObserver();
+  });
+  useUpdateEffect(() => {
+    generateObserver();
+  }, [generateObserver]);
 
   useUnload(() => {
     observer.current.disconnect();
