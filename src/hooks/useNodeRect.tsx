@@ -1,16 +1,15 @@
 import Taro, { nextTick } from '@tarojs/taro';
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function useNodeRect(nodeId: string, deps?: any[]) {
   const [rect, setRect] =
     useState<Taro.NodesRef.BoundingClientRectCallbackResult>();
-  const selector = useMemo(() => {
-    return Taro.createSelectorQuery();
-  }, []);
-  const getRect = useCallback(() => {
+  const selector = useRef(Taro.createSelectorQuery());
+
+  useEffect(() => {
     if (nodeId) {
       nextTick(() => {
-        selector
+        selector.current
           .select(`#${nodeId}`)
           .boundingClientRect((res) => {
             if (res) {
@@ -20,11 +19,7 @@ export default function useNodeRect(nodeId: string, deps?: any[]) {
           .exec();
       });
     }
-  }, [selector, nodeId]);
-
-  useEffect(() => {
-    getRect();
-  }, [getRect, ...(deps ?? [])]);
+  }, [nodeId, ...(deps ?? [])]);
 
   return rect;
 }
