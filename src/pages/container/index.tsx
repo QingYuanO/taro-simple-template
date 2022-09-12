@@ -1,5 +1,5 @@
 import Container from '@/components/Container';
-import useNodeInViewport from '@/hooks/useNodeInViewport';
+import useNodeDisappearInTop from '@/hooks/useNodeDisappearInTop';
 import { View } from '@tarojs/components';
 import { useCallback, useState } from 'react';
 
@@ -8,7 +8,7 @@ definePageConfig({
 });
 
 export default function ContainerPage() {
-  const { show } = useNodeInViewport('test1');
+  const { show } = useNodeDisappearInTop('test1');
   const [testFooter, setTestFooter] = useState(false);
   const test = useCallback((rect) => {
     // console.log(rect);
