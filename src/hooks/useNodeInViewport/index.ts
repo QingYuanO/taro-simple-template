@@ -39,10 +39,6 @@ export default function useNodeInViewport(nodeId: string) {
     generateObserver();
   }, [generateObserver]);
 
-  // useReady(() => {
-  //   generateObserver();
-  // })
-
   useUnload(() => {
     observer.disconnect();
   });

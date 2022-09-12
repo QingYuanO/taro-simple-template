@@ -1,10 +1,10 @@
 import { View } from '@tarojs/components';
 import { useEffect, useMemo, useState } from 'react';
+import useNodeRect from '@/hooks/useNodeRect';
 import './index.less';
 import { findContainerChildren, getNavBarHeight } from './helper';
 import { Content, Footer, Navbar } from './components';
 import { ContainerProps } from './types';
-import { useNodeRect } from '@/hooks/useNodeRect';
 
 function Container({
   children,

@@ -1,7 +1,7 @@
 import Taro, { nextTick } from '@tarojs/taro';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 
-export function useNodeRect(nodeId: string, deps?: any[]) {
+export default function useNodeRect(nodeId: string, deps?: any[]) {
   const [rect, setRect] =
     useState<Taro.NodesRef.BoundingClientRectCallbackResult>();
   const selector = useMemo(() => {

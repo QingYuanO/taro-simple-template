@@ -1,4 +1,4 @@
-import { useNodeRect } from '@/hooks/useNodeRect';
+import useNodeRect from '@/hooks/useNodeRect';
 import { ViewProps, View } from '@tarojs/components';
 import React, {
   Children,
@@ -33,7 +33,7 @@ export default forwardRef<
       return addedSafeBottomChildren;
     }
     return children;
-  }, []);
+  }, [children, isIPhone]);
 
   const rect = useNodeRect('taroContainerFooter', [children]);
 

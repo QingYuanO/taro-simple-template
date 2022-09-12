@@ -1,6 +1,6 @@
 import Count from '@/components/Count';
 import TaroLogo from '@/components/TaroLogo';
-import { useNodeRect } from '@/hooks/useNodeRect';
+import useNodeRect from '@/hooks/useNodeRect';
 import { toContainerPage, toPackageAHomePage } from '@/utils/toRouterPage';
 import { Button, View } from '@tarojs/components';
 import './index.less';
@@ -10,8 +10,7 @@ definePageConfig({
 });
 
 const Index = () => {
-
-  const rect = useNodeRect('test')
+  const rect = useNodeRect('test');
   console.log(rect);
 
   return (
@@ -19,7 +18,7 @@ const Index = () => {
       <TaroLogo />
       <Count />
       <Button
-      id='test'
+        id='test'
         type='primary'
         className='mt-[50px]'
         onClick={() => {

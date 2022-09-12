@@ -12,9 +12,9 @@ export default function ContainerPage() {
   const [testFooter, setTestFooter] = useState(false);
   const test = useCallback((rect) => {
     // console.log(rect);
-    console.log(testFooter);
 
   }, []);
+  console.log(testFooter);
 
   return (
     <Container>
@@ -32,7 +32,7 @@ export default function ContainerPage() {
       <Container.Footer onFooterRectChange={test}>
         <View className='bg-white'>
           <View className='bg-red-400'>1</View>
-          {testFooter && <View>testFooter</View>}
+          {testFooter && <View className='bg-red-200'>testFooter</View>}
         </View>
       </Container.Footer>
     </Container>
