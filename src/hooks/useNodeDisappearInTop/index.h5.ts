@@ -18,10 +18,8 @@ export default function useNodeDisappearInTop(nodeId: string) {
     new IntersectionObserver(
       function (entries) {
         const observeNode = entries[entries.length - 1];
-        console.log(observeNode);
-
         setShow(
-          observeNode.intersectionRect.height > 0 ||
+          observeNode.isIntersecting ||
             observeNode.boundingClientRect.top >= safeTop,
         );
         setRect(observeNode.boundingClientRect);

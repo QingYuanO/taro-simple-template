@@ -26,9 +26,9 @@ export default function useNodeDisappearInTop(nodeId: string) {
           .observe(`#${nodeId}`, (res) => {
             const { boundingClientRect, intersectionRatio } = res;
             setRect(boundingClientRect);
-            const isHide =
-              boundingClientRect.top <= safeTop && intersectionRatio === 0;
-            setShow(!isHide);
+            const isShow =
+              boundingClientRect.top >= safeTop || intersectionRatio > 0;
+            setShow(isShow);
           });
       });
     }
