@@ -1,8 +1,8 @@
-import { View } from "@tarojs/components";
-import Taro from "@tarojs/taro";
-import { formattedRoutePath } from "../../helper";
-import { IconProps } from "../../types";
-import { BackIcon, HomeIcon } from "../icon";
+import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+import { formattedRoutePath } from '../../helper';
+import { IconProps } from '../../types';
+import { BackIcon, HomeIcon } from '../icon';
 
 export default function DefaultLeftIcon({ size, color }: IconProps) {
   // console.log(Taro.getCurrentInstance());
@@ -18,12 +18,12 @@ export default function DefaultLeftIcon({ size, color }: IconProps) {
   const realEntryPagePath = formattedRoutePath(entryPagePath ?? pages[0]);
 
   //获取tabBar页面路径
-  const tabBarPaths = tabBar?.list?.map(t => formattedRoutePath(t.pagePath));
+  const tabBarPaths = tabBar?.list?.map((t) => formattedRoutePath(t.pagePath));
 
   const notBackIconPagePathArr: string[] = tabBarPaths ?? [realEntryPagePath];
 
   const isShowDefaultLeftIcon = !notBackIconPagePathArr.includes(
-    formattedRoutePath(currentPages.at(-1)?.route ?? "")
+    formattedRoutePath(currentPages[currentPages.length - 1]?.route ?? ''),
   );
 
   const isShowBackIcon = currentPages.length > 1;
@@ -32,7 +32,7 @@ export default function DefaultLeftIcon({ size, color }: IconProps) {
     Taro.navigateBack({
       fail() {
         Taro.reLaunch({ url: realEntryPagePath });
-      }
+      },
     });
   };
 
