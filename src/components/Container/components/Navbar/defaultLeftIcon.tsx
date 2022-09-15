@@ -1,10 +1,11 @@
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+import { memo } from 'react';
 import { formattedRoutePath } from '../../helper';
 import { IconProps } from '../../types';
 import { BackIcon, HomeIcon } from '../icon';
 
-export default function DefaultLeftIcon({ size, color }: IconProps) {
+export default memo(function DefaultLeftIcon({ size, color }: IconProps) {
   // console.log(Taro.getCurrentInstance());
   // console.log(Taro.getCurrentPages());
 
@@ -52,4 +53,4 @@ export default function DefaultLeftIcon({ size, color }: IconProps) {
       )}
     </View>
   );
-}
+});

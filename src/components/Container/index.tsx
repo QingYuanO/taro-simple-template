@@ -1,17 +1,20 @@
 import { View } from '@tarojs/components';
-import { useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import useNodeRect from '@/hooks/useNodeRect';
+import { useWhyDidYouUpdate } from 'ahooks';
 import './index.less';
 import { findContainerChildren, getNavBarHeight } from './helper';
 import { Content, Footer, Navbar } from './components';
 import { ContainerProps } from './types';
 
-function Container({
-  children,
-  hasNavBarTop = true,
-  hasFooterBottom = true,
-  ...otherViewProps
-}: ContainerProps) {
+function Container(props: ContainerProps) {
+  const {
+    children,
+    hasNavBarTop = true,
+    hasFooterBottom = true,
+    ...otherViewProps
+  } = props;
+  // useWhyDidYouUpdate('Container', { ...props });
   const { navbar, content, footer, other } = useMemo(() => {
     return findContainerChildren(children);
   }, [children]);
@@ -47,6 +50,6 @@ Container.Navbar = Navbar;
 Container.Content = Content;
 Container.Footer = Footer;
 
-export default Container;
+export default Container ;
 
 export { Navbar, Footer };
