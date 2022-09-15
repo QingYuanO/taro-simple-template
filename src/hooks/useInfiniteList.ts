@@ -1,4 +1,5 @@
 import { useLoad, useReachBottom } from '@tarojs/taro';
+import { useMemoizedFn } from 'ahooks';
 import { useState } from 'react';
 
 type SearchType = Record<string, any>;
@@ -55,57 +56,61 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
     }
   });
 
-  const initLoadList = async (externalSearch: SearchType = {}) => {
-    if (isInitLoading) return;
-    try {
-      setIsInitLoading(true);
-      const { search } = listParams;
-      const realSearch = { ...(search ?? {}), ...externalSearch };
-      const data = await fetchListApi({
-        page: 1,
-        pageSize: defaultPageSize,
-        ...realSearch,
-      });
-      setIsInitLoading(true);
-      setListData(data);
-      setListParams((state) => ({
-        page: state.page + 1,
-        pageSize: state.pageSize,
-        search: realSearch,
-      }));
-    } catch (error) {
-      setIsInitLoading(true);
-      console.log(error);
-    }
-  };
-  const fetchNextPage = async (externalSearch: SearchType = {}) => {
-    if (!listData?.hasNextPage || isFetchNext) return;
-    try {
-      setIsFetchNext(true);
-      const { page, pageSize, search } = listParams;
-      const realSearch = { ...(search ?? {}), ...externalSearch };
-      const data = await fetchListApi({
-        page,
-        pageSize,
-        ...realSearch,
-      });
-      setIsFetchNext(false);
-      setListData((state) => ({
-        ...data,
-        list: state.list.concat(data.list),
-      }));
-      setListParams((state) => ({
-        page: state.page + 1,
-        pageSize: state.pageSize,
-        search: realSearch,
-      }));
-    } catch (error) {
-      setIsFetchNext(false);
-      console.log(error);
-    }
-  };
+  const initLoadList = useMemoizedFn(
+    async (externalSearch: SearchType = {}) => {
+      if (isInitLoading) return;
+      try {
+        setIsInitLoading(true);
+        const { search } = listParams;
+        const realSearch = { ...(search ?? {}), ...externalSearch };
+        const data = await fetchListApi({
+          page: 1,
+          pageSize: defaultPageSize,
+          ...realSearch,
+        });
+        setIsInitLoading(true);
+        setListData(data);
+        setListParams((state) => ({
+          page: state.page + 1,
+          pageSize: state.pageSize,
+          search: realSearch,
+        }));
+      } catch (error) {
+        setIsInitLoading(true);
+        console.log(error);
+      }
+    },
+  );
+  const fetchNextPage = useMemoizedFn(
+    async (externalSearch: SearchType = {}) => {
+      if (!listData?.hasNextPage || isFetchNext) return;
+      try {
+        setIsFetchNext(true);
+        const { page, pageSize, search } = listParams;
+        const realSearch = { ...(search ?? {}), ...externalSearch };
+        const data = await fetchListApi({
+          page,
+          pageSize,
+          ...realSearch,
+        });
+        setIsFetchNext(false);
+        setListData((state) => ({
+          ...data,
+          list: state.list.concat(data.list),
+        }));
+        setListParams((state) => ({
+          page: state.page + 1,
+          pageSize: state.pageSize,
+          search: realSearch,
+        }));
+      } catch (error) {
+        setIsFetchNext(false);
+        console.log(error);
+      }
+    },
+  );
 
-  const updateItem = (data: Partial<D>) => {
+  const updateItem = useMemoizedFn((data: Partial<D>) => {
     if (!id) {
       throw new Error('id undefine');
     }
@@ -119,9 +124,9 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
         }
       }),
     }));
-  };
+  });
 
-  const delItem = async (deletedId: any) => {
+  const delItem = useMemoizedFn(async (deletedId: any) => {
     if (!id) {
       throw new Error('id undefine');
     }
@@ -149,7 +154,7 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
     } catch (error) {
       console.log(error);
     }
-  };
+  });
 
   return {
     listData,

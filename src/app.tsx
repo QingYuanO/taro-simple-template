@@ -5,9 +5,8 @@ import {
   focusManager,
   onlineManager,
 } from '@tanstack/react-query';
+import Taro, { useDidHide, useDidShow } from '@tarojs/taro';
 import './app.less';
-import { useDidHide, useDidShow } from '@tarojs/taro';
-import Taro from '@tarojs/taro';
 
 const queryClient = new QueryClient();
 
