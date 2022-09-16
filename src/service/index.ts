@@ -6,8 +6,8 @@ export const BASE_URL = "";
 interceptors.forEach((i) => Taro.addInterceptor(i));
 
 export interface ExtraConfig {
-  showLoad?: boolean;
-  showStatusBarLoad?: boolean;
+  showLoading?: boolean;
+  showStatusBarLoading?: boolean;
   hasToken?: boolean;
   showErrorToast?: boolean;
 }
@@ -42,10 +42,10 @@ class ApiService {
     method: keyof Taro.request.Method
   ) {
     extraConfig = {
-      showLoad: true,
+      showLoading: true,
       hasToken: true,
       showErrorToast: true,
-      showStatusBarLoad: false,
+      showStatusBarLoading: false,
       ...(extraConfig ?? {}),
     };
     //将额外配置传递到拦截器中
@@ -69,9 +69,9 @@ class ApiService {
       },
       ...otherConfig,
     };
-    if (extraConfig.showStatusBarLoad) {
+    if (extraConfig.showStatusBarLoading) {
       Taro.showNavigationBarLoading();
-    } else if (extraConfig.showLoad) {
+    } else if (extraConfig.showLoading) {
       Taro.showLoading({
         title: "请稍候...",
         mask: true,
