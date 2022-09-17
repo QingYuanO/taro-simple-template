@@ -21,6 +21,7 @@ const config = {
   plugins: [
     //本地插件
     resolve(__dirname, '..', 'src/plugin/index'),
+    '@tarojs/plugin-mock',
   ],
   defineConstants: {},
   alias: {
