@@ -1,5 +1,5 @@
 /* eslint-disable import/no-commonjs */
-const path = require("path");
+const path = require('path');
 
 function generateToRouterMethods(pagePath, ctx) {
   const staticStr = `
@@ -73,15 +73,15 @@ const generateParams = (params: { [key: string]: any }) => {
 
   const topImports = `import Taro, { EventChannel } from "@tarojs/taro";\n`;
 
-  let toRouterMethodsStr = "";
-  let importRouteParamsStr = "";
+  let toRouterMethodsStr = '';
+  let importRouteParamsStr = '';
 
   pagePath.forEach((item) => {
     const routerSplit = item
-      .split("/")
+      .split('/')
       .map(
         (routerSplitItem) =>
-          routerSplitItem.charAt(0).toUpperCase() + routerSplitItem.slice(1)
+          routerSplitItem.charAt(0).toUpperCase() + routerSplitItem.slice(1),
       );
 
     //根据是否是分包生成方法名称
@@ -90,10 +90,10 @@ const generateParams = (params: { [key: string]: any }) => {
 
     const getToRouterMethodsStr = (toRouterType) => {
       return `
-export const to${methodName}Page = (option?: ToRouterType<${toRouterType}Params>) => {
+export const to${methodName}Page = (option?: ToRouterType<${toRouterType}>) => {
   navigateType("${item}", option);
 };\n`;
-    }
+    };
 
     // const headToUpperCaseMethodName =
     //   methodName.charAt(0).toUpperCase() + methodName.slice(1);
@@ -101,21 +101,21 @@ export const to${methodName}Page = (option?: ToRouterType<${toRouterType}Params>
     //生成页面对应的router.config文件路径
     const pathUrl = path.resolve(
       ctx.paths.sourcePath,
-      `.${item.slice(0, item.lastIndexOf("/")) + "\\route.config.ts"}`
+      `.${item.slice(0, item.lastIndexOf('/')) + '\\route.config.ts'}`,
     );
     //判断文件是否存在
     if (ctx.helper.fs.existsSync(pathUrl)) {
-      const contentStr = ctx.helper.fs.readFileSync(pathUrl).toString("utf8");
+      const contentStr = ctx.helper.fs.readFileSync(pathUrl).toString('utf8');
       //判断文件是否包含Params
-      if (contentStr.includes("Params")) {
+      if (contentStr.includes('Params')) {
         importRouteParamsStr += `import ${methodName}Params from '..${
-          item.slice(0, item.lastIndexOf("/")) + "/route.config"
+          item.slice(0, item.lastIndexOf('/')) + '/route.config'
         }'\n`;
-        toRouterMethodsStr += getToRouterMethodsStr(methodName)
+        toRouterMethodsStr += getToRouterMethodsStr(`${methodName}Params`);
         return;
       }
     }
-    toRouterMethodsStr += getToRouterMethodsStr('any')
+    toRouterMethodsStr += getToRouterMethodsStr('any');
   });
 
   return topImports + importRouteParamsStr + staticStr + toRouterMethodsStr;
