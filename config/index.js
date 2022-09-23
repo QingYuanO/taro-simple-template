@@ -1,11 +1,10 @@
-//@ts-ignore
-import { resolve } from 'path';
-
+/* eslint-disable import/no-commonjs */
+const path = require('path')
 const {
   TaroWeappTailwindcssWebpackPluginV5,
 } = require('weapp-tailwindcss-webpack-plugin');
-
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
 const config = {
   compiler: 'webpack5',
   projectName: 'taro-simple-template',
@@ -20,20 +19,20 @@ const config = {
   outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [
     //本地插件
-    resolve(__dirname, '..', 'src/plugin/index'),
+    path.resolve(__dirname, '..', 'src/plugin/index'),
     '@tarojs/plugin-mock',
   ],
   defineConstants: {},
   alias: {
-    '@/components': resolve(__dirname, '..', 'src/components'),
-    '@/utils': resolve(__dirname, '..', 'src/utils'),
-    '@/hooks': resolve(__dirname, '..', 'src/hooks'),
-    '@/store': resolve(__dirname, '..', 'src/store'),
-    '@/constants': resolve(__dirname, '..', 'src/constants'),
-    '@/assets': resolve(__dirname, '..', 'src/assets'),
-    '@/service': resolve(__dirname, '..', 'src/service'),
-    '@/pages': resolve(__dirname, '..', 'src/pages'),
-    '@/types': resolve(__dirname, '..', 'src/types'),
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/hooks': path.resolve(__dirname, '..', 'src/hooks'),
+    '@/store': path.resolve(__dirname, '..', 'src/store'),
+    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
+    '@/assets': path.resolve(__dirname, '..', 'src/assets'),
+    '@/service': path.resolve(__dirname, '..', 'src/service'),
+    '@/pages': path.resolve(__dirname, '..', 'src/pages'),
+    '@/types': path.resolve(__dirname, '..', 'src/types'),
   },
   copy: {
     patterns: [],
