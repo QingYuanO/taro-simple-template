@@ -35,9 +35,6 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@tanstack/react-query": "^4.2.3",
-    "@taroify/commerce": "^0.0.29-alpha.9",
-    "@taroify/core": "^0.0.29-alpha.9",
-    "@taroify/icons": "^0.0.29-alpha.9",
     "@tarojs/components": "3.5.5",
     "@tarojs/mini-runner": "^3.5.5",
     "@tarojs/plugin-framework-react": "^3.5.5",
