@@ -1,10 +1,7 @@
-import { Children, isValidElement, ReactElement, ReactNode } from 'react';
 import {
   getMenuButtonBoundingClientRect,
   getSystemInfoSync,
 } from '@tarojs/taro';
-import Container from '..';
-import { ContainerChildren } from '../types';
 
 const globalSystemInfo = getSystemInfoSync();
 export const getSystemInfo = () => {
@@ -35,33 +32,6 @@ export const isIPhoneX = () => {
   return model.includes('iPhone') && (safeArea?.top ?? 0) > 20;
 };
 
-export function findContainerChildren(node?: ReactNode): ContainerChildren {
-  const children: ContainerChildren = {
-    navbar: undefined,
-    footer: undefined,
-    content: undefined,
-    other: [],
-  };
-
-  Children.forEach(node, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement;
-      if (element.type === Container.Navbar) {
-        children.navbar = element;
-      } else if (element.type === Container.Content) {
-        children.content = element;
-      } else if (element.type === Container.Footer) {
-        children.footer = element;
-      } else {
-        children.other!.push(child);
-      }
-    } else {
-      children.other!.push(child);
-    }
-  });
-
-  return children;
-}
 
 /**
  * 统一路由路径格式

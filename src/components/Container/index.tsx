@@ -1,11 +1,38 @@
 import { View } from '@tarojs/components';
-import { memo, useEffect, useMemo, useState } from 'react';
+import { Children, isValidElement, ReactElement, ReactNode, useMemo } from 'react';
 import useNodeRect from '@/hooks/useNodeRect';
-import { useWhyDidYouUpdate } from 'ahooks';
 import './index.less';
-import { findContainerChildren, getNavBarHeight } from './helper';
+import { getNavBarHeight } from './helper';
 import { Content, Footer, Navbar } from './components';
-import { ContainerProps } from './types';
+import { ContainerChildren, ContainerProps } from './types';
+
+function findContainerChildren(node?: ReactNode): ContainerChildren {
+  const children: ContainerChildren = {
+    navbar: undefined,
+    footer: undefined,
+    content: undefined,
+    other: [],
+  };
+
+  Children.forEach(node, (child: ReactNode) => {
+    if (isValidElement(child)) {
+      const element = child as ReactElement;
+      if (element.type === Container.Navbar) {
+        children.navbar = element;
+      } else if (element.type === Container.Content) {
+        children.content = element;
+      } else if (element.type === Container.Footer) {
+        children.footer = element;
+      } else {
+        children.other!.push(child);
+      }
+    } else {
+      children.other!.push(child);
+    }
+  });
+
+  return children;
+}
 
 function Container(props: ContainerProps) {
   const {
