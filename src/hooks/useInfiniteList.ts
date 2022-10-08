@@ -68,7 +68,7 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
           pageSize: defaultPageSize,
           ...realSearch,
         });
-        setIsInitLoading(true);
+        setIsInitLoading(false);
         setListData(data);
         setListParams((state) => ({
           page: state.page + 1,
@@ -76,7 +76,7 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
           search: realSearch,
         }));
       } catch (error) {
-        setIsInitLoading(true);
+        setIsInitLoading(false);
         console.log(error);
       }
     },
