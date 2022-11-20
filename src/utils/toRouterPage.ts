@@ -73,7 +73,7 @@ export const toIndexPage = (option?: ToRouterType<IndexParams>) => {
   navigateType("/pages/index/index", option);
 };
 
-export const toContainerPage = (option?: ToRouterType<anyParams>) => {
+export const toContainerPage = (option?: ToRouterType<any>) => {
   navigateType("/pages/container/index", option);
 };
 
