@@ -46,7 +46,12 @@
 
 // tailwind.config.js
 module.exports = {
-  content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+  content: [
+    './src/pages/**/*.{html,js,ts,jsx,tsx}',
+    './src/components/**/*.{html,js,ts,jsx,tsx}',
+    './src/app.ts',
+    './src/index.html',
+  ],
   theme: {
     extend: {
       colors: {
