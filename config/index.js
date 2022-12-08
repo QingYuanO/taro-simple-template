@@ -1,9 +1,9 @@
 /* eslint-disable import/no-commonjs */
-const path = require('path')
-const {
-  TaroWeappTailwindcssWebpackPluginV5,
-} = require('weapp-tailwindcss-webpack-plugin');
+const path = require('path');
+const { TaroWeappTailwindcssWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
+const mockPort = process.env.TARO_ENV === 'h5' ? 9527 : 9528;
 
 const config = {
   compiler: 'webpack5',
@@ -20,7 +20,12 @@ const config = {
   plugins: [
     //本地插件
     path.resolve(__dirname, '..', 'src/plugin/index'),
-    '@tarojs/plugin-mock',
+    [
+      '@tarojs/plugin-mock',
+      {
+        port: mockPort,
+      },
+    ],
   ],
   defineConstants: {},
   alias: {
