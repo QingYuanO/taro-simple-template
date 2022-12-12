@@ -18,7 +18,7 @@ module.exports = {
       },
     },
   },
-  plugins: [plugin],
+  plugins: [plugin, require('@tailwindcss/line-clamp')],
   daisyui: {
     styled: true,
     themes: ['corporate'],
