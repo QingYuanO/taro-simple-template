@@ -41,10 +41,13 @@ const Index = () => {
       >
         toContainerPage
       </Button>
-      <View className=" line-clamp-3">
+      <View className="mx-5 line-clamp-3">
         Et molestiae hic earum repellat aliquid est doloribus delectus. Enim illum odio porro ut omnis dolor debitis natus. Voluptas
         possimus deserunt sit delectus est saepe nihil. Qui voluptate possimus et quia. Eligendi voluptas voluptas dolor cum. Rerum est quos
         quos id ut molestiae fugit.
+      </View>
+      <View className="align-content-center m-5 rounded border border-solid border-red-400 bg-red-200 p-5 text-center danger-arrow-top">
+        TOP ARROW
       </View>
     </View>
   );

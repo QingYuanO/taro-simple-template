@@ -4,6 +4,15 @@ const { plugin } = require('weapp-tailwindcss-children');
 module.exports = {
   content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
   theme: {
+    tooltipArrows: theme => ({
+      'danger-arrow': {
+        borderColor: theme('colors.red.400'),
+        borderWidth: 1,
+        backgroundColor: theme('colors.red.200'),
+        size: 10,
+        offset: 10,
+      },
+    }),
     extend: {
       colors: {
         typo: {
@@ -18,7 +27,7 @@ module.exports = {
       },
     },
   },
-  plugins: [plugin, require('@tailwindcss/line-clamp')],
+  plugins: [plugin, require('@tailwindcss/line-clamp'), require('tailwindcss-tooltip-arrow-after')()],
   daisyui: {
     styled: true,
     themes: ['corporate'],

@@ -10986,6 +10986,13 @@ table@^4.0.1:
     slice-ansi "1.0.0"
     string-width "^2.1.1"
 
+tailwindcss-tooltip-arrow-after@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-tooltip-arrow-after/-/tailwindcss-tooltip-arrow-after-1.0.0.tgz#15e3be17e5903268cc02b52618ca88c52fcedae3"
+  integrity sha512-iPL63shQtlAeS9iVIT5mEf7x/Tz2RfdfsYdVMvq9ZrjmRTVqvneEjOqEMuUJ/XupdMJakYoFw3DawEaeAY5aBQ==
+  dependencies:
+    lodash "^4.17.15"
+
 tailwindcss@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.4.tgz#afe3477e7a19f3ceafb48e4b083e292ce0dc0250"
