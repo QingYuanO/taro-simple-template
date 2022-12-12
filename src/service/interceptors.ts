@@ -25,8 +25,7 @@ const defaultErrorMessage = {
 function showError(show, res?: any) {
   show &&
     Taro.showToast({
-      title:
-        res.data?.message || defaultErrorMessage[res.statusCode] || '请求异常',
+      title: res.data?.message || defaultErrorMessage[res.statusCode] || '请求异常',
       icon: 'none',
     });
   return Promise.reject(res.data ?? res);
@@ -36,23 +35,18 @@ const customInterceptor = function (chain) {
   let requestParams = chain.requestParams;
   //剔除掉额外配置参数
   const {
-    data: {
-      showErrorToast,
-      showLoading,
-      showStatusBarLoading,
-      ...realRequestParams
-    },
+    data: { showErrorToast, showLoading, showStatusBarLoading, hasToken, ...realRequestParams },
   } = requestParams;
 
   requestParams.data = realRequestParams;
   return chain
     .proceed(requestParams)
-    .catch((res) => {
+    .catch(res => {
       // 这个catch需要放到前面才能捕获request本身的错误，因为showError返回的也是Promise.reject
       console.error(res);
       return showError(res.errMsg, showErrorToast);
     })
-    .then((res) => {
+    .then(res => {
       // 只要请求成功，不管返回什么状态码，都走这个回调
       if (showStatusBarLoading) {
         Taro.hideNavigationBarLoading();
