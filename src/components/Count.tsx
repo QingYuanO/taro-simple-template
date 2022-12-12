@@ -7,12 +7,12 @@ const countAtom = atom(0);
 const Count = () => {
   const [count, setCount] = useAtom(countAtom);
   return (
-    <View className='mt-[30px] flex items-center'>
-      <Text className='btn' onClick={() => setCount(count - 1)}>
+    <View className="mt-[30px] flex items-center">
+      <Text className="text-btn " onClick={() => setCount(count - 1)}>
         -
       </Text>
-      <Text className='mx-[30px] '>{count}</Text>
-      <Text className='btn' onClick={() => setCount(count + 1)}>
+      <Text className="mx-[30px] ">{count}</Text>
+      <Text className="text-btn " onClick={() => setCount(count + 1)}>
         +
       </Text>
     </View>

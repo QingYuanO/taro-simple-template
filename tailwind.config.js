@@ -1,63 +1,14 @@
-// const range = (size) =>
-//     Object.fromEntries(
-//         [...Array(size).keys()]
-//             .slice(1)
-//             .map((i) => [`${i}_${size}`, `${(i / size) * 100}%`])
-//     );
+/* eslint-disable import/no-commonjs */
+const { plugin } = require('weapp-tailwindcss-children');
 
-// module.exports = {
-//     prefixer: false,
-//     separator: "_",
-//     compile: false,
-//     globalUtility: false,
-//     darkMode: "media",
-//     corePlugins: {
-//         preflight: false,
-//         divideColor: false,
-//         divideOpacity: false,
-//         divideStyle: false,
-//         divideWidth: false,
-//         space: false,
-//         placeholderColor: false,
-//         placeholderOpacity: false,
-//     },
-//     exclude: [/([0-9]{1,}[.][0-9]*)$/],
-//     theme: {
-//         width: (theme) => ({
-//             auto: "auto",
-//             full: "100%",
-//             screen: "100vw",
-//             ...Object.assign(...[2, 3, 4, 5, 6, 12].map(range)),
-//             ...theme("spacing"),
-//         }),
-//         height: (theme) => ({
-//             auto: "auto",
-//             full: "100%",
-//             screen: "100vh",
-//             ...Object.assign(...[2, 3, 4, 5, 6, 12].map(range)),
-//             ...theme("spacing"),
-//         }),
-//         maxHeight: {
-//             full: "100%",
-//             screen: "100vh",
-//         },
-//     },
-// };
-
-// tailwind.config.js
 module.exports = {
-  content: [
-    './src/pages/**/*.{html,js,ts,jsx,tsx}',
-    './src/components/**/*.{html,js,ts,jsx,tsx}',
-    './src/app.ts',
-    './src/index.html',
-  ],
+  content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
   theme: {
     extend: {
       colors: {
         typo: {
-          primary: "#222",
-          secondary: "#9ca3af",
+          primary: '#222',
+          secondary: '#9ca3af',
         },
       },
       boxShadow: {
@@ -67,7 +18,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [plugin],
+  daisyui: {
+    styled: true,
+    themes: ['corporate'],
+    base: false,
+    utils: true,
+    logs: true,
+    rtl: false,
+    darkTheme: 'dark',
+  },
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
     preflight: false,

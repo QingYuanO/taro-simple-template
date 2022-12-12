@@ -15,17 +15,17 @@ const Index = () => {
   const rect = useNodeRect('test');
   console.log(rect);
   useLoad(() => {
-    getMockList()
+    getMockList();
   });
 
   return (
-    <View className='index flex flex-col items-center justify-center py-[50px]'>
+    <View className="index flex flex-col items-center justify-center py-[50px]">
       <TaroLogo />
       <Count />
       <Button
-        id='test'
-        type='primary'
-        className='mt-[50px]'
+        id="test"
+        type="primary"
+        className="taro-btn-reset mt-[50px]"
         onClick={() => {
           toPackageAHomePage();
         }}
@@ -33,8 +33,8 @@ const Index = () => {
         toPackageAHomePage
       </Button>
       <Button
-        type='primary'
-        className='mt-[50px]'
+        type="primary"
+        className="taro-btn-reset mt-[50px]"
         onClick={() => {
           toContainerPage();
         }}
