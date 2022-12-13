@@ -1169,6 +1169,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@downwindcss/easings@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@downwindcss/easings/-/easings-1.0.4.tgz#ba208a02f78f2b8c8a46d2deed9e3f05a8249b4b"
+  integrity sha512-z6GotK7MEZugozpmTB05l65wNTLd+b06+3ToShOA+Zcc4F2ptz279G421S5KsXHkJ1UxOMBo4V6t4W2nPd+jyw==
+
 "@esbuild/linux-loong64@0.14.54":
   version "0.14.54"
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.14.54.tgz#de2a4be678bd4d0d1ffbb86e6de779cde5999028"
@@ -8858,6 +8863,13 @@ postcss-discard-overridden@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/postcss-discard-overridden/-/postcss-discard-overridden-5.1.0.tgz#7e8c5b53325747e9d90131bb88635282fb4a276e"
   integrity sha512-21nOL7RqWR1kasIVdKs8HNqQJhFxLsyRfAnUDm4Fe4t4mCWL9OJiHvlHPjcd8zc5Myu89b/7wZDnOSjFgeWRtw==
+
+postcss-easings@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-easings/-/postcss-easings-3.0.1.tgz#97f9512cd0326c3c9a80b1ae14b78c60f7b43755"
+  integrity sha512-n3bG/X3iB0m8d845vhFg/62/ECeT8jY8gE8F2A41z8Mty41spYA4vzMLezha7icVjtGjqlxgO3QE+uOzpDqeww==
+  dependencies:
+    postcss-value-parser "^4.1.0"
 
 postcss-html-transform@3.5.9:
   version "3.5.9"

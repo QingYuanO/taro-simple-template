@@ -28,8 +28,10 @@ module.exports = {
     },
   },
   plugins: [plugin, require('@tailwindcss/line-clamp'), require('tailwindcss-tooltip-arrow-after')()],
+  presets: [require('@downwindcss/easings')],
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
     preflight: false,
+    container: false,
   },
 };
