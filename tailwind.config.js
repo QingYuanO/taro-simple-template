@@ -28,15 +28,6 @@ module.exports = {
     },
   },
   plugins: [plugin, require('@tailwindcss/line-clamp'), require('tailwindcss-tooltip-arrow-after')()],
-  daisyui: {
-    styled: true,
-    themes: ['corporate'],
-    base: false,
-    utils: true,
-    logs: true,
-    rtl: false,
-    darkTheme: 'dark',
-  },
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
     preflight: false,
