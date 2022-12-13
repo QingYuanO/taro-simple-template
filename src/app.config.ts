@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  pages: ['pages/index/index','pages/container/index'],
+  pages: ['pages/index/index', 'pages/container/index', 'pages/tailwindPluginExample/index'],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
