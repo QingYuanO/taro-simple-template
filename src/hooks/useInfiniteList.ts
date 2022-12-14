@@ -27,11 +27,11 @@ type UseInfiniteListParams<D> = {
 function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
   const {
     fetchListApi,
-    id,
+    id="id",
     defaultPageSize = 10,
     isAutoInitLoad,
     isAutoFetchNext,
-  } = option;
+  } = option ;
   const [listParams, setListParams] = useState<ListParams>(() => ({
     page: 1,
     pageSize: defaultPageSize,
