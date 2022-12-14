@@ -7184,11 +7184,6 @@ joi@^17.6.0:
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
 
-jotai@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.11.1.tgz#a85d2ba34363e831e1e2aa74dead4a0b1ac9e5ae"
-  integrity sha512-pHpaZUdvIpcS12ryMCrwtvmT/IovZAbicfrlll/Rb9394rwhqKoDFsDs0kv4oWtBy/XHHNv7iSZnQFmntiQj+w==
-
 joycon@^3.0.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/joycon/-/joycon-3.1.1.tgz#bce8596d6ae808f8b68168f5fc69280996894f03"
@@ -11725,7 +11720,7 @@ use-deep-compare-effect@^1.8.1:
     "@babel/runtime" "^7.12.5"
     dequal "^2.0.2"
 
-use-sync-external-store@^1.2.0:
+use-sync-external-store@1.2.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
@@ -12299,3 +12294,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zustand@^4.1.5:
+  version "4.1.5"
+  resolved "https://registry.npmmirror.com/zustand/-/zustand-4.1.5.tgz#7402b511f5b23ccb0f9ba6d20ae01ec817e16eb6"
+  integrity sha512-PsdRT8Bvq22Yyh1tvpgdHNE7OAeFKqJXUxtJvj1Ixw2B9O2YZ1M34ImQ+xyZah4wZrR4lENMoDUutKPpyXCQ/Q==
+  dependencies:
+    use-sync-external-store "1.2.0"

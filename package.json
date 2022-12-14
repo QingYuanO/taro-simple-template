@@ -45,10 +45,10 @@
     "@tarojs/taro": "3.5.9",
     "@tarojs/webpack5-runner": "3.5.9",
     "ahooks": "^3.7.2",
-    "jotai": "^1.11.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zustand": "^4.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
