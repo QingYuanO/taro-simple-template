@@ -1,5 +1,7 @@
 /* eslint-disable import/no-commonjs */
 const { plugin } = require('weapp-tailwindcss-children');
+const lineClamp = require('@tailwindcss/line-clamp');
+const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')();
 
 module.exports = {
   content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
@@ -27,8 +29,16 @@ module.exports = {
       },
     },
   },
-  plugins: [plugin, require('@tailwindcss/line-clamp'), require('tailwindcss-tooltip-arrow-after')()],
-  presets: [require('@downwindcss/easings')],
+  plugins: [plugin, lineClamp, tailwindcssTooltipArrowAfter],
+  presets: [
+    //添加一些缓动函数https://easings.net/zh-cn
+    require('@downwindcss/easings'),
+    //将rem转换为rpx
+    require('tailwindcss-rem2px-preset').createPreset({
+      fontSize: 40,
+      unit: 'rpx',
+    }),
+  ],
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
     preflight: false,

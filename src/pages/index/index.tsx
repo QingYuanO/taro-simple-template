@@ -19,13 +19,13 @@ const Index = () => {
   });
 
   return (
-    <View className="index flex flex-col items-center justify-center py-[50px]">
+    <View className="index flex flex-col items-center justify-center py-5">
       <TaroLogo />
       <Count />
       <Button
         id="test"
         type="primary"
-        className="taro-btn-reset mt-[50px]"
+        className="taro-btn-reset mt-5"
         onClick={() => {
           toPackageAHomePage();
         }}
@@ -34,7 +34,7 @@ const Index = () => {
       </Button>
       <Button
         type="primary"
-        className="taro-btn-reset mt-[50px]"
+        className="taro-btn-reset mt-5"
         onClick={() => {
           toContainerPage();
         }}
@@ -43,7 +43,7 @@ const Index = () => {
       </Button>
       <Button
         type="primary"
-        className="taro-btn-reset mt-[50px]"
+        className="taro-btn-reset mt-5"
         onClick={() => {
           toTailwindPluginExamplePage();
         }}

@@ -29,7 +29,5 @@ module.exports = (ctx, options) => {
       });
     },
   });
-  ctx.modifyBuildAssets(({ assets }) => {
-    console.log(assets);
-  });
+  ctx.modifyBuildAssets(({ assets }) => {});
 };
