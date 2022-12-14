@@ -78,7 +78,7 @@ class ApiService {
       });
     }
     return Taro.request<CustomResult<D>, CustomData>(option).then((res) => {
-      return res.data;
+      return res.data.data;
     });
   }
   private static getMethod = (method: keyof Taro.request.Method) => {

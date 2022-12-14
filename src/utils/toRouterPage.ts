@@ -81,6 +81,10 @@ export const toTailwindPluginExamplePage = (option?: ToRouterType<any>) => {
   navigateType("/pages/tailwindPluginExample/index", option);
 };
 
+export const toListExamplePage = (option?: ToRouterType<any>) => {
+  navigateType("/pages/listExample/index", option);
+};
+
 export const toPackageAHomePage = (option?: ToRouterType<PackageAHomeParams>) => {
   navigateType("/packageA/pages/home/index", option);
 };

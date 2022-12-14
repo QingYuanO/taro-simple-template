@@ -27,6 +27,7 @@
       "@/pages/*": ["./src/pages/*"],
       "@/types/*": ["./src/types/*"],
       "@/types": ["./src/types/index"],
+      "@/mock": ["./mock/api"],
     },
     "rootDir": ".",
     "jsx": "react-jsx",
