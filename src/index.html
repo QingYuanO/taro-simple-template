@@ -14,7 +14,7 @@
         function e() {
           var e = n.document.documentElement,
             t = e.getBoundingClientRect().width;
-          e.style.fontSize = t >= 640 ? '40px' : t <= 320 ? '20px' : (t / 375) * 20 + 'px';
+          e.style.fontSize = t >= 640 ? '40px' : t <= 375 ? '20px' : (t / 375) * 20 + 'px';
         }
         n.addEventListener('resize', function () {
           e();
