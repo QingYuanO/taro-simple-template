@@ -1,16 +1,13 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import './theme.less';
+@import '@antmjs/vantui/lib/index.less';
 
 page {
-  --bg-theme: #efeff4;
-  --theme-color: #d73535;
-  //修改taroify css变量
-  --primary-color: var(--theme-color);
-  --empty-image-width: 180px;
-  --empty-image-height: 180px;
-
-  background-color: var(--bg-theme);
+  --page-bg-color: #efeff4;
+  --primary-color: #d73535;
+  background-color: var(--page-bg-color);
 }
 .safe_bottom {
   padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/

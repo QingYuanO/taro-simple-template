@@ -9,9 +9,7 @@ const config = {
   compiler: 'webpack5',
   projectName: 'taro-simple-template',
   date: '2021-11-19',
-  designWidth(input) {
-    return 750;
-  },
+  designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
@@ -42,6 +40,8 @@ const config = {
   ],
   defineConstants: {},
   alias: {
+    //根目录
+    '@': path.resolve(__dirname, '..', 'src'),
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
     '@/hooks': path.resolve(__dirname, '..', 'src/hooks'),
@@ -58,6 +58,9 @@ const config = {
   },
   framework: 'react',
   mini: {
+    miniCssExtractPluginOption: {
+      ignoreOrder: true,
+    },
     webpackChain(chain) {
       chain.merge({
         plugins: [new LodashModuleReplacementPlugin()],
@@ -98,6 +101,7 @@ const config = {
     },
   },
   h5: {
+    esnextModules: [/@antmjs[\\/]vantui/],
     webpackChain(chain) {
       chain.merge({
         plugins: [new LodashModuleReplacementPlugin()],

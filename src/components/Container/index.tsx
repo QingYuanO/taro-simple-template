@@ -35,12 +35,7 @@ function findContainerChildren(node?: ReactNode): ContainerChildren {
 }
 
 function Container(props: ContainerProps) {
-  const {
-    children,
-    hasNavBarTop = true,
-    hasFooterBottom = true,
-    ...otherViewProps
-  } = props;
+  const { children, hasNavBarTop = true, hasFooterBottom = true, className, ...otherViewProps } = props;
   // useWhyDidYouUpdate('Container', { ...props });
   const { navbar, content, footer, other } = useMemo(() => {
     return findContainerChildren(children);
@@ -51,11 +46,11 @@ function Container(props: ContainerProps) {
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
 
   return (
-    <View {...otherViewProps}>
+    <View className={`${className || ''} my-theme`} {...otherViewProps}>
       {navbar}
       {content && (
         <View
-          id='taroContainerContent'
+          id="taroContainerContent"
           className={hasFooterBottom ? 'taro-container__safe-bottom' : ''}
           style={{
             ...(hasContentMt ? { marginTop: navBarHeight } : {}),
@@ -77,6 +72,6 @@ Container.Navbar = Navbar;
 Container.Content = Content;
 Container.Footer = Footer;
 
-export default Container ;
+export default Container;
 
 export { Navbar, Footer };
