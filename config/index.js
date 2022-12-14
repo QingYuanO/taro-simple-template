@@ -26,6 +26,17 @@ const config = {
         port: mockPort,
       },
     ],
+    // [
+    //   '@tarojs/plugin-inject',
+    //   {
+    //     components: {
+    //       Button: {
+    //         class: 'taro-btn-reset',
+    //         dataIndex:"index"
+    //       },
+    //     },
+    //   },
+    // ],
   ],
   defineConstants: {},
   alias: {

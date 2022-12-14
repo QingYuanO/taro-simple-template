@@ -1679,6 +1679,11 @@
     acorn "^8.0.4"
     acorn-walk "^8.0.0"
 
+"@tarojs/plugin-inject@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-inject/-/plugin-inject-1.0.2.tgz#dca71727dfc27a2f48e2bc6df3b2b3a55986de36"
+  integrity sha512-9KwARiJDQVQRZi5H7mpzH5vj8Yx0xVEG94LkXoxfx/+dfCnADKqpGytV9faNWx4nlYttAk45BUacAcWPcHI01Q==
+
 "@tarojs/plugin-mock@^0.0.9":
   version "0.0.9"
   resolved "https://registry.npmjs.org/@tarojs/plugin-mock/-/plugin-mock-0.0.9.tgz#f02147c0cddc434ac08b628edf399b302d5bc3cb"

@@ -7,6 +7,7 @@
     "typescript": true,
     "css": "less"
   },
+  "type": "module",
   "scripts": {
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
@@ -53,6 +54,7 @@
     "@downwindcss/easings": "^1.0.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "@tarojs/plugin-inject": "^1.0.2",
     "@tarojs/plugin-mock": "^0.0.9",
     "@types/react": "^18.0.15",
     "@types/webpack-env": "^1.13.6",
