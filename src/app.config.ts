@@ -1,3 +1,5 @@
+import { useGlobalIconFont } from './components/OriginalIconFont/helper';
+
 export default defineAppConfig({
   pages: ['pages/index/index', 'pages/container/index', 'pages/tailwindPluginExample/index'],
   window: {
@@ -13,4 +15,6 @@ export default defineAppConfig({
       pages: ['pages/home/index'],
     },
   ],
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  usingComponents: Object.assign(useGlobalIconFont()),
 });
