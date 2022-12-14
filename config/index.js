@@ -9,7 +9,12 @@ const config = {
   compiler: 'webpack5',
   projectName: 'taro-simple-template',
   date: '2021-11-19',
-  designWidth: 750,
+  designWidth (input) {
+    if (input.file.replace(/\\+/g, '/').indexOf('@nutui/nutui-taro') > -1) {
+      return 375
+    }
+    return 750
+  },
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
