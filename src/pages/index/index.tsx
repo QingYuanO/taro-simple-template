@@ -19,7 +19,7 @@ const Index = () => {
     <Container className="index flex flex-col items-center justify-center py-5">
       <TaroLogo />
       <Count />
-      <View className="flex flex-col gap-y-4 mt-5">
+      <View className="mt-5 flex flex-col gap-y-4">
         <Button
           id="test"
           type="primary"
@@ -54,6 +54,8 @@ const Index = () => {
           toListExamplePage
         </Button>
       </View>
+      <View className="bg-slate-300 square-10 flex-center">1</View>
+      <View className="bg-slate-300 circular-10 flex-center">1</View>
     </Container>
   );
 };

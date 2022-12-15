@@ -2,6 +2,7 @@
 const { plugin } = require('weapp-tailwindcss-children');
 const lineClamp = require('@tailwindcss/line-clamp');
 const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')();
+const tailwindcssPlugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
@@ -17,19 +18,47 @@ module.exports = {
     }),
     extend: {
       colors: {
-        typo: {
+        word: {
           primary: '#222',
           secondary: '#9ca3af',
         },
       },
-      boxShadow: {
-        custom: `2px 0px 3px rgba(0, 0, 0, 0.003),
-        3.3px 0px 10px rgba(0, 0, 0, 0.004), 4.9px 0px 24.8px rgba(0, 0, 0, 0.006),
-        10px 0px 69px rgba(0, 0, 0, 0.01)`,
+      spacing: {
+        sm: '8px',
+        md: '12px',
+        lg: '16px',
+        xl: '24px',
       },
     },
   },
-  plugins: [plugin, lineClamp, tailwindcssTooltipArrowAfter],
+  plugins: [
+    plugin,
+    lineClamp,
+    tailwindcssTooltipArrowAfter,
+    tailwindcssPlugin(function ({ addUtilities, matchUtilities, theme }) {
+      matchUtilities(
+        {
+          square: value => ({
+            width: value,
+            height: value,
+          }),
+          circular: value => ({
+            width: value,
+            height: value,
+            'border-radius': '100%',
+          }),
+        },
+        { values: theme('spacing') }
+      );
+      addUtilities({
+        '.flex-center': {
+          display: 'flex',
+          'align-items': 'center',
+          'justify-content': 'center',
+        },
+      });
+    }),
+  ],
   presets: [
     //添加一些缓动函数https://easings.net/zh-cn
     require('@downwindcss/easings'),
