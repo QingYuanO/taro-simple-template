@@ -1,3 +1,4 @@
+import Container from '@/components/Container';
 import { Button, Text, View } from '@tarojs/components';
 import { useState } from 'react';
 
@@ -8,7 +9,7 @@ definePageConfig({
 const TailwindPluginExample = () => {
   const [isShow, setIsShow] = useState(false);
   return (
-    <View className="flex flex-col items-center justify-center py-[50px]">
+    <Container className="flex flex-col items-center justify-center py-[50px]">
       <View className="mx-5">
         <Text className="line-clamp-3 text-xs">
           Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6
@@ -41,7 +42,7 @@ const TailwindPluginExample = () => {
           关闭
         </Button>
       </View>
-    </View>
+    </Container>
   );
 };
 

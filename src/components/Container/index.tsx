@@ -1,6 +1,8 @@
 import { View } from '@tarojs/components';
 import { Children, isValidElement, ReactElement, ReactNode, useMemo } from 'react';
 import useNodeRect from '@/hooks/useNodeRect';
+import themeStore from '@/utils/theme';
+import Taro from '@tarojs/taro';
 import './index.less';
 import { getNavBarHeight } from './helper';
 import { Content, Footer, Navbar } from './components';
@@ -36,18 +38,18 @@ function findContainerChildren(node?: ReactNode): ContainerChildren {
 
 function Container(props: ContainerProps) {
   const { children, hasNavBarTop = true, hasFooterBottom = true, className, ...otherViewProps } = props;
-  // useWhyDidYouUpdate('Container', { ...props });
   const { navbar, content, footer, other } = useMemo(() => {
     return findContainerChildren(children);
   }, [children]);
   const navBarHeight = getNavBarHeight();
-  const hasContentMt = hasNavBarTop && navbar;
+  const hasContentMt = hasNavBarTop;
   const hasContentPb = hasFooterBottom && footer;
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
-
+  const themeMode = themeStore.useTracked.themeMode();
+  const pageInstance = Taro.getCurrentInstance();
   return (
-    <View className={`${className || ''} my-theme`} {...otherViewProps}>
-      {navbar}
+    <View className={`${className || ''} cover-antmjs-theme-base ${themeMode}`} {...otherViewProps}>
+      {navbar ?? <Navbar title={pageInstance.page?.config?.navigationBarTitleText ?? ''} />}
       {content && (
         <View
           id="taroContainerContent"

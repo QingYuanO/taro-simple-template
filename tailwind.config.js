@@ -6,6 +6,7 @@ const tailwindcssPlugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
+  darkMode: 'class',
   theme: {
     tooltipArrows: theme => ({
       'danger-arrow': {
@@ -35,7 +36,11 @@ module.exports = {
     plugin,
     lineClamp,
     tailwindcssTooltipArrowAfter,
-    tailwindcssPlugin(function ({ addUtilities, matchUtilities, theme }) {
+    tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
+      const themes = ['products'];
+      themes.forEach(t => {
+        addVariant(t, `.theme-${t} &`);
+      });
       matchUtilities(
         {
           square: value => ({
@@ -51,10 +56,17 @@ module.exports = {
         { values: theme('spacing') }
       );
       addUtilities({
+        '.flex-col-center': {
+          display: 'flex',
+          'align-items': 'center',
+          'justify-content': 'center',
+          'flex-direction': 'column',
+        },
         '.flex-center': {
           display: 'flex',
           'align-items': 'center',
           'justify-content': 'center',
+          'flex-direction': 'row',
         },
       });
     }),
@@ -72,5 +84,6 @@ module.exports = {
   corePlugins: {
     preflight: false,
     container: false,
+    darkMode: false,
   },
 };

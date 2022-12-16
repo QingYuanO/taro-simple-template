@@ -1,13 +1,19 @@
 import { useGlobalIconFont } from './components/OriginalIconFont/helper';
 
 export default defineAppConfig({
-  pages: ['pages/index/index', 'pages/container/index', 'pages/tailwindPluginExample/index', 'pages/listExample/index'],
+  pages: [
+    'pages/index/index',
+    'pages/container/index',
+    'pages/tailwindPluginExample/index',
+    'pages/listExample/index',
+    'pages/themeExample/index',
+  ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
-    // navigationStyle:'custom'
+    navigationBarTitleText: 'WeChat',
+    navigationStyle:'custom'
   },
   subPackages: [
     {

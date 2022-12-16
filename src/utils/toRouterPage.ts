@@ -85,6 +85,10 @@ export const toListExamplePage = (option?: ToRouterType<any>) => {
   navigateType("/pages/listExample/index", option);
 };
 
+export const toThemeExamplePage = (option?: ToRouterType<any>) => {
+  navigateType("/pages/themeExample/index", option);
+};
+
 export const toPackageAHomePage = (option?: ToRouterType<PackageAHomeParams>) => {
   navigateType("/packageA/pages/home/index", option);
 };

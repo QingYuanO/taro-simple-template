@@ -29,7 +29,7 @@ const countStore = createStore('count')<{ count: number }>(
       getStorage,
       onRehydrateStorage() {
         return (state, error) => {
-          console.log(state);
+          // console.log(state);
         };
       },
     },

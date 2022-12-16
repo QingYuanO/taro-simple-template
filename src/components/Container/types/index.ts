@@ -55,6 +55,6 @@ export interface NavbarProps {
   bgColor?: string;
   /** 默认的左边按钮Size */
   defaultLeftIconSize?: number;
-  /** 默认的左边按钮Size */
+  /** 默认的左边按钮Color */
   defaultLeftColor?: string;
 }

@@ -28,6 +28,7 @@
       "@/types/*": ["./src/types/*"],
       "@/types": ["./src/types/index"],
       "@/mock": ["./mock/api"],
+      "@": ["./src/"]
     },
     "rootDir": ".",
     "jsx": "react-jsx",
