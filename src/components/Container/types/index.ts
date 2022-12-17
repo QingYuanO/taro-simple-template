@@ -15,12 +15,10 @@ export interface ContainerChildren {
 
 export type ContainerProps = {
   children?: ReactNode;
-  /** 是否自动給Container.Content添加NavBar高度的顶部边距，默认true */
+  /** 是否自动給content添加NavBar高度的顶部边距，默认true */
   hasNavBarTop?: boolean;
-  /** 是否自动給Container.Content添加Footer高度的底部边距，默认true */
+  /** 是否自动給content添加Footer高度的底部边距，默认true */
   hasFooterBottom?: boolean;
-  navbar?: NavbarProps;
-  footer?: FooterProps;
 } & ViewProps;
 
 export interface FooterProps {

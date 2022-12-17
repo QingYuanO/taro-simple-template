@@ -1,5 +1,4 @@
 import { pixelTransform } from '@/utils';
-import themeStore from '@/utils/theme';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { Fragment, memo, useMemo } from 'react';
@@ -48,9 +47,7 @@ export default memo(function Navbar(props: NavbarProps) {
             </View>
             {title && (
               <View className="taro-container__title-wrap">
-                <Text className={`taro-container__title  ${titleClassName ?? ''}`}>
-                  {title}
-                </Text>
+                <Text className={`taro-container__title  ${titleClassName ?? ''}`}>{title}</Text>
               </View>
             )}
           </View>
