@@ -22,54 +22,52 @@ const Index = () => {
   const rect = useNodeRect('test');
 
   return (
-    <Container>
-      <Container.Content className="index py-5 flex-col-center">
-        <TaroLogo />
-        <Count />
-        <View className="mt-5 flex flex-col gap-y-4">
-          <Button
-            id="test"
-            type="primary"
-            onClick={() => {
-              toPackageAHomePage();
-            }}
-          >
-            toPackageAHomePage
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => {
-              toContainerPage();
-            }}
-          >
-            toContainerPage
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => {
-              toTailwindPluginExamplePage();
-            }}
-          >
-            toTailwindPluginExamplePage
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => {
-              toListExamplePage();
-            }}
-          >
-            toListExamplePage
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => {
-              toThemeExamplePage();
-            }}
-          >
-            toThemeExamplePage
-          </Button>
-        </View>
-      </Container.Content>
+    <Container className="index py-5 flex-col-center">
+      <TaroLogo />
+      <Count />
+      <View className="mt-5 flex flex-col gap-y-4">
+        <Button
+          id="test"
+          type="primary"
+          onClick={() => {
+            toPackageAHomePage();
+          }}
+        >
+          toPackageAHomePage
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            toContainerPage();
+          }}
+        >
+          toContainerPage
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            toTailwindPluginExamplePage();
+          }}
+        >
+          toTailwindPluginExamplePage
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            toListExamplePage();
+          }}
+        >
+          toListExamplePage
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            toThemeExamplePage();
+          }}
+        >
+          toThemeExamplePage
+        </Button>
+      </View>
     </Container>
   );
 };

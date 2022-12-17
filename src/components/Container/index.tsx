@@ -2,17 +2,15 @@ import { View } from '@tarojs/components';
 import { Children, isValidElement, ReactElement, ReactNode, useMemo } from 'react';
 import useNodeRect from '@/hooks/useNodeRect';
 import themeStore from '@/utils/theme';
-import Taro from '@tarojs/taro';
 import './index.less';
 import { getNavBarHeight } from './helper';
-import { Content, Footer, Navbar } from './components';
+import { Footer, Navbar } from './components';
 import { ContainerChildren, ContainerProps } from './types';
 
 function findContainerChildren(node?: ReactNode): ContainerChildren {
   const children: ContainerChildren = {
     navbar: undefined,
     footer: undefined,
-    content: undefined,
     other: [],
   };
 
@@ -21,8 +19,6 @@ function findContainerChildren(node?: ReactNode): ContainerChildren {
       const element = child as ReactElement;
       if (element.type === Container.Navbar) {
         children.navbar = element;
-      } else if (element.type === Container.Content) {
-        children.content = element;
       } else if (element.type === Container.Footer) {
         children.footer = element;
       } else {
@@ -38,7 +34,7 @@ function findContainerChildren(node?: ReactNode): ContainerChildren {
 
 function Container(props: ContainerProps) {
   const { children, hasNavBarTop = true, hasFooterBottom = true, className, ...otherViewProps } = props;
-  const { navbar, content, footer, other } = useMemo(() => {
+  const { navbar, footer, other } = useMemo(() => {
     return findContainerChildren(children);
   }, [children]);
   const navBarHeight = getNavBarHeight();
@@ -46,14 +42,17 @@ function Container(props: ContainerProps) {
   const hasContentPb = hasFooterBottom && footer;
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
   const themeMode = themeStore.useTracked.themeMode();
-  const pageInstance = Taro.getCurrentInstance();
+  const isWrapContainer = !!navbar || !!footer;
   return (
-    <View className={`${className || ''} cover-antmjs-theme-base ${themeMode}`} {...otherViewProps}>
-      {navbar ?? <Navbar title={pageInstance.page?.config?.navigationBarTitleText ?? ''} />}
-      {content && (
+    <View
+      className={`cover-antmjs-theme-base ${themeMode} ${!isWrapContainer ? `${className || ''} taro-container__safe-bottom` : ''}`}
+      {...otherViewProps}
+    >
+      {navbar}
+      {isWrapContainer ? (
         <View
           id="taroContainerContent"
-          className={hasFooterBottom ? 'taro-container__safe-bottom' : ''}
+          className={`${className} taro-container__safe-bottom`}
           style={{
             ...(hasContentMt ? { marginTop: navBarHeight } : {}),
             ...(hasContentPb ? { paddingBottom: rect?.height ?? 0 } : {}),
@@ -61,17 +60,17 @@ function Container(props: ContainerProps) {
             boxSizing: 'border-box',
           }}
         >
-          {content}
+          {other}
         </View>
+      ) : (
+        other
       )}
-      {other}
       {footer}
     </View>
   );
 }
 
 Container.Navbar = Navbar;
-Container.Content = Content;
 Container.Footer = Footer;
 
 export default Container;

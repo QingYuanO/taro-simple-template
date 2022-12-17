@@ -1,3 +1,4 @@
+import { pixelTransform } from '@/utils';
 import themeStore from '@/utils/theme';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -8,10 +9,16 @@ import DefaultLeftIcon from './defaultLeftIcon';
 import './index.less';
 
 export default memo(function Navbar(props: NavbarProps) {
-  const themeMode = themeStore.useTracked.themeMode();
-  const defaultBgColor = themeMode === 'base' ? '#fff' : '#000';
-  const defaultFontColor = themeMode === 'base' ? 'rgb(0,0,0)' : 'rgb(255,255,255)';
-  const { children, title, leftIcon, titleClassName, bgColor, defaultLeftIconSize = 24, defaultLeftColor, hasSeat } = props;
+  const {
+    children,
+    title,
+    leftIcon,
+    titleClassName,
+    bgColor = '#fff',
+    defaultLeftIconSize = 24,
+    defaultLeftColor = 'rgb(0,0,0)',
+    hasSeat,
+  } = props;
   const navBarHeight = getNavBarHeight();
   const navbarTop = useMemo(() => {
     if (process.env.TARO_ENV === 'weapp') {
@@ -31,17 +38,17 @@ export default memo(function Navbar(props: NavbarProps) {
           height: navBarHeight,
           paddingTop: navbarTop,
           paddingBottom: 5,
-          backgroundColor: bgColor ?? defaultBgColor,
+          backgroundColor: bgColor,
         }}
       >
         {children ?? (
           <View className="taro-container__navbar-content-wrap">
             <View className="taro-container__left-operation">
-              {leftIcon ?? <DefaultLeftIcon size={defaultLeftIconSize} color={defaultLeftColor ?? defaultFontColor} />}
+              {leftIcon ?? <DefaultLeftIcon size={pixelTransform(defaultLeftIconSize)} color={defaultLeftColor} />}
             </View>
             {title && (
               <View className="taro-container__title-wrap">
-                <Text className={`taro-container__title ${themeMode === 'base' ? 'text-black' : 'text-white'} ${titleClassName ?? ''}`}>
+                <Text className={`taro-container__title  ${titleClassName ?? ''}`}>
                   {title}
                 </Text>
               </View>

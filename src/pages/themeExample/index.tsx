@@ -10,17 +10,19 @@ definePageConfig({
 const ThemeExample = () => {
   const themeMode = themeStore.useTracked.themeMode();
   return (
-    <Container className="gap-y-5 py-5 flex-col-center">
-      <View className="bg-slate-300 square-10 flex-center dark:bg-red-400">1</View>
-      <View className="bg-slate-300 circular-10 flex-center">1</View>
-      <Button
-        type="primary"
-        onClick={() => {
-          themeStore.set.themeMode(themeMode === 'base' ? 'dark' : 'base');
-        }}
-      >
-        {themeMode === 'dark' ? '基本模式' : '暗黑模式'}
-      </Button>
+    <Container>
+      <View className="gap-y-5 py-5 flex-col-center ">
+        <View className="bg-slate-300 text-word-primary square-10 flex-center dark:bg-black dark:text-white">1</View>
+        <View className="bg-slate-300 text-word-primary  circular-10 flex-center dark:bg-black dark:text-white">1</View>
+        <Button
+          type="primary"
+          onClick={() => {
+            themeStore.set.themeMode(themeMode === 'base' ? 'dark' : 'base');
+          }}
+        >
+          {themeMode === 'dark' ? '基本模式' : '暗黑模式'}
+        </Button>
+      </View>
     </Container>
   );
 };

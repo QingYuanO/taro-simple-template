@@ -22,12 +22,14 @@ const ListExample = () => {
   });
 
   return (
-    <Container className="flex flex-col gap-y-2 p-4">
-      {listData.list.map(item => (
-        <View className="rounded-md bg-blue-400 p-5 text-white shadow shadow-blue-400" key={item.id}>
-          {item.name}
-        </View>
-      ))}
+    <Container>
+      <View className="flex flex-col gap-y-2 p-4">
+        {listData.list.map(item => (
+          <View className="rounded-md bg-blue-400 p-5 text-white shadow shadow-blue-400" key={item.id}>
+            {item.name}
+          </View>
+        ))}
+      </View>
     </Container>
   );
 };

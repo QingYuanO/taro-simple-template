@@ -1,6 +1,6 @@
-import { ViewProps } from "@tarojs/components";
-import { NodesRef } from "@tarojs/taro";
-import { ReactNode } from "react";
+import { ViewProps } from '@tarojs/components';
+import { NodesRef } from '@tarojs/taro';
+import { ReactNode } from 'react';
 
 export interface IconProps {
   color: string;
@@ -9,7 +9,6 @@ export interface IconProps {
 
 export interface ContainerChildren {
   navbar?: ReactNode;
-  content?: ReactNode;
   footer?: ReactNode;
   other?: ReactNode[];
 }
@@ -18,27 +17,22 @@ export type ContainerProps = {
   children?: ReactNode;
   /** 是否自动給Container.Content添加NavBar高度的顶部边距，默认true */
   hasNavBarTop?: boolean;
-   /** 是否自动給Container.Content添加Footer高度的底部边距，默认true */
+  /** 是否自动給Container.Content添加Footer高度的底部边距，默认true */
   hasFooterBottom?: boolean;
+  navbar?: NavbarProps;
+  footer?: FooterProps;
 } & ViewProps;
-export interface ContentProps extends ViewProps {
-  children?: ReactNode | null;
-}
 
 export interface FooterProps {
   children?: ReactNode;
   /** 是否自动生成一个占位组件，一般被用于单独使用时 */
   hasSeat?: boolean;
   /** 组件的布局改变时的回调 */
-  onFooterRectChange?: (
-    dom: NodesRef.BoundingClientRectCallbackResult
-  ) => void;
+  onFooterRectChange?: (dom: NodesRef.BoundingClientRectCallbackResult) => void;
 }
 export interface FooterRef {
   /** 获取组件的布局信息 */
-  getFooterRect: (
-    callback?: (rect: NodesRef.BoundingClientRectCallbackResult) => void
-  ) => void;
+  getFooterRect: (callback?: (rect: NodesRef.BoundingClientRectCallbackResult) => void) => void;
 }
 export interface NavbarProps {
   /** 设置title时，其他属性失效 */

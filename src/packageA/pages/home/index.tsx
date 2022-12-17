@@ -1,4 +1,5 @@
 import AnimeImage from '@/components/AnimeImage';
+import Container from '@/components/Container';
 import { View } from '@tarojs/components';
 
 definePageConfig({
@@ -11,9 +12,13 @@ definePageConfig({
 
 const Home = () => {
   return (
-    <View className='index py-50px flex flex-col items-center justify-center'>
-      <AnimeImage />
-    </View>
+    <Container>
+      <View>
+        <View className="index py-50px flex flex-col items-center justify-center">
+          <AnimeImage />
+        </View>
+      </View>
+    </Container>
   );
 };
 
