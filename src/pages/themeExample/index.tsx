@@ -11,7 +11,7 @@ const ThemeExample = () => {
   const themeMode = themeStore.useTracked.themeMode();
   return (
     <Container>
-      <View className="gap-y-5 py-5 flex-col-center ">
+      <View className="gap-y-5 py-5 flex-col-center">
         <View className="bg-slate-300 text-word-primary square-10 flex-center dark:bg-black dark:text-white">1</View>
         <View className="bg-slate-300 text-word-primary  circular-10 flex-center dark:bg-black dark:text-white">1</View>
         <Button
