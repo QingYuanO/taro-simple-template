@@ -1,9 +1,11 @@
-import Taro from "@tarojs/taro";
-import interceptors, { HTTP_STATUS } from "./interceptors";
+import Taro from '@tarojs/taro';
+import interceptors, { HTTP_STATUS } from './interceptors';
 
-export const BASE_URL = "";
+const MOCK_BASE_URL = { h5: 'http://127.0.0.1:9527', weapp: 'http://127.0.0.1:9528' }[process.env.TARO_ENV];
 
-interceptors.forEach((i) => Taro.addInterceptor(i));
+export const BASE_URL = MOCK_BASE_URL;
+
+interceptors.forEach(i => Taro.addInterceptor(i));
 
 export interface ExtraConfig {
   showLoading?: boolean;
@@ -19,26 +21,16 @@ export interface CustomResult<D = unknown> {
   message: string;
 }
 
-type OmitMethodCustomOption = Omit<
-  Taro.request.Option<CustomResult, CustomData>,
-  "method"
-> & {
+type OmitMethodCustomOption = Omit<Taro.request.Option<CustomResult, CustomData>, 'method'> & {
   baseUrl?: string;
   extraConfig?: ExtraConfig;
 };
 
-export type CustomOption = Omit<OmitMethodCustomOption, "url">;
+export type CustomOption = Omit<OmitMethodCustomOption, 'url'>;
 
 class ApiService {
   static baseOptions<D>(
-    {
-      url,
-      data,
-      header,
-      baseUrl,
-      extraConfig,
-      ...otherConfig
-    }: OmitMethodCustomOption,
+    { url, data, header, baseUrl, extraConfig, ...otherConfig }: OmitMethodCustomOption,
     method: keyof Taro.request.Method
   ) {
     extraConfig = {
@@ -53,18 +45,16 @@ class ApiService {
       ...extraConfig,
       ...(data ?? {}),
     };
-    const contentType = ["POST", "PUT"].includes(method)
-      ? "application/json"
-      : "application/x-www-form-urlencoded";
+    const contentType = ['POST', 'PUT'].includes(method) ? 'application/json' : 'application/x-www-form-urlencoded';
 
     const option: Taro.request.Option = {
       url: (baseUrl ?? BASE_URL) + url,
       data,
       method,
       header: {
-        "content-type": contentType,
+        'content-type': contentType,
         //TODO添加自己的token
-        Authorization: extraConfig.hasToken ? "" : "",
+        Authorization: extraConfig.hasToken ? '' : '',
         ...header,
       },
       ...otherConfig,
@@ -73,11 +63,11 @@ class ApiService {
       Taro.showNavigationBarLoading();
     } else if (extraConfig.showLoading) {
       Taro.showLoading({
-        title: "请稍候...",
+        title: '请稍候...',
         mask: true,
       });
     }
-    return Taro.request<CustomResult<D>, CustomData>(option).then((res) => {
+    return Taro.request<CustomResult<D>, CustomData>(option).then(res => {
       return res.data;
     });
   }
@@ -87,10 +77,10 @@ class ApiService {
     }
     return apiMethod;
   };
-  static get = this.getMethod("GET");
-  static post = this.getMethod("POST");
-  static put = this.getMethod("PUT");
-  static delete = this.getMethod("DELETE");
+  static get = this.getMethod('GET');
+  static post = this.getMethod('POST');
+  static put = this.getMethod('PUT');
+  static delete = this.getMethod('DELETE');
 }
 
 export default ApiService;

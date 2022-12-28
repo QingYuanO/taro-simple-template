@@ -3,7 +3,7 @@ const path = require('path');
 const { TaroWeappTailwindcssWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
-const mockPort = process.env.TARO_ENV === 'h5' ? 9527 : 9528;
+const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
 
 const config = {
   compiler: 'webpack5',

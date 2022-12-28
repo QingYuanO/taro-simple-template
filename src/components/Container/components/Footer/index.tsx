@@ -9,7 +9,7 @@ import './index.less';
 export default memo(
   forwardRef<FooterRef | undefined, FooterProps & Omit<ViewProps, 'style'>>(function Footer(props, ref) {
     useWhyDidYouUpdate('Footer', { ...props });
-    const { children, hasSeat, onFooterRectChange, ...viewProps } = props;
+    const { children, hasSeat, hasSafe = true, onFooterRectChange, ...viewProps } = props;
     const { className, id, ...otherViewProps } = viewProps;
     const isIPhone = isIPhoneX();
     const rect = useNodeRect('taroContainerFooter', [children]);
@@ -29,7 +29,7 @@ export default memo(
       <Fragment>
         <View
           id="taroContainerFooter"
-          className={`taro-container__footer-wrap  ${className ?? ''} ${isIPhone ? 'taro-container__safe-bottom' : ''}`}
+          className={`taro-container__footer-wrap  ${className ?? ''} ${isIPhone && hasSafe ? 'taro-container__safe-bottom' : ''}`}
           {...otherViewProps}
         >
           {children}

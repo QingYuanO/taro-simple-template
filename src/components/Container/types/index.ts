@@ -25,6 +25,7 @@ export interface FooterProps {
   children?: ReactNode;
   /** 是否自动生成一个占位组件，一般被用于单独使用时 */
   hasSeat?: boolean;
+  hasSafe?: boolean;
   /** 组件的布局改变时的回调 */
   onFooterRectChange?: (dom: NodesRef.BoundingClientRectCallbackResult) => void;
 }

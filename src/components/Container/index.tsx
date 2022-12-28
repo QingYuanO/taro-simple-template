@@ -38,7 +38,7 @@ function Container(props: ContainerProps) {
     return findContainerChildren(children);
   }, [children]);
   const navBarHeight = getNavBarHeight();
-  const hasContentMt = hasNavBarTop;
+  const hasContentMt = hasNavBarTop && navbar;
   const hasContentPb = hasFooterBottom && footer;
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
   const themeMode = themeStore.useTracked.themeMode();
@@ -52,7 +52,7 @@ function Container(props: ContainerProps) {
       {isWrapContainer ? (
         <View
           id="taroContainerContent"
-          className={`${className} taro-container__safe-bottom`}
+          className={`${className}`}
           style={{
             ...(hasContentMt ? { marginTop: navBarHeight } : {}),
             ...(hasContentPb ? { paddingBottom: rect?.height ?? 0 } : {}),
