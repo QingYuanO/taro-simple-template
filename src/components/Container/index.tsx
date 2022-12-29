@@ -33,7 +33,7 @@ function findContainerChildren(node?: ReactNode): ContainerChildren {
 }
 
 function Container(props: ContainerProps) {
-  const { children, hasNavBarTop = true, hasFooterBottom = true, className, ...otherViewProps } = props;
+  const { children, hasNavBarTop = true, hasFooterBottom = true, hasSafeBottom, className, ...otherViewProps } = props;
   const { navbar, footer, other } = useMemo(() => {
     return findContainerChildren(children);
   }, [children]);
@@ -43,16 +43,17 @@ function Container(props: ContainerProps) {
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
   const themeMode = themeStore.useTracked.themeMode();
   const isWrapContainer = !!navbar || !!footer;
+  const safeBottomClass = hasSafeBottom ? 'taro-container__safe-bottom' : '';
   return (
     <View
-      className={`cover-antmjs-theme-base ${themeMode} ${!isWrapContainer ? `${className || ''} taro-container__safe-bottom` : ''}`}
+      className={`cover-antmjs-theme-base ${themeMode} ${!isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''}`}
       {...otherViewProps}
     >
       {navbar}
       {isWrapContainer ? (
         <View
           id="taroContainerContent"
-          className={`${className}`}
+          className={`${className}  ${safeBottomClass}`}
           style={{
             ...(hasContentMt ? { marginTop: navBarHeight } : {}),
             ...(hasContentPb ? { paddingBottom: rect?.height ?? 0 } : {}),

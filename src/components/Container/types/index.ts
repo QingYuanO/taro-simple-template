@@ -19,6 +19,7 @@ export type ContainerProps = {
   hasNavBarTop?: boolean;
   /** 是否自动給content添加Footer高度的底部边距，默认true */
   hasFooterBottom?: boolean;
+  hasSafeBottom?: boolean;
 } & ViewProps;
 
 export interface FooterProps {
