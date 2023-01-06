@@ -1,9 +1,29 @@
 import Taro from '@tarojs/taro';
 import interceptors, { HTTP_STATUS } from './interceptors';
 
-const MOCK_BASE_URL = { h5: 'http://127.0.0.1:9527', weapp: 'http://127.0.0.1:9528' }[process.env.TARO_ENV];
+const LOCAL_IP = `http://127.0.0.1`;
 
-export const BASE_URL = MOCK_BASE_URL;
+const MOCK_PORT = { h5: '9527', weapp: '9528' }[process.env.TARO_ENV];
+
+const MOCK_BASE_URL = `${LOCAL_IP}:${MOCK_PORT}`;
+
+const getBaseUrl = () => {
+  const {
+    miniProgram: { envVersion },
+  } = Taro.getAccountInfoSync();
+  switch (envVersion) {
+    case 'develop':
+      return MOCK_BASE_URL;
+    case 'trial':
+      return '';
+    case 'release':
+      return '';
+    default:
+      return '';
+  }
+};
+
+export const BASE_URL = getBaseUrl();
 
 interceptors.forEach(i => Taro.addInterceptor(i));
 
