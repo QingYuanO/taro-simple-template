@@ -54,6 +54,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@downwindcss/easings": "^1.0.4",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tarojs/plugin-inject": "^1.0.2",

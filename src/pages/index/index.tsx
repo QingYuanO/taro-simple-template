@@ -1,3 +1,5 @@
+import { View } from '@tarojs/components';
+import { Button } from '@antmjs/vantui';
 import Container from '@/components/Container';
 import Count from '@/components/Count';
 import TaroLogo from '@/components/TaroLogo';
@@ -10,8 +12,7 @@ import {
   toTailwindPluginExamplePage,
   toThemeExamplePage,
 } from '@/utils/toRouterPage';
-import { Button } from '@antmjs/vantui';
-import { View } from '@tarojs/components';
+
 import './index.less';
 
 definePageConfig({

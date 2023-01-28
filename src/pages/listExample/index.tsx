@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
-import { getMockList } from '@/service/apis/mock';
-import useInfiniteList from '@/hooks/useInfiniteList';
 import Container from '@/components/Container';
+import useInfiniteList from '@/hooks/useInfiniteList';
+import { getMockList } from '@/service/apis/mock';
 
 definePageConfig({
   navigationBarTitleText: '测试无限滚动',

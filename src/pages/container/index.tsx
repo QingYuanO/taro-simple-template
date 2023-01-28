@@ -1,7 +1,7 @@
+import { memo, useCallback, useMemo, useState } from 'react';
+import { View } from '@tarojs/components';
 import Container from '@/components/Container';
 import useNodeDisappearInTop from '@/hooks/useNodeDisappearInTop';
-import { View } from '@tarojs/components';
-import { memo, useCallback, useMemo, useState } from 'react';
 
 definePageConfig({
   navigationStyle: 'custom',
@@ -20,7 +20,7 @@ export default function ContainerPage() {
   }, []);
 
   return (
-    <Container className='test'>
+    <Container className="test">
       <Container.Navbar title={show ? 'container-test' : '嘿嘿'} />
 
       <View className="mb-[20px] bg-green-300" id="test1" onClick={() => setTestFooter(!testFooter)}>

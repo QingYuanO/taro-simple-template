@@ -1,7 +1,7 @@
+import { View } from '@tarojs/components';
+import { Button } from '@antmjs/vantui';
 import Container from '@/components/Container';
 import themeStore from '@/utils/theme';
-import { Button } from '@antmjs/vantui';
-import { View } from '@tarojs/components';
 
 definePageConfig({
   navigationBarTitleText: '测试暗黑模式',

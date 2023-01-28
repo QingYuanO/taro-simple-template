@@ -1,3 +1,5 @@
+/** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
+
 module.exports = {
   arrowParens: 'avoid', // 箭头函数只有一个参数的时候可以忽略括号
   bracketSpacing: true, // 括号内部不要出现空格
@@ -13,4 +15,24 @@ module.exports = {
   trailingComma: 'es5', // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
   bracketSpacing: true, // 在对象，数组括号与文字之间加空格
   semicolons: true, // 在语句末尾打印分号
+  importOrder: [
+    '^@tarojs/(.*)$',
+    '^@antmjs/(.*)$',
+    '^@/components/(.*)$',
+    '^@/hooks/(.*)$',
+    '',
+    '^@/utils/(.*)$',
+    '^@/constants/(.*)$',
+    '^@/service/(.*)$',
+    '',
+    '^@/assets/(.*)$',
+    '^[./]',
+  ],
+  importOrderBuiltinModulesToTop: true,
+  importOrderCaseInsensitive: true,
+  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
+  importOrderMergeDuplicateImports: true,
+  importOrderCombineTypeAndValueImports: true,
+  importOrderSeparation: false,
+  importOrderSortSpecifiers: true,
 };
