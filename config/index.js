@@ -41,7 +41,7 @@ const config = {
   defineConstants: {},
   alias: {
     //根目录
-    '@': path.resolve(__dirname, '..', 'src'),
+    '@/src': path.resolve(__dirname, '..', 'src'),
     '@/mock': path.resolve(__dirname, '..', 'mock'),
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
