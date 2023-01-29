@@ -5,7 +5,7 @@ const Random = mockjs.Random;
 const count = 105;
 const originList = new Array(count).fill(null).map((item, idx) => ({
   id: idx,
-  name: Random.ctitle(5, 10) as string,
+  name: Random.cname() as string,
   number: 'P202203' + Random.integer(1, 1000),
   time: Random.now() as string,
   desc: Random.csentence() as string,

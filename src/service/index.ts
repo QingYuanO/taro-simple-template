@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro';
+
 import interceptors, { HTTP_STATUS } from './interceptors';
 
 const LOCAL_IP = `http://127.0.0.1`;
@@ -8,18 +9,29 @@ const MOCK_PORT = { h5: '9527', weapp: '9528' }[process.env.TARO_ENV];
 const MOCK_BASE_URL = `${LOCAL_IP}:${MOCK_PORT}`;
 
 const getBaseUrl = () => {
-  const {
-    miniProgram: { envVersion },
-  } = Taro.getAccountInfoSync();
-  switch (envVersion) {
-    case 'develop':
-      return MOCK_BASE_URL;
-    case 'trial':
-      return '';
-    case 'release':
-      return '';
-    default:
-      return '';
+  if (process.env.TARO_ENV === 'h5') {
+    switch (process.env.NODE_ENV) {
+      case 'development':
+        return MOCK_BASE_URL;
+      case 'production':
+        return '';
+      default:
+        return '';
+    }
+  } else {
+    const {
+      miniProgram: { envVersion },
+    } = Taro.getAccountInfoSync();
+    switch (envVersion) {
+      case 'develop':
+        return MOCK_BASE_URL;
+      case 'trial':
+        return '';
+      case 'release':
+        return '';
+      default:
+        return '';
+    }
   }
 };
 
