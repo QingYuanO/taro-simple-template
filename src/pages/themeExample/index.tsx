@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
-import { Button } from '@antmjs/vantui';
+import { Button } from '@nutui/nutui-react-taro';
 import Container from '@/components/Container';
+
 import themeStore from '@/utils/theme';
 
 definePageConfig({

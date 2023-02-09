@@ -15,12 +15,12 @@ module.exports = {
     [
       'import',
       {
-        libraryName: '@antmjs/vantui',
-        libraryDirectory: 'es',
-         // 指定样式路径，建议这里样式按需引入不开启，直接在app.less引入全局样式
-        // style: (name) => `${name}/style/less`,
+        libraryName: '@nutui/nutui-react-taro',
+        libraryDirectory: 'dist/esm',
+        style: true,
+        camel2DashComponentName: false,
       },
-      '@antmjs/vantui',
+      'nutui-react-taro',
     ],
   ],
 };

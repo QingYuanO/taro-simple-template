@@ -46,7 +46,7 @@ function Container(props: ContainerProps) {
   const safeBottomClass = hasSafeBottom ? 'taro-container__safe-bottom' : '';
   return (
     <View
-      className={`cover-antmjs-theme-base ${themeMode} ${!isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''}`}
+      className={`cover-nutui-theme-base ${themeMode} ${!isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''}`}
       {...otherViewProps}
     >
       {navbar}

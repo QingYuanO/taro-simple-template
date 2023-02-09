@@ -1,5 +1,5 @@
+import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { Button } from '@antmjs/vantui';
 import Container from '@/components/Container';
 import Count from '@/components/Count';
 import TaroLogo from '@/components/TaroLogo';

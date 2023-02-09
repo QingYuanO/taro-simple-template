@@ -17,7 +17,7 @@ module.exports = {
   semicolons: true, // 在语句末尾打印分号
   importOrder: [
     '^@tarojs/(.*)$',
-    '^@antmjs/(.*)$',
+    '^@nutui/(.*)$',
     '^@/components/(.*)$',
     '^@/hooks/(.*)$',
     '',
