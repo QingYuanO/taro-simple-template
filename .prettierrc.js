@@ -21,6 +21,7 @@ module.exports = {
     '^@/components/(.*)$',
     '^@/hooks/(.*)$',
     '',
+    '^@/utils$',
     '^@/utils/(.*)$',
     '^@/constants/(.*)$',
     '^@/service/(.*)$',
