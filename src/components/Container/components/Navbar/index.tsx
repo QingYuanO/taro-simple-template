@@ -1,21 +1,23 @@
-import { pixelTransform } from '@/utils';
+import { Fragment, memo, useMemo } from 'react';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { Fragment, memo, useMemo } from 'react';
+
+import { pixelTransform } from '@/utils';
+import themeStore from '@/utils/theme';
+
 import { getNavBarHeight } from '../../helper';
 import { NavbarProps } from '../../types';
 import DefaultLeftIcon from './defaultLeftIcon';
-import './index.less';
 
 export default memo(function Navbar(props: NavbarProps) {
+  const themeMode = themeStore.useTracked.themeMode();
   const {
     children,
     title,
     leftIcon,
     titleClassName,
-    bgColor = '#fff',
     defaultLeftIconSize = 24,
-    defaultLeftColor = 'rgb(0,0,0)',
+    defaultLeftColor = themeMode === 'dark' ? 'rgb(255,255,255)' : 'rgb(0,0,0)',
     hasSeat,
   } = props;
   const navBarHeight = getNavBarHeight();
@@ -32,22 +34,21 @@ export default memo(function Navbar(props: NavbarProps) {
     <Fragment>
       <View
         id="taroContainerNavbar"
-        className="taro-container__navbar-wrap"
+        className="fixed inset-x-0 top-0 flex items-center z-[800] box-border bg-white dark:bg-black"
         style={{
-          height: navBarHeight,
+          minHeight: navBarHeight,
           paddingTop: navbarTop,
           paddingBottom: 5,
-          backgroundColor: bgColor,
         }}
       >
         {children ?? (
-          <View className="taro-container__navbar-content-wrap">
-            <View className="taro-container__left-operation">
+          <View className="flex items-center relative h-full w-full dark:bg-black">
+            <View className="absolute top-1/2 flex items-center left-2" style={{ transform: 'translateY(-50%)' }}>
               {leftIcon ?? <DefaultLeftIcon size={pixelTransform(defaultLeftIconSize)} color={defaultLeftColor} />}
             </View>
             {title && (
-              <View className="taro-container__title-wrap">
-                <Text className={`taro-container__title  ${titleClassName ?? ''}`}>{title}</Text>
+              <View className="w-full flex-center text-base">
+                <Text className={` font-medium text-black dark:text-white  ${titleClassName ?? ''}`}>{title}</Text>
               </View>
             )}
           </View>

@@ -1,14 +1,12 @@
-import useNodeRect from '@/hooks/useNodeRect';
-import { ViewProps, View } from '@tarojs/components';
-import { useWhyDidYouUpdate } from 'ahooks';
 import { forwardRef, Fragment, memo, useEffect, useImperativeHandle } from 'react';
+import { View, ViewProps } from '@tarojs/components';
+import useNodeRect from '@/hooks/useNodeRect';
+
 import { isIPhoneX } from '../../helper';
 import { FooterProps, FooterRef } from '../../types';
-import './index.less';
 
 export default memo(
   forwardRef<FooterRef | undefined, FooterProps & Omit<ViewProps, 'style'>>(function Footer(props, ref) {
-    useWhyDidYouUpdate('Footer', { ...props });
     const { children, hasSeat, hasSafe = true, onFooterRectChange, ...viewProps } = props;
     const { className, id, ...otherViewProps } = viewProps;
     const isIPhone = isIPhoneX();
@@ -29,7 +27,7 @@ export default memo(
       <Fragment>
         <View
           id="taroContainerFooter"
-          className={`taro-container__footer-wrap  ${className ?? ''} ${isIPhone && hasSafe ? 'taro-container__safe-bottom' : ''}`}
+          className={` fixed inset-x-0 bottom-0 z-[100] box-border  ${className ?? ''} ${isIPhone && hasSafe ? 'safe-bottom' : ''}`}
           {...otherViewProps}
         >
           {children}

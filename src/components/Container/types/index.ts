@@ -46,7 +46,7 @@ export interface NavbarProps {
   /** 标题 className */
   titleClassName?: string;
   /** 背景颜色 */
-  bgColor?: string;
+  // bgColor?: string;
   /** 默认的左边按钮Size */
   defaultLeftIconSize?: number;
   /** 默认的左边按钮Color */
