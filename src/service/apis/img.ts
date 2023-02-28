@@ -11,7 +11,11 @@ export const getSingleImg = () => {
 
 export const useSingleImg = createQuery<{ url: string }, void>({
   primaryKey: 'getSingleImg',
-  queryFn: getSingleImg,
+  queryFn: () =>
+    ApiService.get('https://api.waifu.pics/sfw/waifu', {
+      extraConfig: { showLoading: false },
+      baseUrl: '',
+    }),
   onSuccess(data) {
     console.log('test');
   },

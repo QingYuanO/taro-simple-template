@@ -1,7 +1,6 @@
 /* eslint-disable import/no-commonjs */
 const path = require('path');
 const { TaroWeappTailwindcssWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
 
@@ -60,10 +59,6 @@ const config = {
     },
     webpackChain(chain) {
       chain.merge({
-        plugins: [new LodashModuleReplacementPlugin()],
-      });
-
-      chain.merge({
         plugin: {
           install: {
             plugin: TaroWeappTailwindcssWebpackPluginV5,
@@ -80,7 +75,7 @@ const config = {
     postcss: {
       pxtransform: {
         enable: true,
-        config: { selectorBlackList: ['nut-','nutui-'] },
+        config: { selectorBlackList: ['nut-', 'nutui-'] },
       },
       url: {
         enable: true,
@@ -99,11 +94,6 @@ const config = {
   },
   h5: {
     esnextModules: [/@antmjs[\\/]vantui/],
-    webpackChain(chain) {
-      chain.merge({
-        plugins: [new LodashModuleReplacementPlugin()],
-      });
-    },
     publicPath: '/',
     staticDirectory: 'static',
     postcss: {
