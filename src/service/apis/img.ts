@@ -1,3 +1,5 @@
+import { createQuery } from 'react-query-kit';
+
 import ApiService from '..';
 
 export const getSingleImg = () => {
@@ -6,3 +8,11 @@ export const getSingleImg = () => {
     baseUrl: '',
   });
 };
+
+export const useSingleImg = createQuery<{ url: string }, void>({
+  primaryKey: getSingleImg.name,
+  queryFn: getSingleImg,
+  onSuccess(data) {
+    console.log('test');
+  },
+});

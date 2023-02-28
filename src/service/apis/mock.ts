@@ -1,4 +1,6 @@
 import { MockList } from '@/mock';
+import { createInfiniteQuery } from 'react-query-kit';
+
 import ApiService, { CustomResult } from '..';
 
 type ListData = {
@@ -16,3 +18,9 @@ export const getMockList = (page: number) => {
     return res.data;
   });
 };
+
+export const useMockList = createInfiniteQuery<ListData, void>({
+  primaryKey: getMockList.name,
+  queryFn: ({ queryKey: [_primaryKey], pageParam = 1 }) => getMockList(pageParam),
+  getNextPageParam: lastPage => (lastPage.isLastPage ? null : lastPage.page),
+});
