@@ -10,7 +10,7 @@ export const getSingleImg = () => {
 };
 
 export const useSingleImg = createQuery<{ url: string }, void>({
-  primaryKey: getSingleImg.name,
+  primaryKey: 'getSingleImg',
   queryFn: getSingleImg,
   onSuccess(data) {
     console.log('test');

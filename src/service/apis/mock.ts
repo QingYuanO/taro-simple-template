@@ -20,7 +20,7 @@ export const getMockList = (page: number) => {
 };
 
 export const useMockList = createInfiniteQuery<ListData, void>({
-  primaryKey: getMockList.name,
+  primaryKey: 'getMockList',
   queryFn: ({ queryKey: [_primaryKey], pageParam = 1 }) => getMockList(pageParam),
   getNextPageParam: lastPage => (lastPage.isLastPage ? null : lastPage.page),
 });
