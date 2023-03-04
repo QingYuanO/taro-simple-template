@@ -1,19 +1,19 @@
-import create from "zustand"
+import { create } from 'zustand';
 
-const log = (config) => (set, get, api) =>
+const log = config => (set, get, api) =>
   config(
     (...args) => {
-      console.log('  applying', args)
-      set(...args)
-      console.log('  new state', get())
+      console.log('  applying', args);
+      set(...args);
+      console.log('  new state', get());
     },
     get,
     api
-  )
+  );
 
-export  const useBeeStore = create(
-  log((set) => ({
+export const useBeeStore = create(
+  log(set => ({
     bees: false,
-    setBees: (input) => set({ bees: input }),
+    setBees: input => set({ bees: input }),
   }))
-)
+);
