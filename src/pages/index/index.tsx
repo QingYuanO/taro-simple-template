@@ -1,9 +1,9 @@
 import { View } from '@tarojs/components';
 import { Button } from '@nutui/nutui-react-taro';
-import Container from '@/components/Container';
-import Count from '@/components/Count';
-import TaroLogo from '@/components/TaroLogo';
-import useNodeRect from '@/hooks/useNodeRect';
+import Container from '@/src/components/Container';
+import Count from '@/src/components/Count';
+import TaroLogo from '@/src/components/TaroLogo';
+import { useNodeRect } from '@/src/hooks';
 
 import {
   toContainerPage,
@@ -11,7 +11,7 @@ import {
   toPackageAHomePage,
   toTailwindPluginExamplePage,
   toThemeExamplePage,
-} from '@/utils/toRouterPage';
+} from '@/src/utils/toRouterPage';
 
 import './index.less';
 

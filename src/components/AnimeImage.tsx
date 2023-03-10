@@ -1,8 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
 import { memo } from 'react';
 import { Image, Text, View } from '@tarojs/components';
 
-import { getSingleImg, useSingleImg } from '@/service/apis/img';
+import { useSingleImg } from '@/src/service/apis/img';
 
 const AnimeImage = () => {
   const { data, isFetching, refetch } = useSingleImg({

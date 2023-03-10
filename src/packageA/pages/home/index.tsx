@@ -1,6 +1,7 @@
+import AnimeImage from '@/src/components/AnimeImage';
+import Container from '@/src/components/Container';
 import { View } from '@tarojs/components';
-import AnimeImage from '@/components/AnimeImage';
-import Container from '@/components/Container';
+
 
 definePageConfig({
   navigationBarTitleText: 'packageA - home - page',

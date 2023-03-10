@@ -1,7 +1,7 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { View } from '@tarojs/components';
-import Container from '@/components/Container';
-import useNodeDisappearInTop from '@/hooks/useNodeDisappearInTop';
+import Container from '@/src/components/Container';
+import useNodeDisappearInTop from '@/src/hooks/useNodeDisappearInTop';
 
 definePageConfig({
   navigationStyle: 'custom',

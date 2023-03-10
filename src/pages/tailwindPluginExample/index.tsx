@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Text, View } from '@tarojs/components';
-import Container from '@/components/Container';
+import Container from '@/src/components/Container';
 
 definePageConfig({
   navigationBarTitleText: 'tailwind插件示例',

@@ -31,15 +31,6 @@ const config = {
     //根目录
     '@/src': path.resolve(__dirname, '..', 'src'),
     '@/mock': path.resolve(__dirname, '..', 'mock'),
-    '@/components': path.resolve(__dirname, '..', 'src/components'),
-    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
-    '@/hooks': path.resolve(__dirname, '..', 'src/hooks'),
-    '@/store': path.resolve(__dirname, '..', 'src/store'),
-    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
-    '@/assets': path.resolve(__dirname, '..', 'src/assets'),
-    '@/service': path.resolve(__dirname, '..', 'src/service'),
-    '@/pages': path.resolve(__dirname, '..', 'src/pages'),
-    '@/types': path.resolve(__dirname, '..', 'src/types'),
   },
   copy: {
     patterns: [],
@@ -47,7 +38,7 @@ const config = {
   },
   framework: 'react',
   compiler: {
-    type: "webpack5",
+    type: 'webpack5',
     // 仅 webpack5 支持依赖预编译配置
     prebundle: {
       enable: false,

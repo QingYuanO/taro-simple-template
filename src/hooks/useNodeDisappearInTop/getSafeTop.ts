@@ -1,4 +1,4 @@
-import { getNavBarHeight } from "@/components/Container/helper";
+import { getNavBarHeight } from "@/src/components/Container/helper";
 import { getCurrentInstance } from "@tarojs/taro";
 
 export function getSafeTop(){

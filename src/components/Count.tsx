@@ -1,9 +1,9 @@
-
-import { View, Text } from '@tarojs/components';
 import { memo } from 'react';
-import { createStore } from '@udecode/zustood';
-import getStorage from '@/utils/getStorage';
+import { Text, View } from '@tarojs/components';
 import { Button } from '@nutui/nutui-react-taro';
+import { createStore } from '@udecode/zustood';
+
+import getStorage from '@/src/utils/getStorage';
 
 const log = config => (set, get, api) =>
   config(
@@ -46,7 +46,6 @@ const Count = () => {
   return (
     <View className="mt-[30px] flex items-center">
       <Button
-
         icon="minus"
         className="text-btn"
         onClick={() => {
@@ -55,7 +54,6 @@ const Count = () => {
       />
       <Text className="mx-[30px] ">{count}</Text>
       <Button
-
         icon="plus"
         className="text-btn"
         onClick={() => {

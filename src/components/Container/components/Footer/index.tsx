@@ -1,6 +1,6 @@
 import { forwardRef, Fragment, memo, useEffect, useImperativeHandle } from 'react';
 import { View, ViewProps } from '@tarojs/components';
-import useNodeRect from '@/hooks/useNodeRect';
+import useNodeRect from '@/src/hooks/useNodeRect';
 
 import { isIPhoneX } from '../../helper';
 import { FooterProps, FooterRef } from '../../types';

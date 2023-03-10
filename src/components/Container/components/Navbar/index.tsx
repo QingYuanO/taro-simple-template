@@ -2,8 +2,8 @@ import { Fragment, memo, useMemo } from 'react';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { pixelTransform } from '@/utils';
-import themeStore from '@/utils/theme';
+import { pixelTransform } from '@/src/utils';
+import themeStore from '@/src/utils/theme';
 
 import { getNavBarHeight } from '../../helper';
 import { NavbarProps } from '../../types';

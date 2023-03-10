@@ -1,9 +1,11 @@
-import { View } from '@tarojs/components';
 import { Children, isValidElement, ReactElement, ReactNode, useMemo } from 'react';
-import useNodeRect from '@/hooks/useNodeRect';
-import themeStore from '@/utils/theme';
-import { getNavBarHeight } from './helper';
+import { View } from '@tarojs/components';
+import useNodeRect from '@/src/hooks/useNodeRect';
+
+import themeStore from '@/src/utils/theme';
+
 import { Footer, Navbar } from './components';
+import { getNavBarHeight } from './helper';
 import { ContainerChildren, ContainerProps } from './types';
 
 function findContainerChildren(node?: ReactNode): ContainerChildren {
