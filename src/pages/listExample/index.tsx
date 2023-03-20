@@ -1,37 +1,37 @@
-import { View } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
+import { useReachBottom } from '@tarojs/taro';
+import { MockList } from '@/mock';
 import Container from '@/src/components/Container';
-import { useInfiniteList } from '@/src/hooks';
+import InfiniteList from '@/src/components/InfiniteList';
 
-import { getMockList, useMockList } from '@/src/service/apis/mock';
+import { useMockList } from '@/src/service/apis/mock';
 
 definePageConfig({
   navigationBarTitleText: '测试无限滚动',
 });
 
 const ListExample = () => {
-  const { listData, isFetchNext, isInitLoading } = useInfiniteList({
-    fetchListApi: async params => {
-      const data = await getMockList(params.page);
-      return {
-        list: data.list,
-        hasNextPage: !data.isLastPage,
-        total: data.total,
-      };
-    },
-    isAutoFetchNext: true,
-    isAutoInitLoad: true,
-  });
-  useMockList();
+  const { data, isFetchingNextPage, hasNextPage, fetchNextPage } = useMockList();
+  const list = data?.pages.reduce((t, c) => {
+    return [...t, ...c.list];
+  }, []);
 
+  useReachBottom(() => {
+    fetchNextPage();
+  });
   return (
     <Container>
-      <View className="flex flex-col gap-y-2 p-4">
-        {listData.list.map(item => (
-          <View className="rounded-md bg-blue-400 p-5 text-white shadow shadow-blue-400" key={item.id}>
-            {item.name}
-          </View>
-        ))}
-      </View>
+      <InfiniteList<MockList[number]>
+        listWrapClassName="flex flex-col gap-y-2 pt-4 px-4"
+        itemKey="id"
+        data={list}
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage}
+        renderItem={item => {
+          return <View className="rounded-md bg-blue-400 p-5 text-white shadow shadow-blue-400">{item.name}</View>;
+        }}
+      />
+      <ScrollView></ScrollView>
     </Container>
   );
 };

@@ -2,7 +2,7 @@ import mockjs from 'mockjs';
 
 const Random = mockjs.Random;
 
-const count = 105;
+const count = 31;
 const originList = new Array(count).fill(null).map((item, idx) => ({
   id: idx,
   name: Random.cname() as string,
