@@ -24,12 +24,6 @@ module.exports = {
           secondary: '#9ca3af',
         },
       },
-      spacing: {
-        sm: '8px',
-        md: '12px',
-        lg: '16px',
-        xl: '24px',
-      },
     },
   },
   plugins: [
@@ -82,7 +76,7 @@ module.exports = {
   ],
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
-    preflight: false,
+    preflight: true,
     container: false,
     darkMode: false,
   },

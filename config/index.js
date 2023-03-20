@@ -1,6 +1,6 @@
 /* eslint-disable import/no-commonjs */
 const path = require('path');
-const { TaroWeappTailwindcssWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
+const { UnifiedWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
 
 const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
 
@@ -58,11 +58,13 @@ const config = {
       chain.merge({
         plugin: {
           install: {
-            plugin: TaroWeappTailwindcssWebpackPluginV5,
+            plugin: UnifiedWebpackPluginV5,
             args: [
               {
+                appType: 'taro',
                 // 注意这一行(不传默认 react)
                 framework: 'react', // 'vue2' / 'vue3'
+                cssPreflightRange: 'all',
               },
             ],
           },
