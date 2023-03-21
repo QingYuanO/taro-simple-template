@@ -1469,6 +1469,11 @@
   resolved "https://registry.npmmirror.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
   integrity sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
 
+"@slicknode/stylemapper@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@slicknode/stylemapper/-/stylemapper-0.1.5.tgz#0e529b2977ded9e2a0166c982eb22d67a624d98b"
+  integrity sha512-hpb0CmumDiHvh++Tk5h8wvybzvRsOag0N6DBAobbmj5TnTY1OMYqGbPPAQoCFROEqNbg88YDlfp5oPDj5pDm3g==
+
 "@stencil/core@^2.18.1":
   version "2.22.2"
   resolved "https://registry.npmmirror.com/@stencil/core/-/core-2.22.2.tgz#f518b6bfae85352c72cd07fcaf2f2b61e0581fd9"
