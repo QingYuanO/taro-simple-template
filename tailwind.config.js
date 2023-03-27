@@ -1,5 +1,5 @@
 /* eslint-disable import/no-commonjs */
-const { plugin } = require('weapp-tailwindcss-children');
+const { createPlugin } = require('weapp-tailwindcss-children');
 const lineClamp = require('@tailwindcss/line-clamp');
 const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')();
 const tailwindcssPlugin = require('tailwindcss/plugin');
@@ -27,7 +27,7 @@ module.exports = {
     },
   },
   plugins: [
-    plugin,
+    createPlugin({ fallbackElements: ['view', 'text', 'image', 'button'] }),
     lineClamp,
     tailwindcssTooltipArrowAfter,
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
