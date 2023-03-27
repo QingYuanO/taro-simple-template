@@ -31,9 +31,9 @@ module.exports = {
     lineClamp,
     tailwindcssTooltipArrowAfter,
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
-      const themes = ['products'];
+      const themes = ['h5','weapp',];
       themes.forEach(t => {
-        addVariant(t, `.theme-${t} &`);
+        addVariant(t, `.${t} &`);
       });
       matchUtilities(
         {
