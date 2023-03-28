@@ -1,55 +1,31 @@
 import { memo } from 'react';
 import { Text, View } from '@tarojs/components';
 import { Button } from '@nutui/nutui-react-taro';
-import { createStore } from '@udecode/zustood';
+import { createSelectorFunctions } from 'auto-zustand-selectors-hook';
+import { create } from 'zustand';
+import { combine } from 'zustand/middleware';
 
-import getStorage from '@/src/utils/getStorage';
-
-const log = config => (set, get, api) =>
-  config(
-    (...args) => {
-      console.log('  applying', args);
-      set(...args);
-      console.log('  new state', get());
-    },
-    get,
-    api
-  );
-
-const countStore = createStore('count')<{ count: number }>(
-  {
-    count: 0,
-  },
-  {
-    devtools: {
-      enabled: true,
-    },
-    persist: {
-      enabled: true,
-      name: 'count',
-      getStorage,
-      onRehydrateStorage() {
-        return (state, error) => {
-          // console.log(state);
-        };
-      },
-    },
-    middlewares: [log],
-  }
+const countStore = create(
+  combine({ count: 0 }, set => ({
+    increase: (by: number) => set(state => ({ count: state.count + by })),
+    decrease: (by: number) => set(state => ({ count: state.count - by })),
+  }))
 );
-countStore.store.subscribe((state, preState) => {
-  console.log(state);
-  console.log(preState);
-});
+
+const useCountStore = createSelectorFunctions(countStore);
+
 const Count = () => {
-  const count = countStore.useTracked.count();
+  const count = useCountStore.use.count();
+  const increase = useCountStore.use.increase();
+  const decrease = useCountStore.use.decrease();
+
   return (
     <View className="mt-[30px] flex items-center">
       <Button
         icon="minus"
         className="text-btn"
         onClick={() => {
-          countStore.set.count(count - 1);
+          decrease(1);
         }}
       />
       <Text className="mx-[30px] ">{count}</Text>
@@ -57,7 +33,7 @@ const Count = () => {
         icon="plus"
         className="text-btn"
         onClick={() => {
-          countStore.set.count(count + 1);
+          increase(1);
         }}
       />
     </View>

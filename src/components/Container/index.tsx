@@ -1,8 +1,8 @@
 import { Children, isValidElement, ReactElement, ReactNode, useMemo } from 'react';
 import { View } from '@tarojs/components';
-import useNodeRect from '@/src/hooks/useNodeRect';
 
-import themeStore from '@/src/utils/theme';
+import useNodeRect from '@/src/hooks/useNodeRect';
+import useThemeStore from '@/src/utils/theme';
 
 import { Footer, Navbar } from './components';
 import { getNavBarHeight } from './helper';
@@ -42,12 +42,14 @@ function Container(props: ContainerProps) {
   const hasContentMt = hasNavBarTop && navbar;
   const hasContentPb = hasFooterBottom && footer;
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
-  const themeMode = themeStore.useTracked.themeMode();
+  const themeMode = useThemeStore(state => state.themeMode);
   const isWrapContainer = !!navbar || !!footer;
   const safeBottomClass = hasSafeBottom ? 'safe-bottom' : '';
   return (
     <View
-      className={`cover-nutui-theme-base ${process.env.TARO_ENV} ${themeMode} ${!isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''}`}
+      className={`cover-nutui-theme-base ${process.env.TARO_ENV} ${themeMode} ${
+        !isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''
+      }`}
       {...otherViewProps}
     >
       {navbar}

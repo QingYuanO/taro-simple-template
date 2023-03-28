@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 import { StateStorage } from 'zustand/middleware';
 
-const getStorage: (() => StateStorage) | undefined = () => ({
+const TaroStorage: StateStorage = {
   getItem(name) {
     return Taro.getStorageSync(name);
   },
@@ -11,6 +11,6 @@ const getStorage: (() => StateStorage) | undefined = () => ({
   removeItem(name) {
     Taro.removeStorageSync(name);
   },
-});
+};
 
-export default getStorage;
+export default TaroStorage;

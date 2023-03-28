@@ -3,14 +3,14 @@ import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { pixelTransform } from '@/src/utils';
-import themeStore from '@/src/utils/theme';
+import useThemeStore from '@/src/utils/theme';
 
 import { getNavBarHeight } from '../../helper';
 import { NavbarProps } from '../../types';
 import DefaultLeftIcon from './defaultLeftIcon';
 
 export default memo(function Navbar(props: NavbarProps) {
-  const themeMode = themeStore.useTracked.themeMode();
+  const themeMode = useThemeStore(state => state.themeMode);
   const {
     children,
     title,

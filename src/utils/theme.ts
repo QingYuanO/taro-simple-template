@@ -1,28 +1,26 @@
-import { createStore } from '@udecode/zustood';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-import getStorage from './getStorage';
+import TaroStorage from './TaroStorage';
 
 type ThemeMode = 'dark' | 'base';
 
-const themeStore = createStore('theme')<{ themeMode: ThemeMode }>(
-  {
-    themeMode: 'base',
-  },
-  {
-    persist: {
-      enabled: true,
-      name: 'theme',
-      getStorage,
-      onRehydrateStorage() {
-        return (state, error) => {
-          if (state) {
-            // subscribeThemeMode(state);
-          }
-        };
-      },
-    },
-  }
-);
-// themeStore.store.subscribe(subscribeThemeMode);
+interface ThemeStore {
+  themeMode: ThemeMode;
+  themeChange: (by: ThemeMode) => void;
+}
 
-export default themeStore;
+const useThemeStore = create<ThemeStore>()(
+  persist(
+    set => ({
+      themeMode: 'base',
+      themeChange: by => set(() => ({ themeMode: by })),
+    }),
+    {
+      name: 'theme',
+      storage: createJSONStorage(() => TaroStorage),
+    }
+  )
+);
+
+export default useThemeStore;

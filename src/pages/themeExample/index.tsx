@@ -2,14 +2,15 @@ import { View } from '@tarojs/components';
 import { Button } from '@nutui/nutui-react-taro';
 import Container from '@/src/components/Container';
 
-import themeStore from '@/src/utils/theme';
+import useThemeStore from '@/src/utils/theme';
 
 definePageConfig({
   navigationBarTitleText: '测试暗黑模式',
 });
 
 const ThemeExample = () => {
-  const themeMode = themeStore.useTracked.themeMode();
+  const themeMode = useThemeStore(state => state.themeMode);
+  const themeChange = useThemeStore(state => state.themeChange);
   return (
     <Container>
       <View className="gap-y-5 py-5 flex-col-center">
@@ -18,7 +19,7 @@ const ThemeExample = () => {
         <Button
           type="primary"
           onClick={() => {
-            themeStore.set.themeMode(themeMode === 'base' ? 'dark' : 'base');
+            themeChange(themeMode === 'base' ? 'dark' : 'base');
           }}
         >
           {themeMode === 'dark' ? '基本模式' : '暗黑模式'}
