@@ -65,6 +65,7 @@ const config = {
                 // 注意这一行(不传默认 react)
                 framework: 'react', // 'vue2' / 'vue3'
                 cssPreflightRange: 'all',
+                cssPreflight: { 'box-sizing': 'border-box', 'border-width': '0', 'border-style': 'solid', 'border-color': 'currentColor' },
               },
             ],
           },

@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 /* eslint-disable import/no-commonjs */
 const { createPlugin } = require('weapp-tailwindcss-children');
 const lineClamp = require('@tailwindcss/line-clamp');
@@ -31,7 +32,7 @@ module.exports = {
     lineClamp,
     tailwindcssTooltipArrowAfter,
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
-      const themes = ['h5','weapp',];
+      const themes = ['h5', 'weapp'];
       themes.forEach(t => {
         addVariant(t, `.${t} &`);
       });
@@ -76,7 +77,7 @@ module.exports = {
   ],
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
-    preflight: true,
+    preflight: process.env.TARO_ENV === 'h5',
     container: false,
     darkMode: false,
   },
