@@ -101,7 +101,10 @@ const config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {},
+      },
+      pxtransform: {
+        enable: true,
+        config: { baseFontSize: 16, maxRootSize: 32, minRootSize: 16 },
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

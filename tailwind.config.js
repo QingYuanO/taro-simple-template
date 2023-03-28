@@ -70,7 +70,7 @@ module.exports = {
     require('@downwindcss/easings'),
     //将rem转换为rpx
     require('tailwindcss-rem2px-preset').createPreset({
-      fontSize: 40,
+      fontSize: 32,
       unit: 'rpx',
     }),
   ],
