@@ -7,10 +7,12 @@ const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
 const config = {
   projectName: 'taro-simple-template',
   date: '2021-11-19',
-  designWidth: 750,
+  designWidth: 375,
+  //项目中px转换为rpx的比例,先将px转换为rpx,然后将rpx转换成个平台的单位
   deviceRatio: {
+    375: 2 / 1, //小程序：1px=2rpx，h5：1px=(1px/baseFontSize)rem
     640: 2.34 / 2,
-    750: 1,
+    750: 1,//小程序：1px=1rpx，h5：2px=(1px/baseFontSize)rem
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
@@ -64,8 +66,6 @@ const config = {
                 appType: 'taro',
                 // 注意这一行(不传默认 react)
                 framework: 'react', // 'vue2' / 'vue3'
-                cssPreflightRange: 'all',
-                cssPreflight: { 'box-sizing': 'border-box', 'border-width': '0', 'border-style': 'solid', 'border-color': 'currentColor' },
               },
             ],
           },
