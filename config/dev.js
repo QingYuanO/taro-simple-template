@@ -1,10 +1,21 @@
+/* eslint-disable import/no-commonjs */
+const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
+
 module.exports = {
   env: {
     NODE_ENV: '"development"',
   },
   defineConstants: {},
+  plugins: [
+    [
+      '@tarojs/plugin-mock',
+      {
+        port: mockPort,
+      },
+    ],
+  ],
   mini: {
-    webpackChain: (chain) => {
+    webpackChain: chain => {
       // chain.merge({
       //   plugin: {
       //     install: {

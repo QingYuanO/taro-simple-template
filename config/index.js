@@ -2,8 +2,6 @@
 const path = require('path');
 const { UnifiedWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
 
-const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
-
 const config = {
   projectName: 'taro-simple-template',
   date: '2021-11-19',
@@ -20,12 +18,6 @@ const config = {
   plugins: [
     //本地插件
     path.resolve(__dirname, '..', 'src/plugin/index'),
-    [
-      '@tarojs/plugin-mock',
-      {
-        port: mockPort,
-      },
-    ],
     '@tarojs/plugin-html',
   ],
   defineConstants: {},
