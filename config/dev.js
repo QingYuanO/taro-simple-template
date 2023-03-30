@@ -15,7 +15,7 @@ module.exports = {
     ],
   ],
   mini: {
-    webpackChain: chain => {
+    webpackChain: () => {
       // chain.merge({
       //   plugin: {
       //     install: {

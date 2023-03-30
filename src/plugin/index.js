@@ -29,5 +29,5 @@ module.exports = (ctx, options) => {
       });
     },
   });
-  ctx.modifyBuildAssets(({ assets }) => {});
+  ctx.modifyBuildAssets(({}) => {});
 };
