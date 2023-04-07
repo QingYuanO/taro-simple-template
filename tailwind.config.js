@@ -1,13 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 /* eslint-disable import/no-commonjs */
 const { createPlugin } = require('weapp-tailwindcss-children');
-const lineClamp = require('@tailwindcss/line-clamp');
 const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')();
 const tailwindcssPlugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
-  darkMode: 'class',
+  // darkMode: 'class',
   theme: {
     tooltipArrows: theme => ({
       'danger-arrow': {
@@ -29,7 +28,6 @@ module.exports = {
   },
   plugins: [
     createPlugin({ fallbackElements: ['view', 'text', 'image', 'button'] }),
-    lineClamp,
     tailwindcssTooltipArrowAfter,
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
       const themes = ['h5', 'weapp'];
