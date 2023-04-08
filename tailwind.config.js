@@ -6,7 +6,7 @@ const tailwindcssPlugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
-  // darkMode: 'class',
+  darkMode: 'class',
   theme: {
     tooltipArrows: theme => ({
       'danger-arrow': {
