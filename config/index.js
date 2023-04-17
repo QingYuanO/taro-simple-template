@@ -58,6 +58,7 @@ const config = {
                 appType: 'taro',
                 // 注意这一行(不传默认 react)
                 framework: 'react', // 'vue2' / 'vue3'
+                cssPreflightRange: 'all',
               },
             ],
           },
@@ -65,6 +66,12 @@ const config = {
       });
     },
     postcss: {
+      htmltransform: {
+        enable: false, // 小程序默认关闭该配置
+        config: {
+          removeCursorStyle: true, // 默认为 true
+        },
+      },
       pxtransform: {
         enable: true,
         config: { selectorBlackList: ['nut-', 'nutui-'] },
