@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/container/index',
     'pages/tailwindPluginExample/index',
     'pages/listExample/index',
+    'pages/scrollViewList/index',
     'pages/themeExample/index',
   ],
   window: {

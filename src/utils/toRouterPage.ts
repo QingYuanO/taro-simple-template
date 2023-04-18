@@ -85,6 +85,10 @@ export const toListExamplePage = (option?: ToRouterType<any>) => {
   navigateType("/pages/listExample/index", option);
 };
 
+export const toScrollViewListPage = (option?: ToRouterType<any>) => {
+  navigateType("/pages/scrollViewList/index", option);
+};
+
 export const toThemeExamplePage = (option?: ToRouterType<any>) => {
   navigateType("/pages/themeExample/index", option);
 };

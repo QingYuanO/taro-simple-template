@@ -3,12 +3,13 @@ import { Button } from '@nutui/nutui-react-taro';
 import Container from '@/src/components/Container';
 import Count from '@/src/components/Count';
 import TaroLogo from '@/src/components/TaroLogo';
-import { useNodeRect } from '@/src/hooks';
 
+import { useNodeRect } from '@/src/hooks';
 import {
   toContainerPage,
   toListExamplePage,
   toPackageAHomePage,
+  toScrollViewListPage,
   toTailwindPluginExamplePage,
   toThemeExamplePage,
 } from '@/src/utils/toRouterPage';
@@ -59,6 +60,14 @@ const Index = () => {
           }}
         >
           toListExamplePage
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            toScrollViewListPage();
+          }}
+        >
+          toScrollViewListPage
         </Button>
         <Button
           type="primary"
