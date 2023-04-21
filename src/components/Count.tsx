@@ -23,7 +23,7 @@ const Count = () => {
     <View className="mt-[30px] flex items-center">
       <Button
         icon="minus"
-        className="text-btn"
+        className="text-btn ex"
         onClick={() => {
           decrease(1);
         }}

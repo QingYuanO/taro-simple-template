@@ -36,6 +36,22 @@ module.exports = {
       });
       matchUtilities(
         {
+          require: value => ({
+            position: 'relative',
+            '&::before': {
+              content: '*',
+              position: 'absolute',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              [value]: '-24rpx',
+              color: 'red',
+            },
+          }),
+        },
+        { values: { left: 'left', right: 'right' } }
+      );
+      matchUtilities(
+        {
           square: value => ({
             width: value,
             height: value,
@@ -44,6 +60,18 @@ module.exports = {
             width: value,
             height: value,
             'border-radius': '100%',
+          }),
+          'expand-area': value => ({
+            position: 'relative',
+            '&::after': {
+              content: '',
+              position: 'absolute',
+              top: value,
+              bottom: value,
+              left: value,
+              right: value,
+              'z-index': 80,
+            },
           }),
         },
         { values: theme('spacing') }
