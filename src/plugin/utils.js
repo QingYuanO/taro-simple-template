@@ -16,6 +16,8 @@ export enum NavigateType {
 
 interface ToRouterType<P> {
   params?: P;
+  /** 跳转是否需要登录 */
+  isNeedLoginAuth?:boolean;
   type?: NavigateType /** 接口调用结束的回调函数（调用成功、失败都会执行） */;
   complete?: (res: TaroGeneral.CallbackResult) => void;
   /** 页面间通信接口，用于监听被打开页面发送到当前页面的数据。 */
@@ -71,7 +73,7 @@ const generateParams = (params: { [key: string]: any }) => {
 };
   `;
 
-  const topImports = `import Taro, { EventChannel } from "@tarojs/taro";\n`;
+  const topImports = `import Taro, { EventChannel } from "@tarojs/taro";\nimport { wrapFunWithAuth } from "./auth"\n`;
 
   let toRouterMethodsStr = '';
   let importRouteParamsStr = '';
@@ -91,7 +93,11 @@ const generateParams = (params: { [key: string]: any }) => {
     const getToRouterMethodsStr = (toRouterType) => {
       return `
 export const to${methodName}Page = (option?: ToRouterType<${toRouterType}>) => {
-  navigateType("${item}", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("${item}", option))
+  }else{
+    navigateType("${item}", option);
+  }
 };\n`;
     };
 

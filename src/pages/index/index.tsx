@@ -64,7 +64,7 @@ const Index = () => {
         <Button
           type="primary"
           onClick={() => {
-            toScrollViewListPage();
+            toScrollViewListPage({ isNeedLoginAuth: true });
           }}
         >
           toScrollViewListPage

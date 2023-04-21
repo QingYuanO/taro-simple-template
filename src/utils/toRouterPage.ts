@@ -1,4 +1,5 @@
 import Taro, { EventChannel } from "@tarojs/taro";
+import { wrapFunWithAuth } from "./auth"
 import IndexParams from '../pages/index/route.config'
 import PackageAHomeParams from '../packageA/pages/home/route.config'
 
@@ -15,6 +16,8 @@ export enum NavigateType {
 
 interface ToRouterType<P> {
   params?: P;
+  /** 跳转是否需要登录 */
+  isNeedLoginAuth?:boolean;
   type?: NavigateType /** 接口调用结束的回调函数（调用成功、失败都会执行） */;
   complete?: (res: TaroGeneral.CallbackResult) => void;
   /** 页面间通信接口，用于监听被打开页面发送到当前页面的数据。 */
@@ -70,29 +73,57 @@ const generateParams = (params: { [key: string]: any }) => {
 };
   
 export const toIndexPage = (option?: ToRouterType<IndexParams>) => {
-  navigateType("/pages/index/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/index/index", option))
+  }else{
+    navigateType("/pages/index/index", option);
+  }
 };
 
 export const toContainerPage = (option?: ToRouterType<any>) => {
-  navigateType("/pages/container/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/container/index", option))
+  }else{
+    navigateType("/pages/container/index", option);
+  }
 };
 
 export const toTailwindPluginExamplePage = (option?: ToRouterType<any>) => {
-  navigateType("/pages/tailwindPluginExample/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/tailwindPluginExample/index", option))
+  }else{
+    navigateType("/pages/tailwindPluginExample/index", option);
+  }
 };
 
 export const toListExamplePage = (option?: ToRouterType<any>) => {
-  navigateType("/pages/listExample/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/listExample/index", option))
+  }else{
+    navigateType("/pages/listExample/index", option);
+  }
 };
 
 export const toScrollViewListPage = (option?: ToRouterType<any>) => {
-  navigateType("/pages/scrollViewList/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/scrollViewList/index", option))
+  }else{
+    navigateType("/pages/scrollViewList/index", option);
+  }
 };
 
 export const toThemeExamplePage = (option?: ToRouterType<any>) => {
-  navigateType("/pages/themeExample/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/themeExample/index", option))
+  }else{
+    navigateType("/pages/themeExample/index", option);
+  }
 };
 
 export const toPackageAHomePage = (option?: ToRouterType<PackageAHomeParams>) => {
-  navigateType("/packageA/pages/home/index", option);
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/packageA/pages/home/index", option))
+  }else{
+    navigateType("/packageA/pages/home/index", option);
+  }
 };

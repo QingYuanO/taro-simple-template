@@ -56,10 +56,12 @@
     "ahooks": "^3.7.6",
     "auto-zustand-selectors-hook": "^2.0.0",
     "clsx": "^1.2.1",
+    "immer": "^10.0.1",
     "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query-kit": "^1.4.1",
+    "use-immer": "^0.9.0",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
