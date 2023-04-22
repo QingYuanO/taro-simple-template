@@ -16,7 +16,7 @@ const AnimeImage = () => {
   };
   return (
     <View className="mt-[100px] flex flex-col">
-      <View className="flex min-h-[600px] w-[500px] flex-col items-center justify-center shadow-lg" onClick={onGetImage}>
+      <View className="flex min-h-[300px] w-[250px] flex-col items-center justify-center shadow-lg" onClick={onGetImage}>
         {data?.url && (
           <>
             <Image src={data.url} className="h-full w-full" style={{ display: !isFetching ? 'inherit' : 'none' }} mode="widthFix" />
