@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import TaroStorage from './TaroStorage';
+import TaroStorage from '../utils/TaroStorage';
 
 type ThemeMode = 'dark' | 'base';
 

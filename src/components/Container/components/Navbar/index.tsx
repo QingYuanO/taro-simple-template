@@ -3,7 +3,7 @@ import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
 import { pixelTransform } from '@/src/utils';
-import useThemeStore from '@/src/utils/theme';
+import useThemeStore from '@/src/store/theme';
 
 import { getNavBarHeight } from '../../helper';
 import { NavbarProps } from '../../types';

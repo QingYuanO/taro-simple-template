@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 import { Button } from '@nutui/nutui-react-taro';
 import Container from '@/src/components/Container';
 
-import useThemeStore from '@/src/utils/theme';
+import useThemeStore from '@/src/store/theme';
 
 definePageConfig({
   navigationBarTitleText: '测试暗黑模式',
