@@ -1600,7 +1600,7 @@
     memoize-one "^6.0.0"
     postcss "^8.4.18"
 
-"@tarojs/components-react@3.6.5":
+"@tarojs/components-react@3.6.5", "@tarojs/components-react@^3.6.5":
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/@tarojs/components-react/-/components-react-3.6.5.tgz#9cceceb18cf18ec9f9cf13ec12c1bfdcf2519603"
   integrity sha512-GmeYTIo7IHWhr2gbdRoHMbX6PUaHz0hJ+WCLgcvv/XeTXufQxCvG3B4TBlvFzdagDsAJFL4WxwA29zAXi5M7Zw==

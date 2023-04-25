@@ -10,7 +10,7 @@ const config = {
   deviceRatio: {
     375: 2 / 1, //小程序：1px=2rpx，h5：1px=(1px/baseFontSize)rem
     640: 2.34 / 2,
-    750: 1,//小程序：1px=1rpx，h5：2px=(1px/baseFontSize)rem
+    750: 1, //小程序：1px=1rpx，h5：2px=(1px/baseFontSize)rem
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
@@ -93,6 +93,7 @@ const config = {
   },
   h5: {
     esnextModules: [],
+    useHtmlComponents: true,
     publicPath: '/',
     staticDirectory: 'static',
     router: {

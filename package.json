@@ -39,6 +39,7 @@
     "@slicknode/stylemapper": "^0.1.5",
     "@tanstack/react-query": "^4.28.0",
     "@tarojs/components": "^3.6.5",
+    "@tarojs/components-react": "^3.6.5",
     "@tarojs/helper": "^3.6.5",
     "@tarojs/plugin-framework-react": "^3.6.5",
     "@tarojs/plugin-html": "^3.6.5",
