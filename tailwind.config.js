@@ -5,7 +5,7 @@ const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')(
 const tailwindcssPlugin = require('tailwindcss/plugin');
 
 module.exports = {
-  content: ['./src/pages/**/*.{html,js,ts,jsx,tsx}', './src/components/**/*.{html,js,ts,jsx,tsx}', './src/app.ts', './src/index.html'],
+  content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     tooltipArrows: theme => ({
