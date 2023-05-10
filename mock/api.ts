@@ -11,8 +11,7 @@ const originList = new Array(count).fill(null).map((item, idx) => ({
   desc: Random.csentence() as string,
 }));
 
-
-export type MockList = typeof originList
+export type MockList = typeof originList;
 
 export default {
   'GET /api/list': ctx => {
@@ -37,6 +36,19 @@ export default {
             totalPage,
             isLastPage: page === totalPage,
             list,
+          },
+        };
+      })
+    );
+  },
+  'GET /api/refreshToken': ctx => {
+    ctx.res.send(
+      mockjs.mock(options => {
+        return {
+          code: 200,
+          message: 'success',
+          data: {
+            token: Random.string(32),
           },
         };
       })
