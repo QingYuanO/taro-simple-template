@@ -4,11 +4,7 @@ import { Image, Text, View } from '@tarojs/components';
 import { useSingleImg } from '@/src/service/apis/img';
 
 const AnimeImage = () => {
-  const { data, isFetching, refetch } = useSingleImg({
-    onSuccess() {
-      console.log('test1');
-    },
-  });
+  const { data, isFetching, refetch } = useSingleImg();
   console.log(data);
 
   const onGetImage = async () => {

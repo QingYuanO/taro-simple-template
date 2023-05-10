@@ -18,9 +18,7 @@ export const useSingleImg = createQuery<{ url: string }, void>({
     }),
   useDefaultOptions() {
     return {
-      onSuccess(data) {
-        console.log('test');
-      },
+      onSuccess(data) {},
     };
   },
 });
