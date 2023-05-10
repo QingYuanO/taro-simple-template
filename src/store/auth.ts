@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
-import TaroStorage from '@/src/utils/TaroStorage';
+import { getExpTaroStorage } from '@/src/utils/TaroStorage';
 
 export type AuthStoreKV = Utils.StoreKV<Omit<IAuthStore, 'setAuthStore'>>;
 export interface IAuthStore {
@@ -23,14 +23,14 @@ export const authStore = create<IAuthStore>()(
       }),
       {
         name: 'auth',
-        storage: createJSONStorage(() => TaroStorage),
+        //设置auth的过期时间-1小时
+        storage: createJSONStorage(() => getExpTaroStorage(60 * 60 * 1000)),
       }
     )
   )
 );
 
 export const useAuthStore = createSelectorFunctions(authStore);
-
 export const useIsLogin = () => {
   const token = useAuthStore.use.token();
   return !!token;

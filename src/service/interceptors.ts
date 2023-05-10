@@ -1,4 +1,11 @@
-import Taro from '@tarojs/taro';
+import Taro, { Chain } from '@tarojs/taro';
+import { authStore, IAuthStore } from '@/src/store/auth';
+import { StorageValue } from 'zustand/middleware';
+
+import SingletonApi from '@/src/utils/SingletonApi';
+
+import { ExtraConfig } from '.';
+import { refreshToken } from './apis/auth';
 
 export enum HTTP_STATUS {
   SUCCESS = 200,
@@ -31,13 +38,13 @@ function showError(show, res?: any) {
   return Promise.reject(res.data ?? res);
 }
 
-const customInterceptor = function (chain) {
+const customInterceptor = function (chain: Chain) {
   let requestParams = chain.requestParams;
   //剔除掉额外配置参数
   const {
-    data: { showErrorToast, showLoading, showStatusBarLoading, hasToken, ...realRequestParams },
+    data: { extraConfig, ...realRequestParams },
   } = requestParams;
-
+  const { showErrorToast, showLoading, showStatusBarLoading } = extraConfig as ExtraConfig;
   requestParams.data = realRequestParams;
   return chain
     .proceed(requestParams)
@@ -75,6 +82,31 @@ const customInterceptor = function (chain) {
     });
 };
 
-const interceptors = [customInterceptor]; //Taro.interceptors.logInterceptor
+const refreshTokenSingletonApi = new SingletonApi<{ token: IAuthStore['token'] }>();
+const refreshTokenInterceptor = async (chain: Chain) => {
+  const requestParams = chain.requestParams;
+  const { showLoading, showStatusBarLoading, hasToken } = requestParams.data.extraConfig as ExtraConfig;
+  //如果需要token但是没有token，则直接返回，并尝试请求新token;
+  const auth = authStore.persist.getOptions().storage?.getItem('auth') as StorageValue<IAuthStore>;
+  if (hasToken && !auth?.state?.token) {
+    const data = await refreshTokenSingletonApi.call(refreshToken);
+    authStore.setState(draft => {
+      draft.token = data?.token ?? '';
+    });
+
+    return null;
+  }
+  if (showStatusBarLoading) {
+    Taro.showNavigationBarLoading();
+  } else if (showLoading) {
+    Taro.showLoading({
+      title: '请稍候...',
+      mask: true,
+    });
+  }
+  return chain.proceed(requestParams);
+};
+
+const interceptors = [refreshTokenInterceptor, customInterceptor];
 
 export default interceptors;

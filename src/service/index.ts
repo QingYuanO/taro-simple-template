@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro';
+import { authStore } from '@/src//store/auth';
 
-import interceptors, { HTTP_STATUS } from './interceptors';
+import interceptors from './interceptors';
 
 const LOCAL_IP = `http://127.0.0.1`;
 
@@ -74,7 +75,7 @@ class ApiService {
     };
     //将额外配置传递到拦截器中
     data = {
-      ...extraConfig,
+      extraConfig,
       ...(data ?? {}),
     };
     const contentType = ['POST', 'PUT'].includes(method) ? 'application/json' : 'application/x-www-form-urlencoded';
@@ -86,19 +87,12 @@ class ApiService {
       header: {
         'content-type': contentType,
         //TODO添加自己的token
-        Authorization: extraConfig.hasToken ? '' : '',
+        Authorization: extraConfig.hasToken ? authStore.getState().token : '',
         ...header,
       },
       ...otherConfig,
     };
-    if (extraConfig.showStatusBarLoading) {
-      Taro.showNavigationBarLoading();
-    } else if (extraConfig.showLoading) {
-      Taro.showLoading({
-        title: '请稍候...',
-        mask: true,
-      });
-    }
+
     return Taro.request<CustomResult<D>, CustomData>(option).then(res => {
       return res.data;
     });
