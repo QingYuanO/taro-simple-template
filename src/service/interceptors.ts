@@ -46,6 +46,14 @@ const customInterceptor = function (chain: Chain) {
   } = requestParams;
   const { showErrorToast, showLoading, showStatusBarLoading } = extraConfig as ExtraConfig;
   requestParams.data = realRequestParams;
+  if (showStatusBarLoading) {
+    Taro.showNavigationBarLoading();
+  } else if (showLoading) {
+    Taro.showLoading({
+      title: '请稍候...',
+      mask: true,
+    });
+  }
   return chain
     .proceed(requestParams)
     .catch(res => {
@@ -85,7 +93,7 @@ const customInterceptor = function (chain: Chain) {
 const refreshTokenSingletonApi = new SingletonApi<{ token: IAuthStore['token'] }>();
 const refreshTokenInterceptor = async (chain: Chain) => {
   const requestParams = chain.requestParams;
-  const { showLoading, showStatusBarLoading, hasToken } = requestParams.data.extraConfig as ExtraConfig;
+  const { hasToken } = requestParams.data.extraConfig as ExtraConfig;
   //如果需要token但是没有token，则直接返回，并尝试请求新token;
   const auth = authStore.persist.getOptions().storage?.getItem('auth') as StorageValue<IAuthStore>;
   if (hasToken && !auth?.state?.token) {
@@ -93,17 +101,9 @@ const refreshTokenInterceptor = async (chain: Chain) => {
     authStore.setState(draft => {
       draft.token = data?.token ?? '';
     });
-
     return null;
   }
-  if (showStatusBarLoading) {
-    Taro.showNavigationBarLoading();
-  } else if (showLoading) {
-    Taro.showLoading({
-      title: '请稍候...',
-      mask: true,
-    });
-  }
+
   return chain.proceed(requestParams);
 };
 

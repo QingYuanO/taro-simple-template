@@ -1,5 +1,5 @@
-import { MockList } from '@/mock';
 import { createInfiniteQuery } from 'react-query-kit';
+import { MockList } from '@/mock';
 
 import ApiService, { CustomResult } from '..';
 
@@ -14,8 +14,9 @@ type ListData = {
 export const getMockList = (page: number) => {
   return ApiService.get<CustomResult<ListData>>(`/api/list`, {
     data: { page, pageSize: 10 },
+    extraConfig: { hasToken: true },
   }).then(res => {
-    return res.data;
+    return res?.data;
   });
 };
 
