@@ -117,8 +117,6 @@ module.exports = {
     }),
   ],
   presets: [
-    //添加一些缓动函数https://easings.net/zh-cn
-    require('@downwindcss/easings'),
     //将rem转换为rpx
     require('tailwindcss-rem2px-preset').createPreset({
       fontSize: 16,
