@@ -32,6 +32,7 @@ module.exports = {
   plugins: [
     createPlugin({ fallbackElements: ['view', 'text', 'image', 'button'] }),
     tailwindcssTooltipArrowAfter,
+    require("tailwindcss-animate"),
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
       const themes = ['h5', 'weapp'];
       themes.forEach(t => {
