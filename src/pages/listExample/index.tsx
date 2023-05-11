@@ -11,14 +11,14 @@ definePageConfig({
 });
 
 const ListExample = () => {
-  const { data, isFetchingNextPage, hasNextPage, fetchNextPage } = useMockList();
+  const { data, isFetchingNextPage, isLoading, hasNextPage, fetchNextPage } = useMockList();
   const list = data?.pages.reduce((t, c) => {
     return [...t, ...c.list];
   }, []);
-
   useReachBottom(() => {
     fetchNextPage();
   });
+  if (isLoading) return null;
   return (
     <Container>
       <InfiniteList<MockList[number]>

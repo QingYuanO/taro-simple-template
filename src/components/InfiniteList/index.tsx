@@ -1,6 +1,6 @@
 import { Fragment, PropsWithChildren, ReactNode } from 'react';
 import { View } from '@tarojs/components';
-import { Empty, EmptyProps } from '@nutui/nutui-react-taro';
+import { twMerge } from 'tailwind-merge';
 
 import LoadMoreLoading, { LoadMoreLoadingProps } from '../LoadMoreLoading';
 
@@ -13,13 +13,13 @@ export type ListProps<Item = unknown> = {
   listWrapClassName?: string;
   containerWrapClassName?: string;
   emptyClassName?: string;
+  description?: string;
   hasEmpty?: boolean;
-} & Omit<LoadMoreLoadingProps, 'isLoading' | 'hasMore'> &
-  Partial<Omit<EmptyProps, 'className'>>;
+} & Omit<LoadMoreLoadingProps, 'isLoading' | 'hasMore'>;
 
 export default function InfiniteList<Item = unknown>(props: PropsWithChildren<ListProps<Item>>) {
   const { data, itemKey, isFetchingNextPage, hasNextPage, listWrapClassName, containerWrapClassName, renderItem } = props;
-  const { emptyClassName, description, image, imageSize } = props;
+  const { emptyClassName, description } = props;
   const { hasEmpty = true, loadingText, notMoreText } = props;
   return (
     <Fragment>
@@ -33,7 +33,7 @@ export default function InfiniteList<Item = unknown>(props: PropsWithChildren<Li
           <LoadMoreLoading isLoading={isFetchingNextPage} hasMore={hasNextPage} notMoreText={notMoreText} loadingText={loadingText} />
         </View>
       ) : (
-        hasEmpty && <Empty description={description} image={image} imageSize={imageSize} className={emptyClassName} />
+        hasEmpty && <View className={twMerge('h-20 flex-center', emptyClassName)}>{description}</View>
       )}
     </Fragment>
   );

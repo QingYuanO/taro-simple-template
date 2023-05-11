@@ -1,10 +1,10 @@
 import { View } from '@tarojs/components';
-import { Button } from '@nutui/nutui-react-taro';
+import { useAuthStore } from '@/src/store/auth';
 import Container from '@/src/components/Container';
 import Count from '@/src/components/Count';
 import TaroLogo from '@/src/components/TaroLogo';
+import Button from '@/src/components/ui/Button';
 
-import { useNodeRect } from '@/src/hooks';
 import {
   toContainerPage,
   toListExamplePage,
@@ -14,14 +14,14 @@ import {
   toThemeExamplePage,
 } from '@/src/utils/toRouterPage';
 
-import './index.less';
-
 definePageConfig({
   navigationBarTitleText: '首页',
 });
 
 const Index = () => {
-  const rect = useNodeRect('test');
+  const setAuthStore = useAuthStore.use.setAuthStore();
+  const token = useAuthStore.use.token();
+  console.log('token', token);
 
   return (
     <Container className="index py-5 flex-col-center">
@@ -29,8 +29,7 @@ const Index = () => {
       <Count />
       <View className="mt-5 flex flex-col gap-y-4">
         <Button
-          id="test"
-          type="primary"
+          round
           onClick={() => {
             toPackageAHomePage();
           }}
@@ -38,7 +37,7 @@ const Index = () => {
           toPackageAHomePage
         </Button>
         <Button
-          type="primary"
+          round
           onClick={() => {
             toContainerPage();
           }}
@@ -46,7 +45,7 @@ const Index = () => {
           toContainerPage
         </Button>
         <Button
-          type="primary"
+          round
           onClick={() => {
             toTailwindPluginExamplePage();
           }}
@@ -54,7 +53,7 @@ const Index = () => {
           toTailwindPluginExamplePage
         </Button>
         <Button
-          type="primary"
+          round
           onClick={() => {
             toListExamplePage();
           }}
@@ -62,7 +61,7 @@ const Index = () => {
           toListExamplePage
         </Button>
         <Button
-          type="primary"
+          round
           onClick={() => {
             toScrollViewListPage({ isNeedLoginAuth: true });
           }}
@@ -70,12 +69,20 @@ const Index = () => {
           toScrollViewListPage
         </Button>
         <Button
-          type="primary"
+          round
           onClick={() => {
             toThemeExamplePage();
           }}
         >
           toThemeExamplePage
+        </Button>
+        <Button
+          round
+          onClick={() => {
+            setAuthStore('token', '1');
+          }}
+        >
+          setToken
         </Button>
       </View>
     </Container>

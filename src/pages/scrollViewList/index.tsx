@@ -1,10 +1,10 @@
 import { ScrollView, View } from '@tarojs/components';
-import Taro, { useReachBottom } from '@tarojs/taro';
-import { Button } from '@nutui/nutui-react-taro';
+import Taro from '@tarojs/taro';
 import { MockList } from '@/mock';
 import Container from '@/src/components/Container';
 import { getNavBarHeight } from '@/src/components/Container/helper';
 import InfiniteList from '@/src/components/InfiniteList';
+import Button from '@/src/components/ui/Button';
 
 import { useNodeRect } from '@/src/hooks';
 import { useMockList } from '@/src/service/apis/mock';
@@ -27,7 +27,7 @@ const ScrollViewList = () => {
 
   return (
     <Container hasFooterBottom={false} hasNavBarTop={false}>
-      <Container.Navbar title="ScrollViewList" hasSeat  />
+      <Container.Navbar title="ScrollViewList" hasSeat />
       <ScrollView
         className=" overflow-auto"
         style={{ height: height - tHeight - (bHeight?.height ?? 0) }}
@@ -51,8 +51,8 @@ const ScrollViewList = () => {
           }}
         />
       </ScrollView>
-      <Container.Footer className="flex-center px-4">
-        <Button type="primary" block>
+      <Container.Footer className="px-4 flex-center">
+        <Button round block>
           确认
         </Button>
       </Container.Footer>

@@ -1,8 +1,7 @@
 import { View } from '@tarojs/components';
-import { Button } from '@nutui/nutui-react-taro';
-import Container from '@/src/components/Container';
-
 import useThemeStore from '@/src/store/theme';
+import Container from '@/src/components/Container';
+import Button from '@/src/components/ui/Button';
 
 definePageConfig({
   navigationBarTitleText: '测试暗黑模式',
@@ -17,7 +16,7 @@ const ThemeExample = () => {
         <View className="bg-slate-300 text-word-primary square-10 flex-center dark:bg-black dark:text-white">1</View>
         <View className="bg-slate-300 text-word-primary  circular-10 flex-center dark:bg-black dark:text-white">1</View>
         <Button
-          type="primary"
+          round
           onClick={() => {
             themeChange(themeMode === 'base' ? 'dark' : 'base');
           }}
