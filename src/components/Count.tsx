@@ -1,9 +1,11 @@
 import { memo } from 'react';
 import { Text, View } from '@tarojs/components';
-import { Button } from '@nutui/nutui-react-taro';
+import styled from '@slicknode/stylemapper';
 import { createSelectorFunctions } from 'auto-zustand-selectors-hook';
 import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
+
+import Button from './ui/Button';
 
 const countStore = create(
   combine({ count: 0 }, set => ({
@@ -22,20 +24,26 @@ const Count = () => {
   return (
     <View className="mt-[30px] flex items-center">
       <Button
-        icon="minus"
-        className="text-btn ex"
+        className="circular-12"
+        type="plain"
+        round
         onClick={() => {
           decrease(1);
         }}
-      />
+      >
+        -
+      </Button>
       <Text className="mx-[30px] ">{count}</Text>
       <Button
-        icon="plus"
-        className="text-btn"
+        className="circular-12"
+        type="plain"
+        round
         onClick={() => {
           increase(1);
         }}
-      />
+      >
+        +
+      </Button>
     </View>
   );
 };

@@ -18,7 +18,6 @@ const config = {
   plugins: [
     //本地插件
     path.resolve(__dirname, '..', 'src/plugin/index'),
-    '@tarojs/plugin-html',
   ],
   defineConstants: {},
   alias: {
@@ -41,9 +40,7 @@ const config = {
   cache: {
     enable: false, // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
   },
-  sass: {
-    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`,
-  },
+  sass: {},
   mini: {
     miniCssExtractPluginOption: {
       ignoreOrder: true,
@@ -66,15 +63,9 @@ const config = {
       });
     },
     postcss: {
-      // htmltransform: {
-      //   enable: false, // 小程序默认关闭该配置
-      //   config: {
-      //     removeCursorStyle: true, // 默认为 true
-      //   },
-      // },
       pxtransform: {
         enable: true,
-        config: { selectorBlackList: ['nut-', 'nutui-'] },
+        config: {},
       },
       url: {
         enable: true,
