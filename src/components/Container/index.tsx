@@ -44,7 +44,7 @@ function Container(props: ContainerProps) {
   const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
   const themeMode = useThemeStore(state => state.themeMode);
   const isWrapContainer = !!navbar || !!footer;
-  const safeBottomClass = hasSafeBottom ? 'safe-bottom' : '';
+  const safeBottomClass = hasSafeBottom ? 'safe-b' : '';
   return (
     <View
       className={`cover-nutui-theme-base ${process.env.TARO_ENV} ${themeMode} ${

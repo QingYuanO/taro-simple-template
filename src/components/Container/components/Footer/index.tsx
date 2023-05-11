@@ -27,7 +27,7 @@ export default memo(
       <Fragment>
         <View
           id="taroContainerFooter"
-          className={` fixed inset-x-0 bottom-0 z-[100] box-border  ${className ?? ''} ${isIPhone && hasSafe ? 'safe-bottom' : ''}`}
+          className={` fixed inset-x-0 bottom-0 z-[100] box-border  ${className ?? ''} ${isIPhone && hasSafe ? 'safe-b' : ''}`}
           {...otherViewProps}
         >
           {children}

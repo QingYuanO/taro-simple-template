@@ -1,8 +1,12 @@
-.cover-nutui-theme-base {
-  --nutui-brand-color: #3b82f6;
-  --nutui-brand-color-end: #3b82f6;
-}
 .theme-base-var {
   --page-bg-color: #efeff4;
-  --primary-color: #d73535;
+  --primary: #3b82f6;
+  --word-primary:#222;
+  --word-secondary:#9ca3af;
+}
+
+.cover-nutui-theme-base {
+  .theme-base-var();
+  --nutui-brand-color: var(--primary);
+  --nutui-brand-color-end: var(--primary);
 }

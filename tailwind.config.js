@@ -19,9 +19,12 @@ module.exports = {
     }),
     extend: {
       colors: {
+        primary:{
+          DEFAULT:'var(--primary)'
+        },
         word: {
-          primary: '#222',
-          secondary: '#9ca3af',
+          primary: 'var(--word-primary)',
+          secondary: 'var(--word-secondary)',
         },
       },
     },
@@ -34,6 +37,7 @@ module.exports = {
       themes.forEach(t => {
         addVariant(t, `.${t} &`);
       });
+      addVariant('wx-disabled',`&[disabled]`)
       matchUtilities(
         {
           require: value => ({
@@ -49,6 +53,23 @@ module.exports = {
           }),
         },
         { values: { left: 'left', right: 'right' } }
+      );
+      matchUtilities(
+        {
+          safe: value => {
+            const name = {
+              b: 'bottom',
+              t: 'top',
+              l: 'left',
+              r: 'right',
+            }[value];
+            return {
+              'padding-bottom': `constant(safe-area-inset-${name})` /*兼容 IOS<11.2*/,
+              'padding-bottom': `env(safe-area-inset-${name})` /*兼容 IOS>11.2*/,
+            };
+          },
+        },
+        { values: { b: 'b', t: 't', l: 'l', r: 'r' } }
       );
       matchUtilities(
         {
@@ -88,6 +109,9 @@ module.exports = {
           'align-items': 'center',
           'justify-content': 'center',
           'flex-direction': 'row',
+        },
+        '.all-unset': {
+          all: 'unset',
         },
       });
     }),

@@ -4,14 +4,26 @@
 @import './styles/theme.less';
 
 /*  #ifdef  weapp */
+
 page {
   .theme-base-var();
   background-color: var(--page-bg-color);
 }
+button {
+  margin-left: unset;
+  margin-right: unset;
+  width: unset;
+  padding-left: unset;
+  padding-right: unset;
+}
+button::after {
+  border: none;
+}
 /*  #endif  */
 
 /*  #ifdef  h5 */
-* {
+
+:root {
   .theme-base-var();
 }
 .taro_router .taro_page {
@@ -21,14 +33,3 @@ page {
   background-color: #fff;
 }
 /*  #endif  */
-
-.safe-bottom {
-  padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
-  padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
-}
-
-.taro-btn-reset {
-  margin-left: unset;
-  margin-right: unset;
-  width: unset;
-}
