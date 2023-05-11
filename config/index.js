@@ -60,6 +60,15 @@ const config = {
             ],
           },
         },
+        module: {
+          rule: [
+            {
+              test: /\.mjs$/,
+              loader: 'babel-loader',
+              include: [path.resolve(__dirname, '..', 'node_modules/tailwind-merge/dist/lib')],
+            },
+          ],
+        },
       });
     },
     postcss: {
