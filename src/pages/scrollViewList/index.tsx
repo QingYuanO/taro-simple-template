@@ -51,7 +51,7 @@ const ScrollViewList = () => {
           }}
         />
       </ScrollView>
-      <Container.Footer className="px-4 flex-center">
+      <Container.Footer className="px-4 py-2 flex-center">
         <Button round block>
           确认
         </Button>

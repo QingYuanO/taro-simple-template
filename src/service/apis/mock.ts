@@ -14,7 +14,7 @@ type ListData = {
 export const getMockList = (page: number) => {
   return ApiService.get<CustomResult<ListData>>(`/api/list`, {
     data: { page, pageSize: 10 },
-    extraConfig: { hasToken: true },
+    extraConfig: { hasToken: true,showLoading:false },
   }).then(res => {
     return res?.data;
   });
