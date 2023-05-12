@@ -44,34 +44,16 @@ const customInterceptor = function (chain: Chain) {
   const {
     data: { extraConfig, ...realRequestParams },
   } = requestParams;
-  const { showErrorToast, showLoading, showStatusBarLoading } = extraConfig as ExtraConfig;
+  const { showErrorToast } = extraConfig as ExtraConfig;
   requestParams.data = realRequestParams;
-  if (showStatusBarLoading) {
-    Taro.showNavigationBarLoading();
-  } else if (showLoading) {
-    Taro.showLoading({
-      title: '请稍候...',
-      mask: true,
-    });
-  }
-  return chain
-    .proceed(requestParams)
-    .catch(res => {
-      // 这个catch需要放到前面才能捕获request本身的错误，因为showError返回的也是Promise.reject
-      console.error(res);
-      return showError(res.errMsg, showErrorToast);
-    })
-    .then(res => {
-      // 只要请求成功，不管返回什么状态码，都走这个回调
-      if (showStatusBarLoading) {
-        Taro.hideNavigationBarLoading();
-      } else if (showLoading) {
-        Taro.hideLoading();
-      }
-      if (res.statusCode >= 400) {
-        return showError(showErrorToast, res);
-      } else {
-        /**
+
+  return chain.proceed(requestParams).then(res => {
+    // 只要请求成功，不管返回什么状态码，都走这个回调
+
+    if (res.statusCode >= 400) {
+      return showError(showErrorToast, res);
+    } else {
+      /**
          * res原始数据格式
           ---------
           开发者服务器返回的数据
@@ -85,15 +67,14 @@ const customInterceptor = function (chain: Chain) {
           cookies
           cookies?: string[]
          */
-        return res;
-      }
-    });
+      return res;
+    }
+  });
 };
 
 const refreshTokenSingletonApi = new SingletonApi<{ token: IAuthStore['token'] }>();
 const refreshTokenInterceptor = async (chain: Chain) => {
-  const requestParams = chain.requestParams;
-  const { hasToken } = requestParams.data.extraConfig as ExtraConfig;
+  const { hasToken } = chain.requestParams.data.extraConfig as ExtraConfig;
   //如果需要token但是没有token，则直接返回，并尝试请求新token;
   const auth = authStore.persist.getOptions().storage?.getItem('auth') as StorageValue<IAuthStore>;
   if (hasToken && !auth?.state?.token) {
@@ -104,9 +85,35 @@ const refreshTokenInterceptor = async (chain: Chain) => {
     return null;
   }
 
-  return chain.proceed(requestParams);
+  return chain.proceed(chain.requestParams);
 };
 
-const interceptors = [refreshTokenInterceptor, customInterceptor];
+const loadingInterceptor = async (chain: Chain) => {
+  const { data } = chain.requestParams;
+  const { showErrorToast, showLoading, showStatusBarLoading } = data.extraConfig as ExtraConfig;
+  try {
+    if (showStatusBarLoading) {
+      Taro.showNavigationBarLoading();
+    } else if (showLoading) {
+      Taro.showLoading({
+        title: '请稍候...',
+        mask: true,
+      });
+    }
+    const res = await chain.proceed(chain.requestParams);
+    if (showStatusBarLoading) {
+      Taro.hideNavigationBarLoading();
+    } else if (showLoading) {
+      Taro.hideLoading();
+    }
+    return res;
+  } catch (error) {
+    // 这个catch需要放到前面才能捕获request本身的错误，因为showError返回的也是Promise.reject
+    console.error(error);
+    return showError(error.errMsg, showErrorToast);
+  }
+};
+
+const interceptors = [loadingInterceptor, refreshTokenInterceptor, customInterceptor];
 
 export default interceptors;

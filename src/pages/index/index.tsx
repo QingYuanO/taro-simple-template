@@ -13,6 +13,7 @@ import {
   toTailwindPluginExamplePage,
   toThemeExamplePage,
 } from '@/src/utils/toRouterPage';
+import { pt } from '@/src/utils';
 
 definePageConfig({
   navigationBarTitleText: '首页',
@@ -22,6 +23,7 @@ const Index = () => {
   const setAuthStore = useAuthStore.use.setAuthStore();
   const token = useAuthStore.use.token();
   console.log('token', token);
+  console.log('pt',pt(100));
 
   return (
     <Container className="index py-5 flex-col-center">
