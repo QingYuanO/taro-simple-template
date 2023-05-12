@@ -8,7 +8,7 @@ export const getOpenerEventChannel: () => EventChannel = () => {
   return Taro.getCurrentInstance().page.getOpenerEventChannel();
 };
 
-export const pixelTransform = (num: number) => {
+export const pt = (num: number) => {
   const { screenWidth } = Taro.getSystemInfoSync();
   return num * (screenWidth / 375);
 };

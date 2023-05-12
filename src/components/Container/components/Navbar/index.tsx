@@ -2,7 +2,7 @@ import { Fragment, memo, useMemo } from 'react';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 
-import { pixelTransform } from '@/src/utils';
+import { pt } from '@/src/utils';
 import useThemeStore from '@/src/store/theme';
 
 import { getNavBarHeight } from '../../helper';
@@ -44,7 +44,7 @@ export default memo(function Navbar(props: NavbarProps) {
         {children ?? (
           <View className="flex items-center relative h-full w-full dark:bg-black">
             <View className="absolute top-1/2 flex items-center left-2" style={{ transform: 'translateY(-50%)' }}>
-              {leftIcon ?? <DefaultLeftIcon size={pixelTransform(defaultLeftIconSize)} color={defaultLeftColor} />}
+              {leftIcon ?? <DefaultLeftIcon size={pt(defaultLeftIconSize)} color={defaultLeftColor} />}
             </View>
             {title && (
               <View className="w-full flex-center text-base">
