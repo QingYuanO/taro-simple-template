@@ -13,8 +13,8 @@ const button = cva('relative flex justify-center items-center', {
     },
     size: {
       small: ['text-xs', 'py-1', 'px-2'],
-      base: ['text-sm', 'py-2', 'px-3'],
-      medium: ['text-base', 'py-2.5', 'px-4'],
+      base: ['text-base', 'py-2', 'px-3'],
+      medium: ['text-lg', 'py-2.5', 'px-4'],
     },
     round: {
       true: 'rounded-full',
