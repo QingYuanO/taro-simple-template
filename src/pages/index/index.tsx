@@ -32,6 +32,7 @@ const Index = () => {
       <View className="mt-5 flex flex-col gap-y-4">
         <Button
           round
+          disabled
           onClick={() => {
             toPackageAHomePage();
           }}

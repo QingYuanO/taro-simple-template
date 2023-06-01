@@ -1,10 +1,10 @@
-import { ButtonProps as BProps, Button as TaroButton } from '@tarojs/components';
+import { ButtonProps as BProps, Button as TaroButton, View } from '@tarojs/components';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 
 export type ButtonVariantProps = VariantProps<typeof button>;
 
-const button = cva('flex justify-center items-center active:opacity-90', {
+const button = cva('relative flex justify-center items-center', {
   variants: {
     type: {
       primary: 'text-white bg-primary',
@@ -24,6 +24,10 @@ const button = cva('flex justify-center items-center active:opacity-90', {
       true: 'w-full',
       false: '',
     },
+    disabled: {
+      true: 'opacity-60',
+      false: 'active:opacity-90',
+    },
   },
   compoundVariants: [{}],
   defaultVariants: {
@@ -32,14 +36,16 @@ const button = cva('flex justify-center items-center active:opacity-90', {
   },
 });
 
-export interface ButtonProps extends Omit<BProps, 'size' | 'type'>, ButtonVariantProps {}
+export interface ButtonProps extends Omit<BProps, 'size' | 'type' | 'disabled'>, ButtonVariantProps {}
 
 function Button(props: ButtonProps) {
-  const { type, size, round, block, className, children, ...other } = props;
+  const { type, size, round, block, className, children, disabled, ...other } = props;
+  const booleanDisabled = !!disabled;
   return (
-    <TaroButton {...other} className={twMerge(button({ type, size, round, block, className }))}>
+    <View className={twMerge(button({ type, size, round, block, disabled: booleanDisabled, className }))}>
+      <TaroButton {...other} disabled={booleanDisabled} className=" absolute inset-0 border-none p-0 opacity-0"></TaroButton>
       {children}
-    </TaroButton>
+    </View>
   );
 }
 
