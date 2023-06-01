@@ -19,8 +19,8 @@ module.exports = {
     }),
     extend: {
       colors: {
-        primary:{
-          DEFAULT:'var(--primary)'
+        primary: {
+          DEFAULT: 'var(--primary)',
         },
         word: {
           primary: 'var(--word-primary)',
@@ -30,15 +30,15 @@ module.exports = {
     },
   },
   plugins: [
-    createPlugin({ fallbackElements: ['view', 'text', 'image', 'button'] }),
+    createPlugin({ fallbackElements: process.env.TARO_ENV === 'h5' ? ['*'] : ['view'] }),
     tailwindcssTooltipArrowAfter,
-    require("tailwindcss-animate"),
+    require('tailwindcss-animate'),
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
       const themes = ['h5', 'weapp'];
       themes.forEach(t => {
         addVariant(t, `.${t} &`);
       });
-      addVariant('disabled',`&[disabled]`)
+      addVariant('disabled', `&[disabled]`);
       matchUtilities(
         {
           require: value => ({
