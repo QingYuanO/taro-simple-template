@@ -38,7 +38,7 @@ module.exports = {
       themes.forEach(t => {
         addVariant(t, `.${t} &`);
       });
-      addVariant('wx-disabled',`&[disabled]`)
+      addVariant('disabled',`&[disabled]`)
       matchUtilities(
         {
           require: value => ({
