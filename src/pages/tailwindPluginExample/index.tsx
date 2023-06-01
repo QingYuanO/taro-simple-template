@@ -24,7 +24,7 @@ const TailwindPluginExample = () => {
         </View>
         <Button
           type="primary"
-          className="taro-btn-reset mt-[50px] "
+          className="mt-12"
           onClick={() => {
             setIsShow(!isShow);
           }}
