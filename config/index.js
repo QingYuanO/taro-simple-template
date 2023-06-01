@@ -1,6 +1,6 @@
 /* eslint-disable import/no-commonjs */
 const path = require('path');
-const { UnifiedWebpackPluginV5 } = require('weapp-tailwindcss-webpack-plugin');
+const { UnifiedWebpackPluginV5 } = require('weapp-tailwindcss/webpack');
 
 const config = {
   projectName: 'taro-simple-template',
@@ -56,6 +56,7 @@ const config = {
                 // 注意这一行(不传默认 react)
                 framework: 'react', // 'vue2' / 'vue3'
                 cssPreflightRange: 'all',
+                mangle: process.env.NODE_ENV === 'production',
               },
             ],
           },

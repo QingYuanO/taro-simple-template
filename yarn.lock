@@ -1104,10 +1104,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@csstools/postcss-is-pseudo-class@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-is-pseudo-class/-/postcss-is-pseudo-class-3.2.0.tgz#1277cc187bdb075013341dab42b4140d1cafae27"
-  integrity sha512-uooelBL99jMg8ZD6xy0Pj1hSalchWmplcin00eI+JHpv1jW2iwbi1cn2UnVsToM4JLwJSZFzTSWCgSpmlyhe3A==
+"@csstools/postcss-is-pseudo-class@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.npmmirror.com/@csstools/postcss-is-pseudo-class/-/postcss-is-pseudo-class-3.2.1.tgz#610f451b9293307d83d484c84af332a05e48b661"
+  integrity sha512-AtANdV34kJl04Al62is3eQRk/BfOfyAvEmRJvbt+nx5REqImLC+2XhuE6skgkcPli1l8ONS67wS+l1sBzySc3Q==
   dependencies:
     "@csstools/selector-specificity" "^2.0.0"
     postcss-selector-parser "^6.0.10"
@@ -6869,7 +6869,7 @@ loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4
     emojis-list "^3.0.0"
     json5 "^1.0.1"
 
-loader-utils@^2.0.0, loader-utils@^2.0.2, loader-utils@^2.0.4:
+loader-utils@^2.0.0, loader-utils@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.4.tgz#8b5cb38b5c34a9a018ee1fc0e6a066d1dfcc528c"
   integrity sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==
@@ -8393,10 +8393,18 @@ postcss-safe-parser@^6.0.0:
   resolved "https://registry.yarnpkg.com/postcss-safe-parser/-/postcss-safe-parser-6.0.0.tgz#bb4c29894171a94bc5c996b9a30317ef402adaa1"
   integrity sha512-FARHN8pwH+WiS2OPCxJI8FuRJpTVnn6ZNFiqAM2aeW2LwTHWWmWgIyKC6cUo0L8aeKiF/14MNvnpls6R2PBeMQ==
 
-postcss-selector-parser@^6.0.10, postcss-selector-parser@^6.0.11, postcss-selector-parser@^6.0.12, postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4, postcss-selector-parser@^6.0.5, postcss-selector-parser@^6.0.9:
+postcss-selector-parser@^6.0.10, postcss-selector-parser@^6.0.11, postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4, postcss-selector-parser@^6.0.5, postcss-selector-parser@^6.0.9:
   version "6.0.12"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.12.tgz#2efae5ffab3c8bfb2b7fbf0c426e3bca616c4abb"
   integrity sha512-NdxGCAZdRrwVI1sy59+Wzrh+pMMHxapGnpfenDVlMEXoOcvt4pGE0JLK9YY2F5dLxcFYA/YbVQKhcGU+FtSYQg==
+  dependencies:
+    cssesc "^3.0.0"
+    util-deprecate "^1.0.2"
+
+postcss-selector-parser@^6.0.13:
+  version "6.0.13"
+  resolved "https://registry.npmmirror.com/postcss-selector-parser/-/postcss-selector-parser-6.0.13.tgz#d05d8d76b1e8e173257ef9d60b706a8e5e99bf1b"
+  integrity sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
@@ -9279,6 +9287,13 @@ semver@^7.0.0, semver@^7.3.2, semver@^7.3.4, semver@^7.3.7, semver@^7.3.8, semve
   dependencies:
     lru-cache "^6.0.0"
 
+semver@^7.5.1:
+  version "7.5.1"
+  resolved "https://registry.npmmirror.com/semver/-/semver-7.5.1.tgz#c90c4d631cf74720e46b21c1d37ea07edfab91ec"
+  integrity sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==
+  dependencies:
+    lru-cache "^6.0.0"
+
 send@0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/send/-/send-0.18.0.tgz#670167cc654b05f5aa4a767f9113bb371bc706be"
@@ -9905,13 +9920,18 @@ tailwindcss-animate@^1.0.5:
   resolved "https://registry.yarnpkg.com/tailwindcss-animate/-/tailwindcss-animate-1.0.5.tgz#a6720e3b0616e1ff922b32846729881c626a069d"
   integrity sha512-UU3qrOJ4lFQABY+MVADmBm+0KW3xZyhMdRvejwtXqYOL7YjHYxmuREFAZdmVG5LPe5E9CAst846SLC4j5I3dcw==
 
-tailwindcss-patch@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/tailwindcss-patch/-/tailwindcss-patch-1.1.1.tgz#f4ed3061a4e92f65fc842f4f0ee3153f440141f1"
-  integrity sha512-H4I8HbzHnAxNK0NA+6PFl05F0+pPbKuHIGOBsYa1Of+QQ47UcpgMlBdhsPYtpELmV8qqM8DwRUGRpIENDrv1Fw==
+tailwindcss-mangle-shared@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmmirror.com/tailwindcss-mangle-shared/-/tailwindcss-mangle-shared-1.2.1.tgz#17530d8f88f4100db1bddecb506607fbe7b72206"
+  integrity sha512-s6/nwZ7Ojg9JCJ5S1AmnY6aRg7Va+xTV6zPF3A9WGA8TZdpN3OrCtF4GPhGVK9TCtvyeiFYVVdUopwjWNINTQQ==
+
+tailwindcss-patch@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmmirror.com/tailwindcss-patch/-/tailwindcss-patch-1.2.1.tgz#8f643f655868b69744ef4c0e2794ba6df2fabbd6"
+  integrity sha512-99o9tOab2CDwunfJ7XvlTh66TiRiYfwTpnM+BtnMT0OZy1mBAtjoAyIGVpB3EhO0hqOa4vUrSB8DfeXcONXj1g==
   dependencies:
     "@babel/generator" "^7.21.5"
-    "@babel/parser" "^7.21.5"
+    "@babel/parser" "^7.21.8"
     "@babel/traverse" "^7.21.5"
     "@babel/types" "^7.21.5"
     resolve "^1.22.2"
@@ -10569,23 +10589,22 @@ weapp-tailwindcss-children@^0.1.0:
   resolved "https://registry.yarnpkg.com/weapp-tailwindcss-children/-/weapp-tailwindcss-children-0.1.0.tgz#0de102f04a89d77447ca3b984669bbe5ffa41aa1"
   integrity sha512-HuDT78u6RbXpJIHbJzw4zW98JByWCz4elhTAT9QR/JWJuQpiRNbnqa5tL+ZTVCcT4bHt9Ppf/E2MNTohPgBE3g==
 
-weapp-tailwindcss-webpack-plugin@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/weapp-tailwindcss-webpack-plugin/-/weapp-tailwindcss-webpack-plugin-2.2.0.tgz#a01e6bff5783d938de73c04b34cbf155a6f2e307"
-  integrity sha512-FXhkBSatlC3rAlio2b6LoJpPKuQQZ/94cL5a81qw3eD9oMG51e9WAPv/gFuED41nN+bPTW62tfo+o8kiTOFq3A==
+weapp-tailwindcss@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.npmmirror.com/weapp-tailwindcss/-/weapp-tailwindcss-2.4.2.tgz#48a3ec60489720df9f9396f91867aab85312d245"
+  integrity sha512-/vrdnJ5sme0T4T/jYtlEtYz+f6C78MVvqRugiO3ermv73LGKnRK76eo11CW06QTpK5atBt9dEkmMu7lM/Hpn/A==
   dependencies:
     "@babel/generator" "^7.21.4"
     "@babel/parser" "^7.21.4"
     "@babel/traverse" "^7.21.4"
     "@babel/types" "^7.21.4"
-    "@csstools/postcss-is-pseudo-class" "^3.2.0"
-    loader-utils "^2.0.2"
+    "@csstools/postcss-is-pseudo-class" "^3.2.1"
     micromatch "^4.0.5"
     postcss "8.4.23"
-    postcss-selector-parser "^6.0.12"
-    semver "^7.5.0"
-    tailwindcss-patch "^1.1.1"
-    webpack-sources "^3.2.3"
+    postcss-selector-parser "^6.0.13"
+    semver "^7.5.1"
+    tailwindcss-mangle-shared "^1.2.1"
+    tailwindcss-patch "^1.2.1"
 
 webidl-conversions@^7.0.0:
   version "7.0.0"
