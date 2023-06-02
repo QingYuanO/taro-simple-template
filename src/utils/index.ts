@@ -1,5 +1,6 @@
 import Taro, { EventChannel } from '@tarojs/taro';
-import { clsx, type ClassValue } from 'clsx';
+import { cx } from 'class-variance-authority';
+import { ClassValue } from 'class-variance-authority/dist/types';
 import { twMerge } from 'tailwind-merge';
 
 //只能在微信小程序中使用
@@ -14,5 +15,5 @@ export const pt = (num: number) => {
 };
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(cx(inputs));
 }
