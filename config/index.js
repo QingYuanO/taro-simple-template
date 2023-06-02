@@ -95,7 +95,7 @@ const config = {
   },
   h5: {
     esnextModules: [],
-    useHtmlComponents: true,
+    useHtmlComponents: false,
     publicPath: '/',
     staticDirectory: 'static',
     router: {
