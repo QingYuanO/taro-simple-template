@@ -1,10 +1,10 @@
 import { View } from '@tarojs/components';
-import { useAuthStore } from '@/src/store/auth';
 import Container from '@/src/components/Container';
 import Count from '@/src/components/Count';
 import TaroLogo from '@/src/components/TaroLogo';
-import Button from '@/src/components/ui/Button';
+import Button from '@/ui/Button';
 
+import { pt } from '@/src/utils';
 import {
   toContainerPage,
   toListExamplePage,
@@ -13,7 +13,7 @@ import {
   toTailwindPluginExamplePage,
   toThemeExamplePage,
 } from '@/src/utils/toRouterPage';
-import { pt } from '@/src/utils';
+import { useAuthStore } from '@/src/store/auth';
 
 definePageConfig({
   navigationBarTitleText: '首页',
@@ -23,7 +23,7 @@ const Index = () => {
   const setAuthStore = useAuthStore.use.setAuthStore();
   const token = useAuthStore.use.token();
   console.log('token', token);
-  console.log('pt',pt(100));
+  console.log('pt', pt(100));
 
   return (
     <Container className="index py-5 flex-col-center">
@@ -32,7 +32,6 @@ const Index = () => {
       <View className="mt-5 flex flex-col gap-y-4">
         <Button
           round
-          disabled
           onClick={() => {
             toPackageAHomePage();
           }}

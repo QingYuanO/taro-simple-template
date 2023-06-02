@@ -24,6 +24,7 @@ const config = {
     //根目录
     '@/src': path.resolve(__dirname, '..', 'src'),
     '@/mock': path.resolve(__dirname, '..', 'mock'),
+    '@/ui': path.resolve(__dirname, '..', 'src/components/ui'),
   },
   copy: {
     patterns: [],
