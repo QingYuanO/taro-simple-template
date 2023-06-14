@@ -13,6 +13,7 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
+    "strict": true,
     "paths": {
       "@/mock": ["./mock/api"],
       "@/src/*": ["./src/*"],
