@@ -1,7 +1,9 @@
 {
   "tailwindCSS.experimental.classRegex": [
     ["styled\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["{([\\s\\S]*)}", ":\\s*['\"`]([^'\"`]*)['\"`]"],
+    "Style\\s*=\\s*['\"`]([^'\"`]*)['\"`]"
   ],
   "cssvar.files": [],
 
@@ -9,5 +11,8 @@
   "cssvar.ignore": [],
 
   // add support for autocomplete in JS or JS like files
-  "cssvar.extensions": ["css", "postcss", "jsx", "tsx"]
+  "cssvar.extensions": ["css", "postcss", "jsx", "tsx"],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
 }
