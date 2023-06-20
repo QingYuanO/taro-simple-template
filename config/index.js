@@ -57,6 +57,10 @@ const config = {
                 // 注意这一行(不传默认 react)
                 framework: 'react', // 'vue2' / 'vue3'
                 cssPreflightRange: 'all',
+                customAttributes: {
+                  // 通配符，代表所有的标签都生效；数组里同时允许 字符串 和正则
+                  '*': [/(?=(c|C)lassName)/],
+                },
                 mangle: process.env.NODE_ENV === 'production',
               },
             ],
