@@ -20,7 +20,7 @@ const ScrollViewList = () => {
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage } = useMockList();
   const list = data?.pages.reduce((t, c) => {
     return [...t, ...c.list];
-  }, []);
+  }, [] as MockList[number][]);
 
   const tHeight = getNavBarHeight();
   const bHeight = useNodeRect('taroContainerFooter');

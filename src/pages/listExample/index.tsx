@@ -14,7 +14,7 @@ const ListExample = () => {
   const { data, isFetchingNextPage, isLoading, hasNextPage, fetchNextPage } = useMockList();
   const list = data?.pages.reduce((t, c) => {
     return [...t, ...c.list];
-  }, []);
+  }, [] as MockList[number][]);
   useReachBottom(() => {
     fetchNextPage();
   });
