@@ -13,7 +13,7 @@ import {
   toTailwindPluginExamplePage,
   toThemeExamplePage,
 } from '@/src/utils/toRouterPage';
-import { useAuthStore } from '@/src/store/auth';
+import { useAuthStore } from '@/src/stores/auth';
 
 definePageConfig({
   navigationBarTitleText: '首页',

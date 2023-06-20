@@ -2,7 +2,7 @@ import { Children, isValidElement, ReactElement, ReactNode, useMemo } from 'reac
 import { View } from '@tarojs/components';
 
 import useNodeRect from '@/src/hooks/useNodeRect';
-import useThemeStore from '@/src/store/theme';
+import useThemeStore from '@/src/stores/theme';
 
 import { Footer, Navbar } from './components';
 import { getNavBarHeight } from './helper';

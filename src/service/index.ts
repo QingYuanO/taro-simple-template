@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro';
-import { authStore } from '@/src//store/auth';
+import { authStore } from '@/src/stores/auth';
 
 import interceptors from './interceptors';
 

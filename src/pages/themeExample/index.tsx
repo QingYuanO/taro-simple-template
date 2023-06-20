@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components';
-import useThemeStore from '@/src/store/theme';
+import useThemeStore from '@/src/stores/theme';
 import Container from '@/src/components/Container';
 import Button from '@/src/components/ui/Button';
 

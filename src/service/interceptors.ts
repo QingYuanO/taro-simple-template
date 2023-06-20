@@ -1,5 +1,5 @@
 import Taro, { Chain } from '@tarojs/taro';
-import { authStore, IAuthStore } from '@/src/store/auth';
+import { authStore, IAuthStore } from '@/src/stores/auth';
 import { StorageValue } from 'zustand/middleware';
 
 import SingletonApi from '@/src/utils/SingletonApi';
