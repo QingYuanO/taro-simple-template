@@ -14,5 +14,17 @@
   "cssvar.extensions": ["css", "postcss", "jsx", "tsx"],
   "editor.quickSuggestions": {
     "strings": "on"
-  }
+  },
+  "cSpell.ignoreWords": [
+    "tmui",
+    "nuxt",
+    "antd",
+    "tailwindcss",
+    "zustand",
+    "immer",
+    "weapp",
+    "tarojs",
+    "fnames"
+  ],
+
 }
