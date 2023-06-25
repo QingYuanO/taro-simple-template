@@ -1,4 +1,5 @@
 import { View } from '@tarojs/components';
+import { useAuthStore } from '@/src/stores/auth';
 import Container from '@/src/components/Container';
 import Count from '@/src/components/Count';
 import TaroLogo from '@/src/components/TaroLogo';
@@ -13,7 +14,6 @@ import {
   toTailwindPluginExamplePage,
   toThemeExamplePage,
 } from '@/src/utils/toRouterPage';
-import { useAuthStore } from '@/src/stores/auth';
 
 definePageConfig({
   navigationBarTitleText: '首页',
@@ -22,6 +22,52 @@ definePageConfig({
 const Index = () => {
   const setAuthStore = useAuthStore.use.setAuthStore();
   const token = useAuthStore.use.token();
+
+  const options = [
+    {
+      label: 'toPackageAHomePage',
+      onClick: () => {
+        toPackageAHomePage();
+      },
+    },
+    {
+      label: 'toContainerPage',
+      onClick: () => {
+        toContainerPage();
+      },
+    },
+    {
+      label: 'toTailwindPluginExamplePage',
+      onClick: () => {
+        toTailwindPluginExamplePage();
+      },
+    },
+    {
+      label: 'toListExamplePage',
+      onClick: () => {
+        toListExamplePage();
+      },
+    },
+    {
+      label: 'toScrollViewListPage',
+      onClick: () => {
+        toScrollViewListPage({ isNeedLoginAuth: true });
+      },
+    },
+    {
+      label: 'toThemeExamplePage',
+      onClick: () => {
+        toThemeExamplePage();
+      },
+    },
+    {
+      label: 'setToken',
+      onClick: () => {
+        setAuthStore('token', '1');
+      },
+    },
+  ];
+
   console.log('token', token);
   console.log('pt', pt(100));
 
@@ -30,62 +76,11 @@ const Index = () => {
       <TaroLogo />
       <Count />
       <View className="mt-5 flex flex-col gap-y-4">
-        <Button
-          round
-          onClick={() => {
-            toPackageAHomePage();
-          }}
-        >
-          toPackageAHomePage
-        </Button>
-        <Button
-          round
-          onClick={() => {
-            toContainerPage();
-          }}
-        >
-          toContainerPage
-        </Button>
-        <Button
-          round
-          onClick={() => {
-            toTailwindPluginExamplePage();
-          }}
-        >
-          toTailwindPluginExamplePage
-        </Button>
-        <Button
-          round
-          onClick={() => {
-            toListExamplePage();
-          }}
-        >
-          toListExamplePage
-        </Button>
-        <Button
-          round
-          onClick={() => {
-            toScrollViewListPage({ isNeedLoginAuth: true });
-          }}
-        >
-          toScrollViewListPage
-        </Button>
-        <Button
-          round
-          onClick={() => {
-            toThemeExamplePage();
-          }}
-        >
-          toThemeExamplePage
-        </Button>
-        <Button
-          round
-          onClick={() => {
-            setAuthStore('token', '1');
-          }}
-        >
-          setToken
-        </Button>
+        {options.map(item => (
+          <Button round key={item.label} onClick={item.onClick}>
+            {item.label}
+          </Button>
+        ))}
       </View>
     </Container>
   );
