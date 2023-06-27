@@ -1,8 +1,10 @@
 /* eslint-disable import/no-commonjs */
 const path = require('path');
 const { UnifiedWebpackPluginV5 } = require('weapp-tailwindcss/webpack');
+// @ts-check
+const { defineConfig } = require('taro-define-config');
 
-const config = {
+const config = defineConfig({
   projectName: 'taro-simple-template',
   date: '2021-11-19',
   designWidth: 375,
@@ -122,11 +124,11 @@ const config = {
       },
     },
   },
-};
+});
 
-export default function (merge) {
+module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'));
   }
   return merge({}, config, require('./prod'));
-}
+};
