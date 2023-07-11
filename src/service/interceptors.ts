@@ -107,7 +107,7 @@ const loadingInterceptor = async (chain: Chain) => {
       Taro.hideLoading();
     }
     return res;
-  } catch (error) {
+  } catch (error:any) {
     // 这个catch需要放到前面才能捕获request本身的错误，因为showError返回的也是Promise.reject
     console.error(error);
     return showError(error.errMsg, showErrorToast);

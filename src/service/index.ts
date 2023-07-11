@@ -48,6 +48,7 @@ export interface ExtraConfig {
 }
 
 export type CustomData = { [key: string]: any };
+//后台返回的数据格式
 export interface CustomResult<D = unknown> {
   data: D;
   code: number;
@@ -93,13 +94,13 @@ class ApiService {
       ...otherConfig,
     };
 
-    return Taro.request<CustomResult<D>, CustomData>(option).then(res => {
+    return Taro.request<D, CustomData>(option).then(res => {
       return res.data;
     });
   }
   private static getMethod = (method: keyof Taro.request.Method) => {
-    function apiMethod<D>(url, option?: CustomOption): Promise<D> {
-      return this.baseOptions({ url, ...option }, method);
+    const apiMethod = <D>(url, option?: CustomOption): Promise<D> => {
+      return this.baseOptions<D>({ url, ...option }, method);
     }
     return apiMethod;
   };
