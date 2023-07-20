@@ -61,7 +61,7 @@ const config = defineConfig({
                 cssPreflightRange: 'all',
                 customAttributes: {
                   // 通配符，代表所有的标签都生效；数组里同时允许 字符串 和正则
-                  '*': [/(?=(c|C)lassName)/],
+                  '*': [/[A-Za-z]?[A-Za-z-]*[Cc]lass/],
                 },
                 mangle: process.env.NODE_ENV === 'production',
               },
