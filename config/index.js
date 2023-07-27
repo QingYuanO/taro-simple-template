@@ -8,11 +8,11 @@ const config = defineConfig({
   projectName: 'taro-simple-template',
   date: '2021-11-19',
   designWidth: 375,
-  //项目中px转换为rpx的比例,先将px转换为rpx,然后将rpx转换成个平台的单位
+  //项目中书写16px
   deviceRatio: {
-    375: 2 / 1, //小程序：1px=2rpx，h5：1px=(1px/baseFontSize)rem
+    375: 2 / 1, //转换:weapp-32rpx,h5-1rem
     640: 2.34 / 2,
-    750: 1, //小程序：1px=1rpx，h5：2px=(1px/baseFontSize)rem
+    750: 1, //转换:weapp-16rpx,h5-0.5rem
     828: 1.81 / 2,
   },
   sourceRoot: 'src',

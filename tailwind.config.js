@@ -118,7 +118,7 @@ module.exports = {
     }),
   ],
   presets: [
-    //将rem转换为rpx
+    //将tailwind类的rem单位转化为px，之后taro会将px根据屏幕尺寸转换为对应平台的单位：小程序-rpx，h5-rem
     require('tailwindcss-rem2px-preset').createPreset({
       fontSize: 16,
       unit: 'px',
