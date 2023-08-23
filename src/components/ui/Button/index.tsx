@@ -1,6 +1,6 @@
+import { cn } from '@/src/utils';
 import { ButtonProps as BProps, Button as TaroButton, View } from '@tarojs/components';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { twMerge } from 'tailwind-merge';
 
 export type ButtonVariantProps = VariantProps<typeof button>;
 
@@ -42,7 +42,7 @@ function Button(props: ButtonProps) {
   const { type, size, round, block, className, children, disabled, ...other } = props;
   const booleanDisabled = !!disabled;
   return (
-    <View className={twMerge(button({ type, size, round, block, disabled: booleanDisabled, className }))}>
+    <View className={cn(button({ type, size, round, block, disabled: booleanDisabled, className }))}>
       <TaroButton {...other} disabled={booleanDisabled} className=" absolute inset-0 border-none p-0 opacity-0"></TaroButton>
       {children}
     </View>

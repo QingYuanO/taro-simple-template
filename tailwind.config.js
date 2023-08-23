@@ -66,7 +66,7 @@ module.exports = {
             }[value];
             return {
               'padding-bottom': `constant(safe-area-inset-${name})` /*兼容 IOS<11.2*/,
-              'padding-bottom': `env(safe-area-inset-${name})` /*兼容 IOS>11.2*/,
+              'padding-bottom ': `env(safe-area-inset-${name})` /*兼容 IOS>11.2*/,
             };
           },
         },
