@@ -3,7 +3,8 @@
 module.exports = {
   plugins: ["@ianvs/prettier-plugin-sort-imports","prettier-plugin-tailwindcss"],
   tailwindConfig: './tailwind.config.js',
-  tailwindFunctions: ['cn'],
+  tailwindFunctions: ['cn','cva','clsx'],
+  tailwindAttributes: ['hoverClass','placeholderClass'],
   arrowParens: 'avoid', // 箭头函数只有一个参数的时候可以忽略括号
   bracketSpacing: true, // 括号内部不要出现空格
   endOfLine: 'lf', // 行结束符使用 Unix 格式
