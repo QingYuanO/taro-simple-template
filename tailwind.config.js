@@ -3,6 +3,7 @@
 const { createPlugin } = require('weapp-tailwindcss-children');
 const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')();
 const tailwindcssPlugin = require('tailwindcss/plugin');
+const { iconsPlugin, getIconCollections } = require("@egoist/tailwindcss-icons")
 
 module.exports = {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
@@ -33,6 +34,10 @@ module.exports = {
     createPlugin({ fallbackElements: process.env.TARO_ENV === 'h5' ? ['*'] : ['view'] }),
     tailwindcssTooltipArrowAfter,
     require('tailwindcss-animate'),
+    iconsPlugin({
+      // Select the icon collections you want to use
+      collections: getIconCollections(["lucide"]),
+    }),
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
       const themes = ['h5', 'weapp'];
       themes.forEach(t => {
