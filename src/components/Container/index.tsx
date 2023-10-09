@@ -47,7 +47,7 @@ function Container(props: ContainerProps) {
   const safeBottomClass = hasSafeBottom ? 'safe-b' : '';
   return (
     <View
-      className={`cover-nutui-theme-base ${process.env.TARO_ENV} ${themeMode} ${
+      className={`cover-nutui-theme-base ${process.env.TARO_ENV} bg-background ${themeMode} ${
         !isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''
       }`}
       {...otherViewProps}

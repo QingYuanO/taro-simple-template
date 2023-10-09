@@ -16,9 +16,4 @@ export const useSingleImg = createQuery<{ url: string }, void>({
       extraConfig: { showLoading: false },
       baseUrl: '',
     }),
-  useDefaultOptions() {
-    return {
-      onSuccess(data) {},
-    };
-  },
 });

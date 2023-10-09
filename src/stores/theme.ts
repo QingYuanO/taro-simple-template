@@ -3,7 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import TaroStorage from '../utils/TaroStorage';
 
-type ThemeMode = 'dark' | 'base';
+type ThemeMode = 'dark' | 'light';
 
 interface ThemeStore {
   themeMode: ThemeMode;
@@ -13,7 +13,7 @@ interface ThemeStore {
 const useThemeStore = create<ThemeStore>()(
   persist(
     set => ({
-      themeMode: 'base',
+      themeMode: 'light',
       themeChange: by => set(() => ({ themeMode: by })),
     }),
     {

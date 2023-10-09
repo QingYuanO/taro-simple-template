@@ -18,7 +18,7 @@ const ThemeExample = () => {
         <Button
           round
           onClick={() => {
-            themeChange(themeMode === 'base' ? 'dark' : 'base');
+            themeChange(themeMode === 'light' ? 'dark' : 'light');
           }}
         >
           {themeMode === 'dark' ? '基本模式' : '暗黑模式'}

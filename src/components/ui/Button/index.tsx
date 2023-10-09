@@ -1,15 +1,16 @@
-import { cn } from '@/src/utils';
 import { ButtonProps as BProps, Button as TaroButton, View } from '@tarojs/components';
 import { cva, type VariantProps } from 'class-variance-authority';
 
+import { cn } from '@/src/utils';
+
 export type ButtonVariantProps = VariantProps<typeof button>;
 
-const button = cva('relative flex justify-center items-center', {
+const button = cva('relative flex items-center justify-center', {
   variants: {
     type: {
-      primary: 'text-white bg-primary',
-      plain: 'text-word-primary bg-white',
-      text: 'm-0 p-0 inline-block bg-transparent text-word-primary',
+      primary: 'bg-primary text-primary-foreground',
+      plain: 'border border-solid border-border bg-secondary text-secondary-foreground',
+      text: 'm-0 inline-block bg-transparent p-0 text-primary-foreground ',
     },
     size: {
       small: ['text-xs', 'py-1', 'px-2'],
