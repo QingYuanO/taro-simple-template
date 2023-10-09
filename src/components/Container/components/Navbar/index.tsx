@@ -34,7 +34,7 @@ export default memo(function Navbar(props: NavbarProps) {
     <Fragment>
       <View
         id="taroContainerNavbar"
-        className="fixed inset-x-0 top-0 flex items-center z-[800] box-border bg-white dark:bg-black shadow shadow-gray-200/50"
+        className="fixed inset-x-0 top-0 flex items-center z-[800] box-border bg-background shadow shadow-gray-200/50"
         style={{
           minHeight: navBarHeight,
           paddingTop: navbarTop,
@@ -42,7 +42,7 @@ export default memo(function Navbar(props: NavbarProps) {
         }}
       >
         {children ?? (
-          <View className="flex items-center relative h-full w-full dark:bg-black">
+          <View className="flex items-center relative h-full w-full bg-background">
             <View className="absolute top-1/2 flex items-center left-2" style={{ transform: 'translateY(-50%)' }}>
               {leftIcon ?? <DefaultLeftIcon size={pt(defaultLeftIconSize)} color={defaultLeftColor} />}
             </View>
