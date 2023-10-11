@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@babel/runtime':
     specifier: ^7.7.7
@@ -81,8 +77,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   react-query-kit:
-    specifier: ^1.4.8
-    version: 1.5.2(@tanstack/react-query@4.35.7)
+    specifier: ^2.0.3
+    version: 2.0.3(@tanstack/react-query@4.35.7)
   tailwind-merge:
     specifier: ^1.14.0
     version: 1.14.0
@@ -2299,6 +2295,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2307,6 +2304,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -2315,6 +2313,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2323,6 +2322,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -2626,6 +2626,7 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -2635,6 +2636,7 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -2644,6 +2646,7 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -2653,6 +2656,7 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -9092,6 +9096,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -9101,6 +9106,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -9110,6 +9116,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -9119,6 +9126,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -11673,13 +11681,10 @@ packages:
       - supports-color
       - utf-8-validate
 
-  /react-query-kit@1.5.2(@tanstack/react-query@4.35.7):
-    resolution: {integrity: sha512-bqaP+FGQ/ku1CitemEodwFcJuaM98NX3bL9kQ+/0CY7hcDIRm2bM15yslsQMiHetI4qS8B3L/euiwxq5BWu0xA==}
+  /react-query-kit@2.0.3(@tanstack/react-query@4.35.7):
+    resolution: {integrity: sha512-XEuTbKDZzXfxMUbVcq/c+FKVczVY1AdURSzIy55NbdQE3/QVXEipcwnwOa6hxyH/ehX2gHTnS346EMzr9uOq5Q==}
     peerDependencies:
-      '@tanstack/react-query': '*'
-    peerDependenciesMeta:
-      '@tanstack/react-query':
-        optional: true
+      '@tanstack/react-query': ^4 || ^5
     dependencies:
       '@tanstack/react-query': 4.35.7(react-dom@18.2.0)(react-native@0.72.5)(react@18.2.0)
     dev: false
@@ -14384,3 +14389,7 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
