@@ -52,6 +52,7 @@ module.exports = {
     createPlugin({ fallbackElements: process.env.TARO_ENV === 'h5' ? ['*'] : ['view'] }),
     tailwindcssTooltipArrowAfter,
     require('tailwindcss-animate'),
+    require('tailwind-scrollbar'),
     iconsPlugin({
       // Select the icon collections you want to use
       collections: getIconCollections(["lucide"]),
