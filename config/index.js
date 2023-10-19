@@ -20,6 +20,7 @@ const config = defineConfig({
   plugins: [
     //本地插件
     path.resolve(__dirname, '..', 'src/plugin/index'),
+    '@tarojs/plugin-html'
   ],
   defineConstants: {},
   alias: {
@@ -64,6 +65,7 @@ const config = defineConfig({
                   '*': [/[A-Za-z]?[A-Za-z-]*[Cc]lass/],
                 },
                 mangle: process.env.NODE_ENV === 'production',
+                injectAdditionalCssVarScope: true,
               },
             ],
           },
@@ -71,9 +73,9 @@ const config = defineConfig({
         module: {
           rule: [
             {
-              test: /\.mjs$/,
-              loader: 'babel-loader',
-              include: [path.resolve(__dirname, '..', 'node_modules/tailwind-merge/dist/lib')],
+              // test: /\.mjs$/,
+              // loader: 'babel-loader',
+              // include: [path.resolve(__dirname, '..', 'node_modules/tailwind-merge/dist/lib')],
             },
           ],
         },
