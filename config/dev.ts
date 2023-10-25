@@ -1,11 +1,12 @@
-/* eslint-disable import/no-commonjs */
-const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV];
+import type { UserConfigExport } from '@tarojs/cli';
 
-module.exports = {
-  env: {
-    NODE_ENV: '"development"',
+const mockPort = { h5: 9527, weapp: 9528 }[process.env.TARO_ENV ?? 'weapp'];
+
+export default {
+  logger: {
+    quiet: false,
+    stats: true,
   },
-  defineConstants: {},
   plugins: [
     [
       '@tarojs/plugin-mock',
@@ -37,4 +38,4 @@ module.exports = {
     },
   },
   h5: {},
-};
+} satisfies UserConfigExport;
