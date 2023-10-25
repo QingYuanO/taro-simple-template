@@ -13,19 +13,18 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "strict": true,
-    "paths": {
-      "@/mock": ["./mock/api"],
-      "@/src/*": ["./src/*"],
-      "@/ui/*": ["./src/components/ui/*"],
-    },
-    "rootDir": ".",
     "baseUrl": ".",
+    "rootDir": ".",
     "jsx": "react-jsx",
     "allowJs": true,
     "resolveJsonModule": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "@/mock": ["./mock/api"],
+      "@/src/*": ["./src/*"],
+      "@/ui/*": ["./src/components/ui/*"]
+    }
   },
-  "include": ["./src", "./types"],
+  "include": ["./src", "./types", "./config"],
   "compileOnSave": false
 }
