@@ -4,11 +4,6 @@
 @import './styles/theme.less';
 
 /*  #ifdef  weapp */
-
-page {
-  // .theme-base-var();
-  // background-color: var(--page-bg-color);
-}
 button {
   margin-left: unset;
   margin-right: unset;
@@ -22,12 +17,9 @@ button::after {
 /*  #endif  */
 
 /*  #ifdef  h5 */
-
-:root {
-  .theme-base-var();
-}
 .taro_router .taro_page {
-  // background-color: var(--page-bg-color) !important;
+  // background-color: var(--background) !important;
+  // color: var(--foreground);
 }
 .weui-tabbar {
   background-color: #fff;
@@ -35,7 +27,7 @@ button::after {
 taro-button-core::after {
   border: none !important;
 }
-taro-button-core+taro-button-core{
-  margin-top:0 !important;
+taro-button-core + taro-button-core {
+  margin-top: 0 !important;
 }
 /*  #endif  */

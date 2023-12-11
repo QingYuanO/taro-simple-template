@@ -1,7 +1,3 @@
-.theme-base-var {
-  --page-bg-color: #efeff4;
-}
-
 .light {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -20,6 +16,24 @@
   --ring: 221.2 83.2% 53.3%;
   --radius: 0.3rem;
 }
+
+/*  #ifdef  weapp */
+
+page {
+  .light();
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/*  #endif  */
+
+/*  #ifdef  h5 */
+
+:root {
+  .light();
+}
+
+/*  #endif  */
 
 .dark {
   --background: 222.2 84% 4.9%;

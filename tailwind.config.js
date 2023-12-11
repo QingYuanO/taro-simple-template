@@ -3,7 +3,7 @@
 const { createPlugin } = require('weapp-tailwindcss-children');
 const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')();
 const tailwindcssPlugin = require('tailwindcss/plugin');
-const { iconsPlugin, getIconCollections } = require("@egoist/tailwindcss-icons")
+const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons');
 
 module.exports = {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
@@ -46,6 +46,11 @@ module.exports = {
           foreground: 'hsl(var(--accent-foreground))',
         },
       },
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: 'calc(var(--radius) - 4px)',
+      },
     },
   },
   plugins: [
@@ -55,7 +60,7 @@ module.exports = {
     require('tailwind-scrollbar'),
     iconsPlugin({
       // Select the icon collections you want to use
-      collections: getIconCollections(["lucide"]),
+      collections: getIconCollections(['lucide']),
     }),
     tailwindcssPlugin(function ({ addUtilities, addVariant, matchUtilities, theme }) {
       const themes = ['h5', 'weapp'];
