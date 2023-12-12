@@ -5,6 +5,8 @@ const tailwindcssTooltipArrowAfter = require('tailwindcss-tooltip-arrow-after')(
 const tailwindcssPlugin = require('tailwindcss/plugin');
 const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons');
 
+const isH5 = process.env.TARO_ENV === 'h5';
+
 module.exports = {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   darkMode: 'class',
@@ -54,7 +56,7 @@ module.exports = {
     },
   },
   plugins: [
-    createPlugin({ fallbackElements: process.env.TARO_ENV === 'h5' ? ['*'] : ['view'] }),
+    createPlugin({ fallbackElements: isH5 ? ['*'] : ['view'] }),
     tailwindcssTooltipArrowAfter,
     require('tailwindcss-animate'),
     require('tailwind-scrollbar'),
@@ -155,7 +157,7 @@ module.exports = {
   ],
   // v3 版本的 tailwindcss 有些不同
   corePlugins: {
-    preflight: process.env.TARO_ENV === 'h5',
+    preflight: isH5,
     container: false,
     darkMode: false,
   },

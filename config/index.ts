@@ -5,6 +5,10 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import devConfig from './dev';
 import prodConfig from './prod';
 
+const isH5 = process.env.TARO_ENV === 'h5';
+const isApp = process.env.TARO_ENV === 'rn';
+const isWeappTailwindcssDisabled = isH5 || isApp;
+
 const path = require('path');
 const { UnifiedWebpackPluginV5 } = require('weapp-tailwindcss/webpack');
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
@@ -66,6 +70,7 @@ export default defineConfig(async (merge, {}) => {
                   },
                   mangle: process.env.NODE_ENV === 'production',
                   injectAdditionalCssVarScope: true,
+                  disabled: isWeappTailwindcssDisabled,
                 },
               ],
             },
