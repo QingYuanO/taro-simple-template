@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import { Text, View } from '@tarojs/components';
-import styled from '@slicknode/stylemapper';
 import { createSelectorFunctions } from 'auto-zustand-selectors-hook';
 import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
