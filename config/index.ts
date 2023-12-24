@@ -29,7 +29,8 @@ export default defineConfig(async (merge, {}) => {
     plugins: [
       //本地插件
       path.resolve(__dirname, '..', 'src/plugin/index'),
-      '@tarojs/plugin-html',
+      ['@tarojs/plugin-html', {}],
+      ['@tarojs/plugin-http', {}],
     ],
     defineConstants: {},
     copy: {
