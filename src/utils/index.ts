@@ -1,4 +1,4 @@
-// import { createTwc } from 'react-twc';
+import { createTwc } from 'react-twc';
 import Taro, { EventChannel } from '@tarojs/taro';
 import { ClassValue } from 'class-variance-authority/dist/types';
 import { clsx } from 'clsx';
@@ -19,4 +19,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// export const twx = createTwc({ compose: cn });
+export const twx = createTwc({
+  compose: twMerge,
+});
