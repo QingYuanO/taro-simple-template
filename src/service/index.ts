@@ -10,16 +10,7 @@ const MOCK_PORT = { h5: '9527', weapp: '9528' }[process.env.TARO_ENV];
 const MOCK_BASE_URL = `${LOCAL_IP}:${MOCK_PORT}`;
 
 const getBaseUrl = () => {
-  if (process.env.TARO_ENV === 'h5') {
-    switch (process.env.NODE_ENV) {
-      case 'development':
-        return MOCK_BASE_URL;
-      case 'production':
-        return '';
-      default:
-        return '';
-    }
-  } else {
+  if (process.env.TARO_ENV === 'weapp') {
     const {
       miniProgram: { envVersion },
     } = Taro.getAccountInfoSync();
@@ -29,6 +20,15 @@ const getBaseUrl = () => {
       case 'trial':
         return '';
       case 'release':
+        return '';
+      default:
+        return '';
+    }
+  } else {
+    switch (process.env.NODE_ENV) {
+      case 'development':
+        return MOCK_BASE_URL;
+      case 'production':
         return '';
       default:
         return '';
@@ -43,7 +43,7 @@ interceptors.forEach(i => Taro.addInterceptor(i));
 export interface ExtraConfig {
   showLoading?: boolean;
   showStatusBarLoading?: boolean;
-  hasToken?: boolean;
+  isHasToken?: boolean;
   showErrorToast?: boolean;
 }
 
@@ -69,7 +69,7 @@ class ApiService {
   ) {
     extraConfig = {
       showLoading: true,
-      hasToken: true,
+      isHasToken: true,
       showErrorToast: true,
       showStatusBarLoading: false,
       ...(extraConfig ?? {}),
@@ -88,7 +88,7 @@ class ApiService {
       header: {
         'content-type': contentType,
         //TODO添加自己的token
-        Authorization: extraConfig.hasToken ? authStore.getState().token : '',
+        Authorization: extraConfig.isHasToken ? authStore.getState().token : '',
         ...header,
       },
       ...otherConfig,
@@ -101,7 +101,7 @@ class ApiService {
   private static getMethod = (method: keyof Taro.request.Method) => {
     const apiMethod = <D>(url, option?: CustomOption): Promise<D> => {
       return this.baseOptions<D>({ url, ...option }, method);
-    }
+    };
     return apiMethod;
   };
   static get = this.getMethod('GET');

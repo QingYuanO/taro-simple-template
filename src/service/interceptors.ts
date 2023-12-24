@@ -74,10 +74,10 @@ const customInterceptor = function (chain: Chain) {
 
 const refreshTokenSingletonApi = new SingletonApi<{ token: IAuthStore['token'] }>();
 const refreshTokenInterceptor = async (chain: Chain) => {
-  const { hasToken } = chain.requestParams.data.extraConfig as ExtraConfig;
+  const { isHasToken } = chain.requestParams.data.extraConfig as ExtraConfig;
   //如果需要token但是没有token，则直接返回，并尝试请求新token;
   const auth = authStore.persist.getOptions().storage?.getItem('auth') as StorageValue<IAuthStore>;
-  if (hasToken && !auth?.state?.token) {
+  if (isHasToken && !auth?.state?.token) {
     const data = await refreshTokenSingletonApi.call(refreshToken);
     authStore.setState(draft => {
       draft.token = data?.token ?? '';
