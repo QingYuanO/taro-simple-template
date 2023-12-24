@@ -4,6 +4,10 @@ import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@
 
 import './app.less';
 
+if (process.env.TARO_ENV === 'weapp') {
+  import('abortcontroller-polyfill/dist/abortcontroller-polyfill-only');
+}
+
 function App({ children }: PropsWithChildren<{}>) {
   const [queryClient] = useState(
     () =>
