@@ -14,14 +14,17 @@ type ListData = {
 export const getMockList = (page: number) => {
   return ApiService.get<CustomResult<ListData>>(`/api/list`, {
     data: { page, pageSize: 10 },
-    extraConfig: { hasToken: true,showLoading:false },
+    extraConfig: { hasToken: true, showLoading: false },
   }).then(res => {
     return res?.data;
   });
 };
 
-export const useMockList = createInfiniteQuery<ListData, void>({
-  primaryKey: 'getMockList',
-  queryFn: ({ queryKey: [_primaryKey], pageParam = 1 }) => getMockList(pageParam),
+export const useMockList = createInfiniteQuery({
+  queryKey: ['getMockList'],
+  fetcher: (_, { pageParam }) => {
+    return getMockList(pageParam);
+  },
   getNextPageParam: lastPage => (lastPage.isLastPage ? undefined : lastPage.page + 1),
+  initialPageParam: 1,
 });
