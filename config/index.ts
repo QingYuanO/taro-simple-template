@@ -16,7 +16,7 @@ export default defineConfig(async (merge, {}) => {
   const baseConfig: UserConfigExport = {
     projectName: 'taro-simple-template',
     date: '2021-11-19',
-    designWidth: 375,
+    designWidth: 750,
     //项目中书写16px
     deviceRatio: {
       375: 2 / 1, //转换:weapp-32rpx,h5-1rem
