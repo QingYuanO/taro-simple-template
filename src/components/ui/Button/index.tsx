@@ -8,7 +8,7 @@ export type ButtonVariantProps = VariantProps<typeof button>;
 const button = cva('relative flex items-center justify-center', {
   variants: {
     type: {
-      primary: 'bg-primary text-primary-foreground',
+      primary: 'rounded-md bg-primary text-primary-foreground',
       plain: 'border border-solid border-border bg-background text-secondary-foreground',
       text: 'm-0 inline-block bg-transparent p-0 text-primary-foreground ',
     },
