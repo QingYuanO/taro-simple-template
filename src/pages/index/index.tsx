@@ -8,6 +8,7 @@ import Button from '@/ui/Button';
 import { pt } from '@/src/utils';
 import {
   toContainerPage,
+  toFormExamplePage,
   toListExamplePage,
   toPackageAHomePage,
   toScrollViewListPage,
@@ -52,6 +53,12 @@ const Index = () => {
       label: 'toScrollViewListPage',
       onClick: () => {
         toScrollViewListPage({ isNeedLoginAuth: true });
+      },
+    },
+    {
+      label: 'toFormExamplePage',
+      onClick: () => {
+        toFormExamplePage();
       },
     },
     {

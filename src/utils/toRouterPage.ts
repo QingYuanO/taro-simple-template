@@ -1,7 +1,5 @@
 import Taro, { EventChannel } from "@tarojs/taro";
 import { wrapFunWithAuth } from "./auth"
-import IndexParams from '../pages/index/route.config'
-import PackageAHomeParams from '../packageA/pages/home/route.config'
 
 export enum NavigateType {
   /** 保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。使用 Router.back 可以返回到原页面。小程序中页面栈最多十层。 */
@@ -72,7 +70,7 @@ const generateParams = (params: { [key: string]: any }) => {
   );
 };
   
-export const toIndexPage = (option?: ToRouterType<IndexParams>) => {
+export const toIndexPage = (option?: ToRouterType<any>) => {
   if(option?.isNeedLoginAuth){
     wrapFunWithAuth(() => navigateType("/pages/index/index", option))
   }else{
@@ -120,7 +118,15 @@ export const toThemeExamplePage = (option?: ToRouterType<any>) => {
   }
 };
 
-export const toPackageAHomePage = (option?: ToRouterType<PackageAHomeParams>) => {
+export const toFormExamplePage = (option?: ToRouterType<any>) => {
+  if(option?.isNeedLoginAuth){
+    wrapFunWithAuth(() => navigateType("/pages/formExample/index", option))
+  }else{
+    navigateType("/pages/formExample/index", option);
+  }
+};
+
+export const toPackageAHomePage = (option?: ToRouterType<any>) => {
   if(option?.isNeedLoginAuth){
     wrapFunWithAuth(() => navigateType("/packageA/pages/home/index", option))
   }else{

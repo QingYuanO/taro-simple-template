@@ -8,6 +8,7 @@ export default defineAppConfig({
     'pages/listExample/index',
     'pages/scrollViewList/index',
     'pages/themeExample/index',
+    'pages/formExample/index',
   ],
   window: {
     backgroundTextStyle: 'light',
