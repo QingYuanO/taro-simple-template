@@ -1,9 +1,9 @@
 import { Fragment, memo, useMemo } from 'react';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+import useThemeStore from '@/src/stores/theme';
 
 import { pt } from '@/src/utils';
-import useThemeStore from '@/src/stores/theme';
 
 import { getNavBarHeight } from '../../helper';
 import { NavbarProps } from '../../types';
@@ -34,7 +34,7 @@ export default memo(function Navbar(props: NavbarProps) {
     <Fragment>
       <View
         id="taroContainerNavbar"
-        className="fixed inset-x-0 top-0 flex items-center z-[800] box-border bg-background shadow shadow-gray-200/50"
+        className="fixed inset-x-0 top-0 z-[800] box-border flex items-center bg-background shadow shadow-gray-200/50 dark:shadow-black/20"
         style={{
           minHeight: navBarHeight,
           paddingTop: navbarTop,
@@ -42,12 +42,12 @@ export default memo(function Navbar(props: NavbarProps) {
         }}
       >
         {children ?? (
-          <View className="flex items-center relative h-full w-full bg-background">
-            <View className="absolute top-1/2 flex items-center left-2" style={{ transform: 'translateY(-50%)' }}>
+          <View className="relative flex h-full w-full items-center bg-background">
+            <View className="absolute left-2 top-1/2 flex items-center" style={{ transform: 'translateY(-50%)' }}>
               {leftIcon ?? <DefaultLeftIcon size={pt(defaultLeftIconSize)} color={defaultLeftColor} />}
             </View>
             {title && (
-              <View className="w-full flex-center text-base">
+              <View className="w-full text-base flex-center">
                 <Text className={` font-medium text-black dark:text-white  ${titleClassName ?? ''}`}>{title}</Text>
               </View>
             )}

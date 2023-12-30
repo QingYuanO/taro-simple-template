@@ -34,44 +34,54 @@ function findContainerChildren(node?: ReactNode): ContainerChildren {
 }
 
 function Container(props: ContainerProps) {
-  const { children, hasNavBarTop = true, hasFooterBottom = true, hasSafeBottom, className, ...otherViewProps } = props;
+  const { children, safe, className, ...otherViewProps } = props;
   const { navbar, footer, other } = useMemo(() => {
     return findContainerChildren(children);
   }, [children]);
-  const navBarHeight = getNavBarHeight();
-  const hasContentMt = hasNavBarTop && navbar;
-  const hasContentPb = hasFooterBottom && footer;
-  const rect = useNodeRect('taroContainerFooter', [hasContentPb]);
+
   const themeMode = useThemeStore(state => state.themeMode);
-  const isWrapContainer = !!navbar || !!footer;
-  const safeBottomClass = hasSafeBottom ? 'safe-b' : '';
+
+  const navBarHeight = getNavBarHeight();
+
+  const isNavbar = navbar && !navbar.props.hasSeat;
+  const isFooter = footer && !footer.props.hasSeat;
+
+  const isSafeTop = safe?.includes('top') || isNavbar;
+  const isSafeBottom = safe?.includes('bottom') || isFooter;
+
+  const isWrapContainer = isNavbar || isFooter;
+
+  const rect = useNodeRect('taroContainerFooter', [isSafeBottom]);
+
   return (
     <View
       className={`cover-nutui-theme-base ${
         process.env.TARO_ENV
       } flex min-h-[100vh] flex-col overflow-y-auto bg-background text-foreground ${themeMode} ${
-        !isWrapContainer ? `${className || ''} ${safeBottomClass}` : ''
+        !isWrapContainer ? `${className || ''}` : ''
       }`}
       {...otherViewProps}
     >
-      {navbar}
       {isWrapContainer ? (
-        <View
-          id="taroContainerContent"
-          className={`${className}  ${safeBottomClass}`}
-          style={{
-            ...(hasContentMt ? { marginTop: navBarHeight } : {}),
-            ...(hasContentPb ? { paddingBottom: rect?.height ?? 0 } : {}),
-            position: 'relative',
-            boxSizing: 'border-box',
-          }}
-        >
-          {other}
-        </View>
+        <>
+          {navbar}
+          <View
+            id="taroContainerContent"
+            className={`${className}`}
+            style={{
+              ...(isSafeTop ? { marginTop: navBarHeight } : {}),
+              ...(isSafeBottom ? { paddingBottom: rect?.height ?? 0 } : {}),
+              position: 'relative',
+              boxSizing: 'border-box',
+            }}
+          >
+            {other}
+          </View>
+          {footer}
+        </>
       ) : (
         other
       )}
-      {footer}
     </View>
   );
 }

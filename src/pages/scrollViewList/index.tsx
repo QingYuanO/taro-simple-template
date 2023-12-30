@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ScrollView, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { MockList } from '@/mock';
@@ -6,7 +7,6 @@ import { getNavBarHeight } from '@/src/components/Container/helper';
 import InfiniteList from '@/src/components/InfiniteList';
 import Button from '@/src/components/ui/Button';
 
-import { useNodeRect } from '@/src/hooks';
 import { useMockList } from '@/src/service/apis/mock';
 
 definePageConfig({
@@ -24,16 +24,15 @@ const ScrollViewList = () => {
     },
     [] as MockList[number][]
   );
-
+  const [footerHeight, setFooterHeight] = useState(0);
   const tHeight = getNavBarHeight();
-  const bHeight = useNodeRect('taroContainerFooter');
 
   return (
-    <Container hasFooterBottom={false} hasNavBarTop={false}>
+    <Container>
       <Container.Navbar title="ScrollViewList" hasSeat />
       <ScrollView
         className=" overflow-auto"
-        style={{ height: height - tHeight - (bHeight?.height ?? 0) }}
+        style={{ height: height - tHeight - (footerHeight ?? 0) }}
         scrollY
         enhanced
         lowerThreshold={150}
@@ -54,7 +53,10 @@ const ScrollViewList = () => {
           }}
         />
       </ScrollView>
-      <Container.Footer className="bg-background px-4 py-2 flex-center">
+      <Container.Footer
+        className="bg-background px-4 py-2 safe-b flex-center"
+        onFooterRectChange={rect => setFooterHeight(rect?.height ?? 0)}
+      >
         <Button round block>
           确认
         </Button>

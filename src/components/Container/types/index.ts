@@ -1,6 +1,6 @@
+import { ReactElement, ReactNode } from 'react';
 import { ViewProps } from '@tarojs/components';
 import { NodesRef } from '@tarojs/taro';
-import { ReactNode } from 'react';
 
 export interface IconProps {
   color: string;
@@ -8,25 +8,22 @@ export interface IconProps {
 }
 
 export interface ContainerChildren {
-  navbar?: ReactNode;
-  footer?: ReactNode;
+  navbar?: ReactElement;
+  footer?: ReactElement;
   other?: ReactNode[];
 }
 
+export type SafeType = 'top' | 'bottom';
+
 export type ContainerProps = {
   children?: ReactNode;
-  /** 是否自动給content添加NavBar高度的顶部边距，默认true */
-  hasNavBarTop?: boolean;
-  /** 是否自动給content添加Footer高度的底部边距，默认true */
-  hasFooterBottom?: boolean;
-  hasSafeBottom?: boolean;
+  safe?: [SafeType, SafeType] | [SafeType] | null;
 } & ViewProps;
 
 export interface FooterProps {
   children?: ReactNode;
   /** 是否自动生成一个占位组件，一般被用于单独使用时 */
   hasSeat?: boolean;
-  hasSafe?: boolean;
   /** 组件的布局改变时的回调 */
   onFooterRectChange?: (dom: NodesRef.BoundingClientRectCallbackResult) => void;
 }

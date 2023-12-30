@@ -11,7 +11,7 @@ export default function ContainerPage() {
   const { show } = useNodeDisappearInTop('test1');
   const [testFooter, setTestFooter] = useState(false);
   const test = useCallback(rect => {
-    // console.log(rect);
+    console.log(rect);
   }, []);
 
   const testNode = useMemo(() => {
