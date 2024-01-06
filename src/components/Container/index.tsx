@@ -43,13 +43,11 @@ function Container(props: ContainerProps) {
 
   const navBarHeight = getNavBarHeight();
 
-  const isNavbar = navbar && !navbar.props.hasSeat;
-  const isFooter = footer && !footer.props.hasSeat;
 
-  const isSafeTop = safe?.includes('top') || isNavbar;
-  const isSafeBottom = safe?.includes('bottom') || isFooter;
+  const isSafeTop = safe?.includes('top') || (navbar && !navbar.props.hasSeat);
+  const isSafeBottom = safe?.includes('bottom') || (footer && !footer.props.hasSeat);
 
-  const isWrapContainer = isNavbar || isFooter;
+  const isWrapContainer = navbar || footer;
 
   const rect = useNodeRect('taroContainerFooter', [isSafeBottom]);
 
@@ -57,7 +55,7 @@ function Container(props: ContainerProps) {
     <View
       className={`cover-nutui-theme-base ${
         process.env.TARO_ENV
-      } flex min-h-[100vh] flex-col overflow-y-auto bg-background text-foreground ${themeMode} ${
+      } min-h-screen overflow-y-auto bg-background text-foreground ${themeMode} ${
         !isWrapContainer ? `${className || ''}` : ''
       }`}
       {...otherViewProps}
