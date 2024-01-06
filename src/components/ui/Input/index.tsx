@@ -5,7 +5,7 @@ import { cn } from '@/src/utils';
 
 export interface InputProps extends TaroInputProps {}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => {
+const Input = React.forwardRef<React.ElementRef<typeof TaroInput>, InputProps>(({ className, type, ...props }, ref) => {
   return (
     <TaroInput
       type={type}
