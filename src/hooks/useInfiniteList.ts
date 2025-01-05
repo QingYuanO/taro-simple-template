@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { useLoad, useReachBottom } from '@tarojs/taro';
 import { useMemoizedFn } from 'ahooks';
-import { useState } from 'react';
 
 type SearchType = Record<string, any>;
 
@@ -25,13 +25,7 @@ type UseInfiniteListParams<D> = {
 };
 
 function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
-  const {
-    fetchListApi,
-    id="id",
-    defaultPageSize = 10,
-    isAutoInitLoad,
-    isAutoFetchNext,
-  } = option ;
+  const { fetchListApi, id = 'id', defaultPageSize = 10, isAutoInitLoad, isAutoFetchNext } = option;
   const [listParams, setListParams] = useState<ListParams>(() => ({
     page: 1,
     pageSize: defaultPageSize,
@@ -56,67 +50,63 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
     }
   });
 
-  const initLoadList = useMemoizedFn(
-    async (externalSearch: SearchType = {}) => {
-      if (isInitLoading) return;
-      try {
-        setIsInitLoading(true);
-        const { search } = listParams;
-        const realSearch = { ...(search ?? {}), ...externalSearch };
-        const data = await fetchListApi({
-          page: 1,
-          pageSize: defaultPageSize,
-          ...realSearch,
-        });
-        setIsInitLoading(false);
-        setListData(data);
-        setListParams((state) => ({
-          page: state.page + 1,
-          pageSize: state.pageSize,
-          search: realSearch,
-        }));
-      } catch (error) {
-        setIsInitLoading(false);
-        console.log(error);
-      }
-    },
-  );
-  const fetchNextPage = useMemoizedFn(
-    async (externalSearch: SearchType = {}) => {
-      if (!listData?.hasNextPage || isFetchNext) return;
-      try {
-        setIsFetchNext(true);
-        const { page, pageSize, search } = listParams;
-        const realSearch = { ...(search ?? {}), ...externalSearch };
-        const data = await fetchListApi({
-          page,
-          pageSize,
-          ...realSearch,
-        });
-        setIsFetchNext(false);
-        setListData((state) => ({
-          ...data,
-          list: state.list.concat(data.list),
-        }));
-        setListParams((state) => ({
-          page: state.page + 1,
-          pageSize: state.pageSize,
-          search: realSearch,
-        }));
-      } catch (error) {
-        setIsFetchNext(false);
-        console.log(error);
-      }
-    },
-  );
+  const initLoadList = useMemoizedFn(async (externalSearch: SearchType = {}) => {
+    if (isInitLoading) return;
+    try {
+      setIsInitLoading(true);
+      const { search } = listParams;
+      const realSearch = { ...(search ?? {}), ...externalSearch };
+      const data = await fetchListApi({
+        page: 1,
+        pageSize: defaultPageSize,
+        ...realSearch,
+      });
+      setIsInitLoading(false);
+      setListData(data);
+      setListParams(state => ({
+        page: 2,
+        pageSize: state.pageSize,
+        search: realSearch,
+      }));
+    } catch (error) {
+      setIsInitLoading(false);
+      console.log(error);
+    }
+  });
+  const fetchNextPage = useMemoizedFn(async (externalSearch: SearchType = {}) => {
+    if (!listData?.hasNextPage || isFetchNext || isInitLoading) return;
+    try {
+      setIsFetchNext(true);
+      const { page, pageSize, search } = listParams;
+      const realSearch = { ...(search ?? {}), ...externalSearch };
+      const data = await fetchListApi({
+        page,
+        pageSize,
+        ...realSearch,
+      });
+      setIsFetchNext(false);
+      setListData(state => ({
+        ...data,
+        list: state.list.concat(data.list),
+      }));
+      setListParams(state => ({
+        page: state.page + 1,
+        pageSize: state.pageSize,
+        search: realSearch,
+      }));
+    } catch (error) {
+      setIsFetchNext(false);
+      console.log(error);
+    }
+  });
 
   const updateItem = useMemoizedFn((data: Partial<D>) => {
     if (!id) {
       throw new Error('id undefine');
     }
-    setListData((state) => ({
+    setListData(state => ({
       ...state,
-      list: state.list.map((item) => {
+      list: state.list.map(item => {
         if (item[id] === data[id]) {
           return { ...item, ...data };
         } else {
@@ -131,9 +121,7 @@ function useInfiniteList<D = unknown>(option: UseInfiniteListParams<D>) {
       throw new Error('id undefine');
     }
     try {
-      const deletedList = listData.list.filter(
-        (item) => item[id] !== deletedId,
-      );
+      const deletedList = listData.list.filter(item => item[id] !== deletedId);
       if (listData.hasNextPage) {
         const { page, pageSize, search } = listParams;
         const singleData = await fetchListApi({
